@@ -3,7 +3,8 @@ package com.hrudhaykanth116.instagramclone.models
 import com.google.gson.annotations.SerializedName
 
 data class UserPostsData(
-    var userPosts: List<UserPost?>?
+    @SerializedName("user_posts")
+    var userPosts: List<UserPost>?
 ) {
     data class UserPost(
         var attribution: Any?,
@@ -71,7 +72,7 @@ data class UserPostsData(
             var fullName: String?,
             var id: String?,
             @SerializedName("profile_picture")
-            var profilePicture: String?,
+            var profilePictureUrl: String?,
             var username: String?
         )
     }

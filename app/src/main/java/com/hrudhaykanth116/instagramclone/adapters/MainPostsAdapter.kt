@@ -4,22 +4,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.hrudhaykanth116.instagramclone.R
+import com.hrudhaykanth116.instagramclone.models.UserPostsData
 import kotlinx.android.synthetic.main.main_post_item.view.*
 import kotlinx.android.synthetic.main.main_status_layout.view.*
 import kotlinx.android.synthetic.main.rounded_image_container.view.*
 
 
-class MainPostsAdapter(private val list: List<String>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MainPostsAdapter(private val userPosts: ArrayList<UserPostsData.UserPost>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val TYPE_PUBLIC_STATUS = 1
     private val TYPE_POST = 2
 
     class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val postDp: ImageView = itemView.dpView.innerImg as ImageView
-        val postContent: ImageView = itemView.postContent as ImageView
+        val postUserDpView: ImageView = itemView.dpView.innerImg as ImageView
+        val postImgView: ImageView = itemView.postContent as ImageView
+        val postUserNameTV: TextView = itemView.postUserNameTV as TextView
     }
 
     class PublicStatusViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -51,8 +53,13 @@ class MainPostsAdapter(private val list: List<String>): RecyclerView.Adapter<Rec
         return viewHolder
     }
 
+    public fun addPosts(newList: List<UserPostsData.UserPost>){
+        userPosts.addAll(0, newList)
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int {
-        return list.size
+        return userPosts.size
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -66,41 +73,15 @@ class MainPostsAdapter(private val list: List<String>): RecyclerView.Adapter<Rec
         
         when (viewHolder.itemViewType) {
             TYPE_PUBLIC_STATUS -> {
-                val publicStatusViewHolder = viewHolder as PublicStatusViewHolder
-                val testList = ArrayList<String>()
-                for (i in 1..20) {
-                    testList.add("Item: $i")
-                }
-                publicStatusViewHolder.publicStoriesContainer.adapter = PublicStoryThumbnailAdapter(testList)
-//                val myStatusUrl = "https://picsum.photos/id/1035/300"
-//                Glide
-//                    .with(publicStatusViewHolder.itemView)
-//                    .load(myStatusUrl)
-//                    .into(publicStatusViewHolder.myStatus)
+                PublicStatusViewFiller().fillPublicStatusView(viewHolder as PublicStatusViewHolder)
             }
             TYPE_POST -> {
-                val postViewHolder = viewHolder as PostViewHolder
-                postViewHolder.postDp.setImageResource(R.drawable.r6)
-                val postImgUrl = "https://picsum.photos/id/${postViewHolder.adapterPosition * 5}/300"
-                val postDpUrl = "https://picsum.photos/id/${postViewHolder.adapterPosition * 10}/300"
-
-                Glide
-                    .with(postViewHolder.itemView)
-                    .load(postImgUrl)
-                    .into(postViewHolder.postContent)
-
-                Glide
-                    .with(postViewHolder.itemView)
-                    .load(postDpUrl)
-                    .into(postViewHolder.postDp)
+                UserPostViewFiller().fillPostView(viewHolder as PostViewHolder, userPosts[position])
             }
             else -> {
                 throw Exception("Wrong view type")
             }
-
         }
-
-
 
     }
 

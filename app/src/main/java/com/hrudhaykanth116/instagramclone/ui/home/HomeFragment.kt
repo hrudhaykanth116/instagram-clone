@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.google.gson.Gson
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.adapters.MainPostsAdapter
 import com.hrudhaykanth116.instagramclone.models.UserPostsData
@@ -19,12 +20,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import java.io.InputStream
 
 
 class HomeFragment : Fragment() {
 
+    private lateinit var mainPostsAdapter: MainPostsAdapter
     private lateinit var homeViewModel: HomeViewModel
-
+    private val userPosts: ArrayList<UserPostsData.UserPost> = ArrayList()
     private var retrofit: Retrofit? = null
     private var apiClient: RetroApi? = null
     private var userPostsJsonCall: Call<UserPostsData>? = null
@@ -46,37 +49,40 @@ class HomeFragment : Fragment() {
         initMainPostsRecyclerView(view)
 
         mainPostsSwipeRefreshLayout.setOnRefreshListener {
-            refreshList()
+            refreshPosts()
         }
 
         super.onViewCreated(view, savedInstanceState)
     }
 
     private fun initMainPostsRecyclerView(view: View) {
-        val testList = ArrayList<String>()
-        for (i in 1..20) {
-            testList.add("Item: $i")
+
+        mainPostsAdapter = MainPostsAdapter(userPosts)
+        view.main_posts_rv.adapter = mainPostsAdapter
+        view.main_posts_rv.setHasFixedSize(true)
+        loadPostsFromLocal()
+        refreshPosts()
+
+    }
+
+    private fun loadPostsFromLocal() {
+        val myJson: String = getJsonFromAssets(context?.resources?.assets?.open("post-sample.json"))
+        val userPostsData = Gson().fromJson(myJson, UserPostsData::class.java)
+        userPostsData.userPosts?.let {
+            Toast.makeText(context, "Showing local data", Toast.LENGTH_SHORT).show()
+            userPosts.addAll(it)
+            mainPostsAdapter.addPosts(it)
         }
-        view.main_posts_rv.adapter = MainPostsAdapter(testList)
+    }
 
-
-        val callback = object : Callback<UserPostsData?> {
-            override fun onFailure(call: Call<UserPostsData?>, t: Throwable) {
-                Log.i(TAG, "onFailure: ${t.message}")
-            }
-
-            override fun onResponse(
-                call: Call<UserPostsData?>,
-                response: Response<UserPostsData?>
-            ) {
-                Log.i(TAG, "onResponse: ")
-                val userPostsData = response.body()
-                val userPosts = userPostsData?.userPosts
-            }
-
+    private fun getJsonFromAssets(inputStream: InputStream?): String {
+        return if (inputStream != null) {
+            val bytes = ByteArray(inputStream.available())
+            inputStream.read(bytes, 0, bytes.size)
+            String(bytes)
+        }else{
+            ""
         }
-        userPostsJsonCall?.enqueue(callback)
-
     }
 
     private fun initRetrofit() {
@@ -85,7 +91,7 @@ class HomeFragment : Fragment() {
         userPostsJsonCall = apiClient?.getUserPostsJson()
     }
 
-    private fun refreshList() {
+    private fun refreshPosts() {
         val callback = object : Callback<UserPostsData?> {
             override fun onFailure(call: Call<UserPostsData?>, t: Throwable) {
                 Log.i(TAG, "onFailure: ${t.message}")
@@ -101,7 +107,7 @@ class HomeFragment : Fragment() {
                 Toast.makeText(context, "Successfully retrieved posts", Toast.LENGTH_SHORT).show()
                 mainPostsSwipeRefreshLayout.isRefreshing = false
                 val userPostsData = response.body()
-                val userPosts = userPostsData?.userPosts
+                userPostsData?.userPosts?.let { mainPostsAdapter.addPosts(it) }
             }
 
         }

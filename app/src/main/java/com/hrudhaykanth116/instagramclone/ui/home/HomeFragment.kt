@@ -8,12 +8,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.room.Room
 import com.google.gson.Gson
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.adapters.MainPostsAdapter
 import com.hrudhaykanth116.instagramclone.models.UserPostsData
 import com.hrudhaykanth116.instagramclone.network.ApiClient
 import com.hrudhaykanth116.instagramclone.network.RetroApi
+import com.hrudhaykanth116.instagramclone.repository.databases.AppDatabase
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import retrofit2.Call
@@ -44,6 +46,13 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        val appDatabase = Room.databaseBuilder(
+            requireContext(),
+            AppDatabase::class.java, "app-db"
+        ).allowMainThreadQueries().build()
+        appDatabase.userDao().getAll()
+
 
         initRetrofit()
         initMainPostsRecyclerView(view)

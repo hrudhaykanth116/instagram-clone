@@ -9,7 +9,7 @@ class UserPostViewFiller {
         postViewHolder: MainPostsAdapter.PostViewHolder,
         userPost: UserPostsData.UserPost?
     ) {
-        val postImgUrl = userPost?.images?.standardResolution?.url
+        val postImgUrl = userPost?.images?.imageDetails?.url
         val postDpUrl = userPost?.user?.profilePictureUrl
 
         val context = postViewHolder.itemView.context

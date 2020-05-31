@@ -1,13 +1,18 @@
 package com.hrudhaykanth116.instagramclone.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 data class UserPostsData(
     @SerializedName("user_posts")
     var userPosts: List<UserPost>?
 ) {
+    @Entity
     data class UserPost(
-        var attribution: Any?,
+        @PrimaryKey(autoGenerate = true)
+        val dbId: Int,
+//        var attribution: Any?,
         var caption: Caption?,
         @SerializedName("created_time")
         var createdTime: String?,
@@ -15,14 +20,14 @@ data class UserPostsData(
         var id: String?,
         var images: Images?,
         var link: String?,
-        var location: Any?,
-        var tags: List<Any?>?,
+//        var location: Any?,
+//        var tags: List<Any?>?,
         var type: String?,
         var user: User?,
         @SerializedName("user_has_liked")
-        var userHasLiked: Boolean?,
-        @SerializedName("users_in_photo")
-        var usersInPhoto: List<Any?>?
+        var userHasLiked: Boolean?
+//        @SerializedName("users_in_photo")
+//        var usersInPhoto: List<Any?>?
     ) {
         data class Caption(
             @SerializedName("created_time")
@@ -43,24 +48,12 @@ data class UserPostsData(
 
         data class Images(
             @SerializedName("low_resolution")
-            var lowResolution: LowResolution?,
+            var lowResolution: ImageDetails?,
             @SerializedName("standard_resolution")
-            var standardResolution: StandardResolution?,
-            var thumbnail: Thumbnail?
+            var imageDetails: ImageDetails?,
+            var thumbnail: ImageDetails?
         ) {
-            data class LowResolution(
-                var height: Int?,
-                var url: String?,
-                var width: Int?
-            )
-
-            data class StandardResolution(
-                var height: Int?,
-                var url: String?,
-                var width: Int?
-            )
-
-            data class Thumbnail(
+            data class ImageDetails(
                 var height: Int?,
                 var url: String?,
                 var width: Int?

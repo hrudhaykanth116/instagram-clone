@@ -12,6 +12,7 @@ import androidx.room.Room
 import com.google.gson.Gson
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.adapters.MainPostsAdapter
+import com.hrudhaykanth116.instagramclone.models.UserPost
 import com.hrudhaykanth116.instagramclone.models.UserPostsData
 import com.hrudhaykanth116.instagramclone.network.ApiClient
 import com.hrudhaykanth116.instagramclone.network.RetroApi
@@ -29,10 +30,9 @@ class HomeFragment : Fragment() {
 
     private lateinit var mainPostsAdapter: MainPostsAdapter
     private lateinit var homeViewModel: HomeViewModel
-    private val userPosts: ArrayList<UserPostsData.UserPost> = ArrayList()
     private var retrofit: Retrofit? = null
     private var apiClient: RetroApi? = null
-    private var userPostsJsonCall: Call<UserPostsData>? = null
+    private var userPostsPageCall: Call<List<UserPost>>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,8 +65,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initMainPostsRecyclerView(view: View) {
-
-        mainPostsAdapter = MainPostsAdapter(userPosts)
+        mainPostsAdapter = MainPostsAdapter()
         view.main_posts_rv.adapter = mainPostsAdapter
         view.main_posts_rv.setHasFixedSize(true)
         loadPostsFromLocal()
@@ -75,12 +74,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun loadPostsFromLocal() {
+        Toast.makeText(context, "Showing local data", Toast.LENGTH_SHORT).show()
         val myJson: String = getJsonFromAssets(context?.resources?.assets?.open("post-sample.json"))
-        val userPostsData = Gson().fromJson(myJson, UserPostsData::class.java)
-        userPostsData.userPosts?.let {
-            Toast.makeText(context, "Showing local data", Toast.LENGTH_SHORT).show()
-            userPosts.addAll(it)
-            mainPostsAdapter.addPosts(it)
+        val userPostsData: UserPostsData = Gson().fromJson(myJson, UserPostsData::class.java)
+        val userPostsPages = userPostsData.userPostsPages
+        userPostsPages?.forEach {
+            mainPostsAdapter.addPostsAtEnd(it)
         }
     }
 
@@ -97,30 +96,30 @@ class HomeFragment : Fragment() {
     private fun initRetrofit() {
         retrofit = ApiClient.getClient()
         apiClient = retrofit?.create(RetroApi::class.java)
-        userPostsJsonCall = apiClient?.getUserPostsJson()
+        userPostsPageCall = apiClient?.getUserPosts(1)
     }
 
     private fun refreshPosts() {
-        val callback = object : Callback<UserPostsData?> {
-            override fun onFailure(call: Call<UserPostsData?>, t: Throwable) {
+        val callback = object : Callback<List<UserPost>?> {
+            override fun onFailure(call: Call<List<UserPost>?>, t: Throwable) {
                 Log.i(TAG, "onFailure: ${t.message}")
                 Toast.makeText(context, "Error retrieving posts", Toast.LENGTH_SHORT).show()
                 mainPostsSwipeRefreshLayout.isRefreshing = false
             }
 
             override fun onResponse(
-                call: Call<UserPostsData?>,
-                response: Response<UserPostsData?>
+                call: Call<List<UserPost>?>,
+                response: Response<List<UserPost>?>
             ) {
                 Log.i(TAG, "onResponse: ")
                 Toast.makeText(context, "Successfully retrieved posts", Toast.LENGTH_SHORT).show()
                 mainPostsSwipeRefreshLayout.isRefreshing = false
                 val userPostsData = response.body()
-                userPostsData?.userPosts?.let { mainPostsAdapter.addPosts(it) }
+                userPostsData?.let { mainPostsAdapter.addPostsAtEnd(it) }
             }
 
         }
-        userPostsJsonCall?.clone()?.enqueue(callback)
+        userPostsPageCall?.clone()?.enqueue(callback)
     }
 
     companion object{

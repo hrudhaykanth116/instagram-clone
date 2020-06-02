@@ -1,9 +1,10 @@
 package com.hrudhaykanth116.instagramclone.network
 
-import com.hrudhaykanth116.instagramclone.models.UserPostsData
+import com.hrudhaykanth116.instagramclone.models.UserPost
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Path
 
 
 public interface RetroApi {
@@ -26,9 +27,8 @@ public interface RetroApi {
 //        @Body user: User?
 //    ): Call<User?>?
 
-
     @Headers("Content-Type: application/json")
-    @GET("user_posts.json")
-    public fun getUserPostsJson(): Call<UserPostsData>?
+    @GET("user_posts/page{pageID}.json")
+    public fun getUserPosts(@Path("pageID") pageId: Int): Call<List<UserPost>>?
 
 }

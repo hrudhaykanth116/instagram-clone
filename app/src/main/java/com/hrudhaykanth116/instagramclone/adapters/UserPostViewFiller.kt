@@ -1,13 +1,13 @@
 package com.hrudhaykanth116.instagramclone.adapters
 
 import com.bumptech.glide.Glide
-import com.hrudhaykanth116.instagramclone.models.UserPostsData
+import com.hrudhaykanth116.instagramclone.models.UserPost
 
 class UserPostViewFiller {
 
     public fun fillPostView(
         postViewHolder: MainPostsAdapter.PostViewHolder,
-        userPost: UserPostsData.UserPost?
+        userPost: UserPost?
     ) {
         val postImgUrl = userPost?.images?.imageDetails?.url
         val postDpUrl = userPost?.user?.profilePictureUrl

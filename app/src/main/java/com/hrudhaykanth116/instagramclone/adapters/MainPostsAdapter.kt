@@ -7,14 +7,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.hrudhaykanth116.instagramclone.R
-import com.hrudhaykanth116.instagramclone.models.UserPostsData
+import com.hrudhaykanth116.instagramclone.models.UserPost
 import kotlinx.android.synthetic.main.main_post_item.view.*
 import kotlinx.android.synthetic.main.main_status_layout.view.*
 import kotlinx.android.synthetic.main.rounded_image_container.view.*
 
 
-class MainPostsAdapter(private val userPosts: ArrayList<UserPostsData.UserPost>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MainPostsAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    private val userPosts: ArrayList<UserPost> = ArrayList()
     private val TYPE_PUBLIC_STATUS = 1
     private val TYPE_POST = 2
 
@@ -53,8 +54,8 @@ class MainPostsAdapter(private val userPosts: ArrayList<UserPostsData.UserPost>)
         return viewHolder
     }
 
-    public fun addPosts(newList: List<UserPostsData.UserPost>){
-        userPosts.addAll(0, newList)
+    public fun addPostsAtEnd(newList: List<UserPost>){
+        userPosts.addAll(userPosts.size, newList)
         notifyDataSetChanged()
     }
 

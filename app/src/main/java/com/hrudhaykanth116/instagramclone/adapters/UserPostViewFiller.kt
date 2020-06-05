@@ -9,8 +9,11 @@ class UserPostViewFiller {
         postViewHolder: MainPostsAdapter.PostViewHolder,
         userPost: UserPost?
     ) {
-        val postImgUrl = userPost?.images?.imageDetails?.url
+        val postImgUrl = userPost?.images?.standardResolution?.url
         val postDpUrl = userPost?.user?.profilePictureUrl
+
+        postViewHolder.postUserNameTV.text = userPost?.user?.username
+
 
         val context = postViewHolder.itemView.context
         Glide

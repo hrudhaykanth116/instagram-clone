@@ -33,6 +33,8 @@ class HomeFragment : Fragment() {
     private var retrofit: Retrofit? = null
     private var apiClient: RetroApi? = null
     private var userPostsPageCall: Call<List<UserPost>>? = null
+    private var pageId = 1
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,7 +55,6 @@ class HomeFragment : Fragment() {
         ).allowMainThreadQueries().build()
         appDatabase.userDao().getAll()
 
-
         initRetrofit()
         initMainPostsRecyclerView(view)
 
@@ -68,9 +69,8 @@ class HomeFragment : Fragment() {
         mainPostsAdapter = MainPostsAdapter()
         view.main_posts_rv.adapter = mainPostsAdapter
         view.main_posts_rv.setHasFixedSize(true)
-        loadPostsFromLocal()
+//        loadPostsFromLocal()
         refreshPosts()
-
     }
 
     private fun loadPostsFromLocal() {
@@ -79,7 +79,7 @@ class HomeFragment : Fragment() {
         val userPostsData: UserPostsData = Gson().fromJson(myJson, UserPostsData::class.java)
         val userPostsPages = userPostsData.userPostsPages
         userPostsPages?.forEach {
-            mainPostsAdapter.addPostsAtEnd(it)
+            mainPostsAdapter.addPostsAtStart(it)
         }
     }
 
@@ -96,14 +96,16 @@ class HomeFragment : Fragment() {
     private fun initRetrofit() {
         retrofit = ApiClient.getClient()
         apiClient = retrofit?.create(RetroApi::class.java)
-        userPostsPageCall = apiClient?.getUserPosts(1)
     }
 
     private fun refreshPosts() {
+        Toast.makeText(context, "Refreshing posts", Toast.LENGTH_SHORT).show()
         val callback = object : Callback<List<UserPost>?> {
             override fun onFailure(call: Call<List<UserPost>?>, t: Throwable) {
                 Log.i(TAG, "onFailure: ${t.message}")
-                Toast.makeText(context, "Error retrieving posts", Toast.LENGTH_SHORT).show()
+                context?.let {
+                    Toast.makeText(it, "Error retrieving posts", Toast.LENGTH_SHORT).show()
+                }
                 mainPostsSwipeRefreshLayout.isRefreshing = false
             }
 
@@ -115,10 +117,14 @@ class HomeFragment : Fragment() {
                 Toast.makeText(context, "Successfully retrieved posts", Toast.LENGTH_SHORT).show()
                 mainPostsSwipeRefreshLayout.isRefreshing = false
                 val userPostsData = response.body()
-                userPostsData?.let { mainPostsAdapter.addPostsAtEnd(it) }
+                userPostsData?.let { mainPostsAdapter.addPostsAtStart(it) }
             }
 
         }
+        if(pageId > 3){
+            pageId = 1
+        }
+        userPostsPageCall = apiClient?.getUserPosts(pageId++)
         userPostsPageCall?.clone()?.enqueue(callback)
     }
 

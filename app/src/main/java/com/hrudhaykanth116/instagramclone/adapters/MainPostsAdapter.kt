@@ -54,13 +54,13 @@ class MainPostsAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return viewHolder
     }
 
-    public fun addPostsAtEnd(newList: List<UserPost>){
-        userPosts.addAll(userPosts.size, newList)
+    public fun addPostsAtStart(newList: List<UserPost>){
+        userPosts.addAll(0, newList)
         notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
-        return userPosts.size
+        return userPosts.size + 1   // user posts + public status
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -77,7 +77,8 @@ class MainPostsAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 PublicStatusViewFiller().fillPublicStatusView(viewHolder as PublicStatusViewHolder)
             }
             TYPE_POST -> {
-                UserPostViewFiller().fillPostView(viewHolder as PostViewHolder, userPosts[position])
+                val userPost = userPosts[position - 1] //
+                UserPostViewFiller().fillPostView(viewHolder as PostViewHolder, userPost)
             }
             else -> {
                 throw Exception("Wrong view type")

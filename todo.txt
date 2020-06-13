@@ -1,0 +1,36 @@
+
+
+
+// Priority
+
+View models and Live data.
+Pagination, cloud firestore
+chat with firebase notifications and @Embeded room entities
+Learn and implement cache mechanism
+dagger
+
+Camerax and post mechanism
+
+
+
+
+
+// TODO
+vector assets and animation. shapeshifter.design
+Maintain neat architecture.
+Room(https://medium.com/androiddevelopers/7-pro-tips-for-room-fbadea4bfbd1)
+
+
+Check network.
+
+What is accessibility in recycler view
+Canvas drawing
+
+
+
+// Components
+
+Retrofit.
+Glide.
+SwipeDownRefreshLayout.
+

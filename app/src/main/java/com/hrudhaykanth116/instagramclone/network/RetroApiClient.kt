@@ -5,13 +5,14 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class ApiClient {
+class RetroApiClient {
 
     companion object {
-        public const val BASE_URL: String = "https://instagram-clone-db-116.firebaseio.com/"
+//        public const val BASE_URL: String = "https://instagram-clone-db-116.firebaseio.com/"
+        private const val BASE_URL: String = "https://api.themoviedb.org/3/"
         private var retrofit: Retrofit? = null
 
-        public fun getClient(): Retrofit? {
+        public fun getRetrofitInstance(): Retrofit {
             if (retrofit == null) {
 
                 val gson = GsonBuilder()
@@ -22,7 +23,7 @@ class ApiClient {
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build()
             }
-            return retrofit
+            return retrofit as Retrofit
         }
 
     }

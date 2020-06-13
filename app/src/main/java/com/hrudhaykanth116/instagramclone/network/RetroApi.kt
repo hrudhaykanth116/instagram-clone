@@ -1,10 +1,12 @@
 package com.hrudhaykanth116.instagramclone.network
 
+import com.hrudhaykanth116.instagramclone.models.PopularMoviesResponse
 import com.hrudhaykanth116.instagramclone.models.UserPost
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 public interface RetroApi {
@@ -30,5 +32,8 @@ public interface RetroApi {
     @Headers("Content-Type: application/json")
     @GET("user_posts/page{pageID}.json")
     public fun getUserPosts(@Path("pageID") pageId: Int): Call<List<UserPost>>?
+
+    @GET("movie/popular/")
+    public fun getPopularMoviesList(@Query("page") pageId: Int, @Query("api_key", encoded = true) apiKey: String): Call<PopularMoviesResponse>
 
 }

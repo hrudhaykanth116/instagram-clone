@@ -1,4 +1,4 @@
-package com.hrudhaykanth116.instagramclone.repository
+package com.hrudhaykanth116.instagramclone.repository.typeconverters
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

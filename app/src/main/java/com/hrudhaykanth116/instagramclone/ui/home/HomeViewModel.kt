@@ -1,23 +1,43 @@
 package com.hrudhaykanth116.instagramclone.ui.home
 
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.hrudhaykanth116.instagramclone.models.UserPost
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
+import com.hrudhaykanth116.instagramclone.models.MovieData
+import com.hrudhaykanth116.instagramclone.models.NetworkState
+import com.hrudhaykanth116.instagramclone.repository.datasources.PopularMoviesDataFactory
+import java.util.concurrent.Executors
+
 
 class HomeViewModel : ViewModel() {
 
-    private val postsList: ArrayList<UserPost> = ArrayList()
-    val postsLiveData = MutableLiveData<List<UserPost>>()
+    public var networkState: LiveData<NetworkState>
+    public var moviesLiveData: LiveData<PagedList<MovieData>>
 
-    public fun updateList(postsList: ArrayList<UserPost>){
-        postsList.clear()
-        postsList.addAll(postsList)
-        postsLiveData.value = postsList
+    init {
+
+        val moviesDataFactory = PopularMoviesDataFactory()
+        // When data source changes in factory, network state live data is also updated.
+        networkState = Transformations.switchMap(moviesDataFactory.popularMovieDSLiveData) {
+            it.networkState
+        }
+
+        val pagedListConfig: PagedList.Config = PagedList.Config.Builder()
+//            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(20)
+            .setPageSize(10) // x items will be loaded from data source. after getting last set(last x), loadAfter() is called.
+            .build()
+
+        // x threads will be used to execute data loading one after the other.iterates again.
+        val executor = Executors.newFixedThreadPool(3)
+        moviesLiveData  = LivePagedListBuilder<Int, MovieData>(moviesDataFactory, pagedListConfig)
+            .setFetchExecutor(executor)
+            .build()
+
+
     }
 
-    public fun addNewList(newPostsList: ArrayList<UserPost>){
-        postsList.addAll(0, newPostsList)
-        postsLiveData.value = postsList
-    }
 
 }

@@ -1,6 +1,8 @@
 package com.hrudhaykanth116.instagramclone.network
 
+import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
 import com.hrudhaykanth116.instagramclone.models.PopularMoviesResponse
+import com.hrudhaykanth116.instagramclone.models.PopularTvShowsResponse
 import com.hrudhaykanth116.instagramclone.models.UserPost
 import retrofit2.Call
 import retrofit2.http.GET
@@ -9,7 +11,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 
-public interface RetroApi {
+public interface RetroApis {
 
 //    @GET("users/{user}/repos")
 //    fun listRepos(@Path("user") user: String?): Call<List<UserPost>>?
@@ -33,7 +35,14 @@ public interface RetroApi {
     @GET("user_posts/page{pageID}.json")
     public fun getUserPosts(@Path("pageID") pageId: Int): Call<List<UserPost>>?
 
-    @GET("movie/popular/")
-    public fun getPopularMoviesList(@Query("page") pageId: Int, @Query("api_key", encoded = true) apiKey: String): Call<PopularMoviesResponse>
+    @GET("movie/popular")
+    public fun getPopularMoviesList(@Query("page") pageId: Int,
+                                    @Query("api_key", encoded = true) apiKey: String = MoviesDbConstants.API_KEY
+    ): Call<PopularMoviesResponse>
+
+    @GET("tv/popular/")
+    public fun getPopularTvShows(@Query("page") pageId: Int,
+                                 @Query("api_key") apiKey: String = MoviesDbConstants.API_KEY
+    ): Call<PopularTvShowsResponse>
 
 }

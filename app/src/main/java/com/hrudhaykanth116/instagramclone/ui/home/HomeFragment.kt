@@ -15,11 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.adapters.MainPostsAdapter
-import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
-import com.hrudhaykanth116.instagramclone.models.MovieData
 import com.hrudhaykanth116.instagramclone.models.PopularMoviesResponse
-import com.hrudhaykanth116.instagramclone.network.RetroApi
+import com.hrudhaykanth116.instagramclone.models.TvShowData
 import com.hrudhaykanth116.instagramclone.network.RetroApiClient
+import com.hrudhaykanth116.instagramclone.network.RetroApis
 import com.hrudhaykanth116.instagramclone.repository.databases.AppDatabase
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
@@ -34,7 +33,7 @@ class HomeFragment : Fragment() {
     private lateinit var mainPostsAdapter: MainPostsAdapter
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var retrofit: Retrofit
-    private lateinit var apiClient: RetroApi
+    private lateinit var apisClient: RetroApis
     private lateinit var popularMoviesRetroCall: Call<PopularMoviesResponse>
 
     override fun onCreateView(
@@ -65,8 +64,8 @@ class HomeFragment : Fragment() {
 
     private fun initViewModel() {
         val homeViewModel: HomeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        homeViewModel.moviesLiveData.observe(viewLifecycleOwner,
-            Observer<PagedList<MovieData>> { pagedList ->
+        homeViewModel.popularTvShowsLiveData.observe(viewLifecycleOwner,
+            Observer<PagedList<TvShowData>> { pagedList ->
                 // Data source changed.
                 mainPostsAdapter.submitList(pagedList)
             }
@@ -91,7 +90,7 @@ class HomeFragment : Fragment() {
 
     private fun initRetrofit() {
         retrofit = RetroApiClient.getRetrofitInstance()
-        apiClient = retrofit.create(RetroApi::class.java)
+        apisClient = retrofit.create(RetroApis::class.java)
     }
 
     private fun refreshPosts() {
@@ -115,7 +114,7 @@ class HomeFragment : Fragment() {
             }
 
         }
-        popularMoviesRetroCall = apiClient.getPopularMoviesList(1, MoviesDbConstants.API_KEY)
+        popularMoviesRetroCall = apisClient.getPopularMoviesList(1)
         popularMoviesRetroCall.clone().enqueue(callback)
     }
 

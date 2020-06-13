@@ -40,8 +40,23 @@ data class MovieData(
     }
 
     override fun hashCode(): Int {
-        return super.hashCode()
+        var result = id ?: 0
+        result = 31 * result + (adult?.hashCode() ?: 0)
+        result = 31 * result + (backdropPath?.hashCode() ?: 0)
+        result = 31 * result + genreIds.hashCode()
+        result = 31 * result + (originalLanguage?.hashCode() ?: 0)
+        result = 31 * result + (originalTitle?.hashCode() ?: 0)
+        result = 31 * result + (overview?.hashCode() ?: 0)
+        result = 31 * result + popularity.hashCode()
+        result = 31 * result + (posterPath?.hashCode() ?: 0)
+        result = 31 * result + (releaseDate?.hashCode() ?: 0)
+        result = 31 * result + (title?.hashCode() ?: 0)
+        result = 31 * result + (video?.hashCode() ?: 0)
+        result = 31 * result + (voteAverage?.hashCode() ?: 0)
+        result = 31 * result + (voteCount ?: 0)
+        return result
     }
+
 
     companion object{
         public val diffUtillCallback = object: DiffUtil.ItemCallback<MovieData>(){

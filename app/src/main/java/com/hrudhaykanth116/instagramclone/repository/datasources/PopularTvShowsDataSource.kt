@@ -3,12 +3,11 @@ package com.hrudhaykanth116.instagramclone.repository.datasources
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
-import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
-import com.hrudhaykanth116.instagramclone.models.MovieData
 import com.hrudhaykanth116.instagramclone.models.NetworkState
-import com.hrudhaykanth116.instagramclone.models.PopularMoviesResponse
-import com.hrudhaykanth116.instagramclone.network.RetroApi
+import com.hrudhaykanth116.instagramclone.models.PopularTvShowsResponse
+import com.hrudhaykanth116.instagramclone.models.TvShowData
 import com.hrudhaykanth116.instagramclone.network.RetroApiClient
+import com.hrudhaykanth116.instagramclone.network.RetroApis
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,34 +17,34 @@ import java.net.UnknownHostException
 /**
  * Data source which is used to load data initially and when new data is required.
  */
-class PopularMoviesDataSource: PageKeyedDataSource<Int, MovieData>() {
+class PopularTvShowsDataSource: PageKeyedDataSource<Int, TvShowData>() {
 
-    private val TAG: String = PopularMoviesDataSource::class.java.name
+    private val TAG: String = PopularTvShowsDataSource::class.java.name
 
     private var retroApiClient: Retrofit = RetroApiClient.getRetrofitInstance()
-    private var retrofitApiClient: RetroApi
+    private var retroApis: RetroApis
     val networkState = MutableLiveData<NetworkState>()
 
     init {
-        retrofitApiClient = retroApiClient.create(RetroApi::class.java)
+        retroApis = retroApiClient.create(RetroApis::class.java)
     }
 
 
     override fun loadInitial(
         params: LoadInitialParams<Int>,
-        callback: LoadInitialCallback<Int, MovieData>
+        callback: LoadInitialCallback<Int, TvShowData>
     ) {
         Log.i(TAG, "loadInitial: ")
         networkState.postValue(NetworkState.LOADING)
 
         try {
-            val popularMoviesListCall = retrofitApiClient.getPopularMoviesList(1, MoviesDbConstants.API_KEY)
-            val response = popularMoviesListCall.execute()
+            val popularTvShowsCall = retroApis.getPopularTvShows(1)
+            val response = popularTvShowsCall.execute()
             if (response.isSuccessful) {
                 val popularMoviesResponse = response.body()
                 popularMoviesResponse?.let {
-                    val movieDataList = popularMoviesResponse.movieData
-                    callback.onResult(movieDataList, null, 2)
+                    val tvShowsList = popularMoviesResponse.tvShowsList
+                    callback.onResult(tvShowsList, null, 2)
                     networkState.postValue(NetworkState.LOADED)
                 }
             }else{
@@ -67,27 +66,26 @@ class PopularMoviesDataSource: PageKeyedDataSource<Int, MovieData>() {
 
     override fun loadAfter(
         params: LoadParams<Int>,
-        callback: LoadCallback<Int, MovieData>
+        callback: LoadCallback<Int, TvShowData>
     ) {
         Log.i(TAG, "loadAfter: ")
         networkState.postValue(NetworkState.LOADING)
 
-        retrofitApiClient.getPopularMoviesList(params.key, MoviesDbConstants.API_KEY).enqueue(
-            object : Callback<PopularMoviesResponse>{
-                override fun onFailure(call: Call<PopularMoviesResponse>, t: Throwable) {
+        retroApis.getPopularTvShows(params.key).enqueue(
+            object : Callback<PopularTvShowsResponse>{
+                override fun onFailure(call: Call<PopularTvShowsResponse>, t: Throwable) {
                     networkState.postValue(NetworkState.FAILED)
                 }
 
                 override fun onResponse(
-                    call: Call<PopularMoviesResponse>,
-                    response: Response<PopularMoviesResponse>
+                    call: Call<PopularTvShowsResponse>,
+                    response: Response<PopularTvShowsResponse>
                 ) {
                     if (response.isSuccessful) {
                         networkState.postValue(NetworkState.LOADED)
-                        val body: PopularMoviesResponse? = response.body()
-                        body?.let {
-                            val movieDataList = body.movieData
-                            callback.onResult(movieDataList.subList(0, 5), params.key + 1)
+                        val popularTvShowsResponse: PopularTvShowsResponse? = response.body()
+                        popularTvShowsResponse?.let {
+                            callback.onResult(popularTvShowsResponse.tvShowsList, params.key + 1)
                         }
                     }else{
                         networkState.postValue(NetworkState.FAILED)
@@ -101,7 +99,7 @@ class PopularMoviesDataSource: PageKeyedDataSource<Int, MovieData>() {
 
     override fun loadBefore(
         params: LoadParams<Int>,
-        callback: LoadCallback<Int, MovieData>
+        callback: LoadCallback<Int, TvShowData>
     ) {
     }
 

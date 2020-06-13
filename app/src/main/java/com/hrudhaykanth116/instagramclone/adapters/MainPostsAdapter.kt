@@ -9,14 +9,14 @@ import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hrudhaykanth116.instagramclone.R
-import com.hrudhaykanth116.instagramclone.models.MovieData
 import com.hrudhaykanth116.instagramclone.models.NetworkState
+import com.hrudhaykanth116.instagramclone.models.TvShowData
 import kotlinx.android.synthetic.main.main_post_item.view.*
 import kotlinx.android.synthetic.main.main_status_layout.view.*
 import kotlinx.android.synthetic.main.rounded_image_container.view.*
 
 class MainPostsAdapter :
-    PagedListAdapter<MovieData, RecyclerView.ViewHolder>(MovieData.diffUtillCallback) {
+    PagedListAdapter<TvShowData, RecyclerView.ViewHolder>(TvShowData.diffUtillCallback) {
 
     private val TYPE_PUBLIC_STATUS = 1
     private val TYPE_POST = 2
@@ -114,8 +114,8 @@ class MainPostsAdapter :
                 PublicStatusViewFiller().fillPublicStatusView(viewHolder as PublicStatusViewHolder)
             }
             TYPE_POST -> {
-                val movieData = getItem(position) as MovieData
-                UserPostViewFiller().fillPostView(viewHolder as PostViewHolder, movieData)
+                val tvShowData = getItem(position) as TvShowData
+                UserPostViewFiller().fillPostView(viewHolder as PostViewHolder, tvShowData)
             }
             TYPE_PROGRESS -> {
                 val progressViewHolder = viewHolder as ProgressViewHolder
@@ -127,7 +127,7 @@ class MainPostsAdapter :
 
     }
 
-    override fun submitList(pagedList: PagedList<MovieData>?) {
+    override fun submitList(pagedList: PagedList<TvShowData>?) {
         super.submitList(pagedList)
     }
 }

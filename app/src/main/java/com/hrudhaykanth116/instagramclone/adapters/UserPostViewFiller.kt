@@ -25,31 +25,8 @@ class UserPostViewFiller {
             }
         }
 
-
-        // TODO: 06-06-2020 Add progress bar
         Glide
             .with(context)
-//            .addDefaultRequestListener(object: RequestListener<Any?> {
-//                override fun onLoadFailed(
-//                    e: GlideException?,
-//                    model: Any?,
-//                    target: Target<Any>?,
-//                    isFirstResource: Boolean
-//                ): Boolean {
-//                    return false
-//                }
-//
-//                override fun onResourceReady(
-//                    resource: Drawable?,
-//                    model: Any?,
-//                    target: Target<Drawable>?,
-//                    dataSource: DataSource?,
-//                    isFirstResource: Boolean
-//                ): Boolean {
-//                    return false
-//                }
-//
-//            })
             .load(postImgUrl).placeholder(R.drawable.images_placeholder)
             .into(postViewHolder.contentTV)
 

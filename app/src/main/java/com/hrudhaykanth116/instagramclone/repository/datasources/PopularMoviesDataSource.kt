@@ -15,6 +15,9 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import java.net.UnknownHostException
 
+/**
+ * Data source which is used to load data initially and when new data is required.
+ */
 class PopularMoviesDataSource: PageKeyedDataSource<Int, MovieData>() {
 
     private val TAG: String = PopularMoviesDataSource::class.java.name
@@ -38,19 +41,28 @@ class PopularMoviesDataSource: PageKeyedDataSource<Int, MovieData>() {
         try {
             val popularMoviesListCall = retrofitApiClient.getPopularMoviesList(1, MoviesDbConstants.API_KEY)
             val response = popularMoviesListCall.execute()
-            val popularMoviesResponse = response.body()
-            popularMoviesResponse?.let {
-                val movieDataList = popularMoviesResponse.movieData
-                callback.onResult(movieDataList, null, 2)
-                networkState.postValue(NetworkState.LOADED)
+            if (response.isSuccessful) {
+                val popularMoviesResponse = response.body()
+                popularMoviesResponse?.let {
+                    val movieDataList = popularMoviesResponse.movieData
+                    callback.onResult(movieDataList, null, 2)
+                    networkState.postValue(NetworkState.LOADED)
+                }
+            }else{
+                handleFailure(response.message())
             }
         }catch (exception: UnknownHostException){
-            networkState.postValue(NetworkState.FAILED)
+            handleFailure(exception.message)
             Log.e(TAG, "loadInitial: ", exception)
         }catch (exception: Exception){
-            Log.e(TAG, "loadInitial: ", exception)
+            handleFailure(exception.message)
         }
 
+    }
+
+    private fun handleFailure(error: String?) {
+        Log.e(TAG, "handleFailure: $error")
+        networkState.postValue(NetworkState.FAILED)
     }
 
     override fun loadAfter(
@@ -75,7 +87,7 @@ class PopularMoviesDataSource: PageKeyedDataSource<Int, MovieData>() {
                         val body: PopularMoviesResponse? = response.body()
                         body?.let {
                             val movieDataList = body.movieData
-                            callback.onResult(movieDataList, params.key + 1)
+                            callback.onResult(movieDataList.subList(0, 5), params.key + 1)
                         }
                     }else{
                         networkState.postValue(NetworkState.FAILED)

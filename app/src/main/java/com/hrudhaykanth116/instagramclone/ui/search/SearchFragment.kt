@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hrudhaykanth116.instagramclone.R
@@ -23,17 +23,12 @@ class SearchFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         searchViewModel =
-                ViewModelProviders.of(this).get(SearchViewModel::class.java)
+                ViewModelProvider(this).get(SearchViewModel::class.java)
         val root = inflater.inflate(R.layout.search_fragment, container, false)
-//        val textView: TextView = root.findViewById(R.id.text_dashboard)
-//        searchViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-//        })
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         val testList = ArrayList<String>()
         for (i in 1..60) {
             testList.add("Item: $i")

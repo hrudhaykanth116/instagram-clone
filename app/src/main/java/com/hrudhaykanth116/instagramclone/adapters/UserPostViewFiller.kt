@@ -3,11 +3,12 @@ package com.hrudhaykanth116.instagramclone.adapters
 import com.bumptech.glide.Glide
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.models.TvShowData
+import com.hrudhaykanth116.instagramclone.viewholders.PostViewHolder
 
 class UserPostViewFiller {
 
     public fun fillPostView(
-        postViewHolder: MainPostsAdapter.PostViewHolder,
+        postViewHolder: PostViewHolder,
         tvShowData: TvShowData
     ) {
         val postImgUrl = "http://image.tmdb.org/t/p/original/${tvShowData.backdropPath}"

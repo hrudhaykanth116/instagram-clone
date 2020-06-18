@@ -13,18 +13,14 @@ class ViewHoldersCreator {
             val viewHolder: RecyclerView.ViewHolder
             val itemView: View = LayoutInflater.from(parent.context).inflate(viewId, parent, false)
             viewHolder = when (viewId) {
-                R.layout.main_status_layout -> {
-                    PublicStatusViewHolder(
-                        itemView
-                    )
+                R.layout.stories_view -> {
+                    PublicStatusViewHolder(itemView)
                 }
                 R.layout.post_view_item -> {
                     PostViewHolder(itemView)
                 }
                 R.layout.progress_bar_row -> {
-                    ProgressViewHolder(
-                        itemView
-                    )
+                    ProgressViewHolder(itemView)
                 }
                 else -> {
                     throw Exception("Wrong view type")

@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hrudhaykanth116.instagramclone.R
-import kotlinx.android.synthetic.main.public_status_thumbnails_item.view.*
 import kotlinx.android.synthetic.main.rounded_image_container.view.*
+import kotlinx.android.synthetic.main.stories_view_item.view.*
 
 
 class PublicStoryThumbnailAdapter(private val list: List<String>): RecyclerView.Adapter<PublicStoryThumbnailAdapter.ViewHolder>() {
@@ -23,7 +23,7 @@ class PublicStoryThumbnailAdapter(private val list: List<String>): RecyclerView.
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView: View = LayoutInflater.from(parent.context).
-            inflate(R.layout.public_status_thumbnails_item, parent, false)
+            inflate(R.layout.stories_view_item, parent, false)
         return ViewHolder(itemView)
     }
 

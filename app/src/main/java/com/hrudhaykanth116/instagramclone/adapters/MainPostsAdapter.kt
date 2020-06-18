@@ -14,11 +14,15 @@ import com.hrudhaykanth116.instagramclone.viewholders.ViewHoldersCreator
 class MainPostsAdapter :
     PagedListAdapter<TvShowData, RecyclerView.ViewHolder>(TvShowData.diffUtillCallback) {
 
-    private val TYPE_PUBLIC_STATUS = R.layout.public_status_thumbnails_item
+    private val TYPE_PUBLIC_STATUS = R.layout.stories_view
     private val TYPE_POST = R.layout.post_view_item
     private val TYPE_PROGRESS = R.layout.progress_bar_row
 
+    // TODO: 19-06-2020 Fix issue: On initial load, loadAfter is also called. Make this count 1
+    private val STORIES_ROWS_COUNT = 0
+
     private var currentNetworkState: NetworkState = NetworkState.LOADING
+    private var previousNetworkState: NetworkState = NetworkState.LOADING
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ViewHoldersCreator.createViewHolder(parent, viewType)
@@ -30,7 +34,7 @@ class MainPostsAdapter :
                 PublicStatusViewFiller().fillPublicStatusView(viewHolder as PublicStatusViewHolder)
             }
             TYPE_POST -> {
-                val tvShowData = getItem(position) as TvShowData
+                val tvShowData = getItem(position - 1) as TvShowData
                 UserPostViewFiller().fillPostView(viewHolder as PostViewHolder, tvShowData)
             }
             TYPE_PROGRESS -> {
@@ -45,7 +49,8 @@ class MainPostsAdapter :
 
     override fun getItemCount(): Int {
         val pagedListCount = super.getItemCount()
-        return pagedListCount + if (shouldShowProgressIcon()) 1 else 0
+        val progressBarCount = if (shouldShowProgressIcon()) 1 else 0
+        return STORIES_ROWS_COUNT + pagedListCount + progressBarCount
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -54,29 +59,33 @@ class MainPostsAdapter :
             return TYPE_PROGRESS
         }
         return when (position) {
-            0 -> TYPE_POST
+            0 -> TYPE_PUBLIC_STATUS
             else -> TYPE_POST
         }
     }
 
     public fun setNetworkState(newNetworkState: NetworkState) {
-        val isProgressIconShown = currentNetworkState != NetworkState.LOADED
-        val previousState = currentNetworkState
-
-        val shouldShowProgressIcon = newNetworkState != NetworkState.LOADED
+        previousNetworkState = currentNetworkState
         currentNetworkState = newNetworkState
 
-        if (shouldShowProgressIcon) {
-            if(!isProgressIconShown){
-                notifyItemInserted(itemCount)
-            }else if(previousState !== newNetworkState){
-                notifyItemChanged(itemCount - 1)
+        updateProgressIcon(newNetworkState)
+    }
+
+    private fun updateProgressIcon(newNetworkState: NetworkState) {
+        val lastItemIndex = itemCount - 1
+        if (shouldShowProgressIcon()) {
+            if (!isProgressIconShown()) {
+                notifyItemInserted(lastItemIndex + 1)
+            } else if (previousNetworkState !== newNetworkState) {
+                notifyItemChanged(lastItemIndex)
             }
-        }else if (isProgressIconShown){
-            notifyItemRemoved(itemCount)
+        } else if (isProgressIconShown()) {
+            notifyItemRemoved(lastItemIndex)
         }
     }
 
     private fun shouldShowProgressIcon() = currentNetworkState != NetworkState.LOADED
+
+    private fun isProgressIconShown() = previousNetworkState != NetworkState.LOADED
 
 }

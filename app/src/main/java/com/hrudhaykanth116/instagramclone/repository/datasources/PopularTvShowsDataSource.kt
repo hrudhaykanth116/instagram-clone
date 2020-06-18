@@ -41,11 +41,11 @@ class PopularTvShowsDataSource: PageKeyedDataSource<Int, TvShowData>() {
             val popularTvShowsCall = retroApis.getPopularTvShows(1)
             val response = popularTvShowsCall.execute()
             if (response.isSuccessful) {
+                networkState.postValue(NetworkState.LOADED)
                 val popularMoviesResponse = response.body()
                 popularMoviesResponse?.let {
                     val tvShowsList = popularMoviesResponse.tvShowsList
                     callback.onResult(tvShowsList, null, 2)
-                    networkState.postValue(NetworkState.LOADED)
                 }
             }else{
                 handleFailure(response.message())
@@ -71,29 +71,28 @@ class PopularTvShowsDataSource: PageKeyedDataSource<Int, TvShowData>() {
         Log.i(TAG, "loadAfter: ")
         networkState.postValue(NetworkState.LOADING)
 
-        retroApis.getPopularTvShows(params.key).enqueue(
-            object : Callback<PopularTvShowsResponse>{
-                override fun onFailure(call: Call<PopularTvShowsResponse>, t: Throwable) {
+        val callBack = object : Callback<PopularTvShowsResponse> {
+            override fun onFailure(call: Call<PopularTvShowsResponse>, t: Throwable) {
+                networkState.postValue(NetworkState.FAILED)
+            }
+
+            override fun onResponse(
+                call: Call<PopularTvShowsResponse>,
+                response: Response<PopularTvShowsResponse>
+            ) {
+                if (response.isSuccessful) {
+                    networkState.postValue(NetworkState.LOADED)
+                    val popularTvShowsResponse: PopularTvShowsResponse? = response.body()
+                    popularTvShowsResponse?.let {
+                        callback.onResult(popularTvShowsResponse.tvShowsList, params.key + 1)
+                    }
+                } else {
                     networkState.postValue(NetworkState.FAILED)
                 }
-
-                override fun onResponse(
-                    call: Call<PopularTvShowsResponse>,
-                    response: Response<PopularTvShowsResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        networkState.postValue(NetworkState.LOADED)
-                        val popularTvShowsResponse: PopularTvShowsResponse? = response.body()
-                        popularTvShowsResponse?.let {
-                            callback.onResult(popularTvShowsResponse.tvShowsList, params.key + 1)
-                        }
-                    }else{
-                        networkState.postValue(NetworkState.FAILED)
-                    }
-                }
-
             }
-        )
+
+        }
+        retroApis.getPopularTvShows(params.key).enqueue(callBack)
 
     }
 

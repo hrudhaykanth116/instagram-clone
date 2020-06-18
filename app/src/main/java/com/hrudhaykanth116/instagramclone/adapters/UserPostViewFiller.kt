@@ -1,7 +1,10 @@
 package com.hrudhaykanth116.instagramclone.adapters
 
+import android.content.Context
+import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.hrudhaykanth116.instagramclone.R
+import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
 import com.hrudhaykanth116.instagramclone.models.TvShowData
 import com.hrudhaykanth116.instagramclone.viewholders.PostViewHolder
 
@@ -11,9 +14,8 @@ class UserPostViewFiller {
         postViewHolder: PostViewHolder,
         tvShowData: TvShowData
     ) {
-        val postImgUrl = "http://image.tmdb.org/t/p/original/${tvShowData.backdropPath}"
-        val postDpUrl = "http://image.tmdb.org/t/p/original/${tvShowData.posterPath}"
-
+        val postImgUrl = MoviesDbConstants.IMAGES_BASE_URL + tvShowData.backdropPath
+        val postDpUrl = MoviesDbConstants.IMAGES_BASE_URL + tvShowData.posterPath
         val context = postViewHolder.itemView.context
 
         postViewHolder.userNameTV.text = tvShowData.originalName
@@ -26,15 +28,20 @@ class UserPostViewFiller {
             }
         }
 
-        Glide
-            .with(context)
-            .load(postImgUrl).placeholder(R.drawable.images_placeholder)
-            .into(postViewHolder.contentTV)
+        loadImg(context, postImgUrl, postViewHolder.contentTV)
+        loadImg(context, postDpUrl, postViewHolder.userDpView)
 
+    }
+
+    private fun loadImg(
+        context: Context,
+        postImgUrl: String,
+        imageView: ImageView
+    ) {
         Glide
             .with(context)
-            .load(postDpUrl)
-            .into(postViewHolder.userDpView)
+            .load(postImgUrl)
+            .into(imageView)
     }
 
 }

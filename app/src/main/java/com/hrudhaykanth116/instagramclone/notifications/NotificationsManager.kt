@@ -5,6 +5,8 @@ import android.content.Context
 import android.util.Log
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.RemoteMessage
+import java.text.SimpleDateFormat
+import java.util.*
 
 object NotificationsManager {
 
@@ -13,7 +15,7 @@ object NotificationsManager {
     private fun showNotification(
         context: Context,
         notification: Notification,
-        notificationId: Int = 1
+        notificationId: Int
     ) {
         Log.d(TAG, "showNotification: ")
         with(NotificationManagerCompat.from(context)) {
@@ -25,7 +27,11 @@ object NotificationsManager {
     fun handleRemoteNotification(context: Context, notification: RemoteMessage.Notification) {
         Log.d(TAG, "handleRemoteNotification: ")
         val builder = NotificationsBuilder.buildNotification(context, notification)
-        showNotification(context, builder.build())
+        showNotification(context, builder.build(), createUniqueNotificationId())
+    }
+
+    private fun createUniqueNotificationId(): Int {
+        return SimpleDateFormat("ddHHmmss", Locale.US).format(Date()).toInt()
     }
 
 

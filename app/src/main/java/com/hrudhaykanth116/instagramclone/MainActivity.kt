@@ -6,6 +6,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hrudhaykanth116.instagramclone.fcm.FirebaseTokenGenerator
+import com.hrudhaykanth116.instagramclone.notifications.NotificationsChannelsManager
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +23,8 @@ class MainActivity : AppCompatActivity() {
 //                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
 //        setupActionBarWithNavController(navController, appBarConfiguration)
 
-        FirebaseTokenGenerator.generateToken()
+        FirebaseTokenGenerator().generateToken()
+        NotificationsChannelsManager().createDefaultNotificationChannel(applicationContext)
 
     }
 }

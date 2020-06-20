@@ -25,7 +25,8 @@
 
         <!-- Service to handle fcm messages, notifications -->
         <service
-            android:name=".fcm.services.MyFirebaseMessagingService">
+            android:name=".fcm.services.MyFirebaseMessagingService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

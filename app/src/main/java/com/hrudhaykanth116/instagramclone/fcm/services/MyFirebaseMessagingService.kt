@@ -3,33 +3,36 @@ package com.hrudhaykanth116.instagramclone.fcm.services
 import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.hrudhaykanth116.instagramclone.notifications.NotificationsManager
 
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        Log.d(TAG, "onMessageReceived: $remoteMessage")
+        Log.d(TAG, "onMessageReceived: ")
+        if(remoteMessage.data.isNotEmpty()){
+            Log.d(TAG, "onMessageReceived: data payload is not empty")
+            // Handle data payload if implemented. this has custom key value pairs.
+        }
+
+        val notification = remoteMessage.notification
+
+        notification?.let {
+            NotificationsManager.handleRemoteNotification(this, notification)
+        }
+
+
     }
 
-    /*private fun sendNotification(messageBody: String) {
-        val intent = Intent(this, PostLoginActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        val pendingIntent = PendingIntent.getActivity(
-            this, 0 *//* Request code *//*, intent,
-            PendingIntent.FLAG_ONE_SHOT
-        )
-        val defaultSoundUri: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        val notificationBuilder: NotificationCompat.Builder = Builder(this)
-            .setSmallIcon(R.drawable.tf2spyprofile)
-            .setContentTitle("FCM Message")
-            .setContentText(messageBody)
-            .setAutoCancel(true)
-            .setSound(defaultSoundUri)
-            .setContentIntent(pendingIntent)
-        val notificationManager =
-            getSystemService<Any>(Context.NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.notify(0 *//* ID of notification *//*, notificationBuilder.build())
-    }*/
+    /**
+     * In some situations, FCM may not deliver a message. This occurs when there are too many messages
+     * (>100) pending for your app on a particular device at the time it connects or if the device hasn't
+     * connected to FCM in more than one month. In these cases, you may receive a callback to
+     * FirebaseMessagingService.onDeletedMessages()
+     */
+    override fun onDeletedMessages() {
+        super.onDeletedMessages()
+    }
 
     /**
      * Called if InstanceID token is updated. This may occur if the security of

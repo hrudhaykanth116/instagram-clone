@@ -27,12 +27,12 @@
         android:id="@+id/navigation_activity"
         android:name="com.hrudhaykanth116.instagramclone.ui.activity.ActivityFragment"
         android:label="Activity"
-        tools:layout="@layout/search_fragment" />
+        tools:layout="@layout/activity_fragment" />
 
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.hrudhaykanth116.instagramclone.ui.profile.ProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/search_fragment" />
+        tools:layout="@layout/profile_fragment" />
 
 </navigation>

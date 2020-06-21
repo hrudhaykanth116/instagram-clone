@@ -53,7 +53,6 @@ class SignInActivity : AppCompatActivity() {
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Log.d(TAG, "signInWithEmailPassword: Authentication successful.")
-                finishAffinity()
                 navigateToMainActivity()
             }else{
                 Log.e(TAG, "signInWithEmailPassword: Authentication failure: ${task.exception}")
@@ -65,6 +64,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun navigateToMainActivity() {
+        finishAffinity()
         startActivity(Intent(applicationContext, MainActivity::class.java))
     }
 

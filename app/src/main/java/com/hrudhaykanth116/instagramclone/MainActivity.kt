@@ -1,12 +1,15 @@
 package com.hrudhaykanth116.instagramclone
 
 import android.os.Bundle
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hrudhaykanth116.instagramclone.fcm.FirebaseTokenGenerator
 import com.hrudhaykanth116.instagramclone.notifications.NotificationsChannelsManager
+import kotlinx.android.synthetic.main.main_activity.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,15 +19,34 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
 
         val navController = findNavController(R.id.nav_host_fragment)
-        bottomNavigationView.setupWithNavController(navController)
+        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
+            onBottomMenuItemSelected(menuItem, navController)
+            true
+        }
+        bottomNavigationView.setOnNavigationItemReselectedListener {
+            // Do nothing when menu item reselected.
+        }
         bottomNavigationView.itemIconTintList = null
-
-//        val appBarConfiguration = AppBarConfiguration(setOf(
-//                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
-//        setupActionBarWithNavController(navController, appBarConfiguration)
 
         FirebaseTokenGenerator().generateToken()
         NotificationsChannelsManager().createDefaultNotificationChannel(applicationContext)
 
     }
+
+    override fun onBackPressed() {
+        Toast.makeText(this, "Back button disabled until further development", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun onBottomMenuItemSelected(
+        menuItem: MenuItem,
+        navController: NavController
+    ) {
+
+        val fragment = supportFragmentManager.findFragmentByTag(menuItem.itemId.toString())
+        val popBackStack = navController.popBackStack(menuItem.itemId, false)
+        if (!popBackStack) {
+            navController.navigate(menuItem.itemId)
+        }
+    }
+
 }

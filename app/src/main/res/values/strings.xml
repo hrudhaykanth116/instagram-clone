@@ -1,12 +1,14 @@
 <resources>
     <string name="app_name">Instagram clone</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_search">Search</string>
+    <string name="title_post">Notifications</string>
 
 
     <string name="post_caption">"<b>%s</b> " %s</string>
     <string name="likes">%s likes</string>
     <string name="default_notification_channel_id">101</string>
     <string name="sign_in">Sign in</string>
+    <string name="title_activity">Activity</string>
+    <string name="title_profile">Profile</string>
 </resources>

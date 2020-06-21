@@ -14,13 +14,13 @@
     <fragment
         android:id="@+id/navigation_search"
         android:name="com.hrudhaykanth116.instagramclone.ui.search.SearchFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_search"
         tools:layout="@layout/search_fragment" />
 
     <fragment
         android:id="@+id/navigation_post"
         android:name="com.hrudhaykanth116.instagramclone.ui.post.PostFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_post"
         tools:layout="@layout/fragment_notifications" />
 
     <fragment

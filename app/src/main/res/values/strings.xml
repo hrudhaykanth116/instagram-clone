@@ -8,5 +8,5 @@
     <string name="post_caption">"<b>%s</b> " %s</string>
     <string name="likes">%s likes</string>
     <string name="default_notification_channel_id">101</string>
-    <string name="login">Login</string>
+    <string name="sign_in">Sign in</string>
 </resources>

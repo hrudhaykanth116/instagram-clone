@@ -6,11 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#B1B1B1"
-    tools:context=".ui.login.LoginActivity"
+    tools:context=".ui.signin.SignInActivity"
     >
 
     <TextView
-        android:id="@+id/loginScreenTitle"
+        android:id="@+id/signInScreenTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -62,6 +62,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/signInProgressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:progressTint="@color/green"
+        app:layout_constraintStart_toStartOf="@id/signInBtn"
+        app:layout_constraintBottom_toBottomOf="@+id/signInBtn"
+        app:layout_constraintEnd_toEndOf="@+id/signInBtn"
+        app:layout_constraintTop_toTopOf="@+id/signInBtn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

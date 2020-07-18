@@ -31,8 +31,15 @@
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.hrudhaykanth116.instagramclone.ui.profile.ProfileFragment"
+        android:name="com.hrudhaykanth116.instagramclone.ui.account.MyAccountFragment"
         android:label="Profile"
-        tools:layout="@layout/profile_fragment" />
+        tools:layout="@layout/my_account_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_user_profile"
+        android:name="com.hrudhaykanth116.instagramclone.ui.profile.TvShowFragment"
+        android:label="User profile"
+        tools:layout="@layout/tv_show_fragment"
+        />
 
 </navigation>

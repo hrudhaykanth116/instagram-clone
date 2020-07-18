@@ -9,11 +9,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.hrudhaykanth116.instagramclone.R
-import com.hrudhaykanth116.instagramclone.adapters.MainPostsAdapter
+import com.hrudhaykanth116.instagramclone.adapters.HomeFragmentAdapter
 import com.hrudhaykanth116.instagramclone.models.PopularMoviesResponse
 import com.hrudhaykanth116.instagramclone.models.TvShowData
 import com.hrudhaykanth116.instagramclone.network.RetroApiClient
@@ -29,7 +30,7 @@ import retrofit2.Retrofit
 
 class HomeFragment : Fragment() {
 
-    private lateinit var mainPostsAdapter: MainPostsAdapter
+    private lateinit var homeFragmentAdapter: HomeFragmentAdapter
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var retrofit: Retrofit
     private lateinit var apisClient: RetroApis
@@ -65,20 +66,25 @@ class HomeFragment : Fragment() {
         homeViewModel.popularTvShowsLiveData.observe(viewLifecycleOwner,
             Observer<PagedList<TvShowData>> { pagedList ->
                 // Data source changed.
-                mainPostsAdapter.submitList(pagedList)
+                homeFragmentAdapter.submitList(pagedList)
             }
         )
         homeViewModel.networkState.observe(viewLifecycleOwner,
             Observer { networkState ->
-                mainPostsAdapter.setNetworkState(networkState)
+                homeFragmentAdapter.setNetworkState(networkState)
             }
         )
     }
 
     private fun initMainPostsRecyclerView(view: View) {
-        mainPostsAdapter = MainPostsAdapter()
+        homeFragmentAdapter = HomeFragmentAdapter(object : HomeFragmentAdapter.IPostClickListener{
+            override fun onProfileNameClicked(tvData: Int?) {
+                findNavController().navigate(R.id.navigation_user_profile)
+            }
+
+        })
         view.main_posts_rv.layoutManager = LinearLayoutManager(context)
-        view.main_posts_rv.adapter = mainPostsAdapter
+        view.main_posts_rv.adapter = homeFragmentAdapter
 
         mainPostsSwipeRefreshLayout.setOnRefreshListener {
             refreshPosts()

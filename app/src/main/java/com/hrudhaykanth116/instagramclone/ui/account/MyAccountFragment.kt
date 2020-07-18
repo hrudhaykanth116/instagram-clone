@@ -1,4 +1,4 @@
-package com.hrudhaykanth116.instagramclone.ui.profile
+package com.hrudhaykanth116.instagramclone.ui.account
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,26 +11,26 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.ui.signin.SignInActivity
-import kotlinx.android.synthetic.main.profile_fragment.*
+import kotlinx.android.synthetic.main.my_account_fragment.*
 
-class ProfileFragment : Fragment() {
+class MyAccountFragment : Fragment() {
 
     companion object {
-        fun newInstance() = ProfileFragment()
+        fun newInstance() = MyAccountFragment()
     }
 
-    private lateinit var viewModel: ProfileViewModel
+    private lateinit var viewModel: MyAccountViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.profile_fragment, container, false)
+        return inflater.inflate(R.layout.my_account_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MyAccountViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

@@ -11,15 +11,8 @@ import com.hrudhaykanth116.instagramclone.viewholders.ProgressViewHolder
 import com.hrudhaykanth116.instagramclone.viewholders.PublicStatusViewHolder
 import com.hrudhaykanth116.instagramclone.viewholders.ViewHoldersCreator
 
-class MainPostsAdapter :
+class HomeFragmentAdapter(private val postClickListener: IPostClickListener) :
     PagedListAdapter<TvShowData, RecyclerView.ViewHolder>(TvShowData.diffUtillCallback) {
-
-    private val TYPE_PUBLIC_STATUS = R.layout.stories_view
-    private val TYPE_POST = R.layout.post_view_item
-    private val TYPE_PROGRESS = R.layout.progress_bar_row
-
-    // TODO: 19-06-2020 Fix issue: On initial load, loadAfter is also called. Make this count 1
-    private val STORIES_ROWS_COUNT = 0
 
     private var currentNetworkState: NetworkState = NetworkState.LOADING
     private var previousNetworkState: NetworkState = NetworkState.LOADING
@@ -34,8 +27,9 @@ class MainPostsAdapter :
                 PublicStatusViewFiller().fillPublicStatusView(viewHolder as PublicStatusViewHolder)
             }
             TYPE_POST -> {
-                val tvShowData = getItem(position - 1) as TvShowData
-                UserPostViewFiller().fillPostView(viewHolder as PostViewHolder, tvShowData)
+                val tvShowData: TvShowData = getItem(position - 1) as TvShowData
+                val postViewHolder = viewHolder as PostViewHolder
+                postViewHolder.bind(tvShowData, postClickListener)
             }
             TYPE_PROGRESS -> {
                 val progressViewHolder = viewHolder as ProgressViewHolder
@@ -87,5 +81,20 @@ class MainPostsAdapter :
     private fun shouldShowProgressIcon() = currentNetworkState != NetworkState.LOADED
 
     private fun isProgressIconShown() = previousNetworkState != NetworkState.LOADED
+
+    companion object{
+
+        private const val TYPE_PUBLIC_STATUS = R.layout.stories_view
+        private const val TYPE_POST = R.layout.post_view_item
+        private const val TYPE_PROGRESS = R.layout.progress_bar_row
+
+        // TODO: 19-06-2020 Fix issue: On initial load, loadAfter is also called. Make this count 1
+        private const val STORIES_ROWS_COUNT = 0
+
+    }
+
+    interface IPostClickListener {
+        fun onProfileNameClicked(tvData: Int?)
+    }
 
 }

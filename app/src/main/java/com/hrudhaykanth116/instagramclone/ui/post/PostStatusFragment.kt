@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.hrudhaykanth116.instagramclone.R
 
-class PostFragment : Fragment() {
+class PostStatusFragment : Fragment() {
 
     private lateinit var postViewModel: PostViewModel
 
@@ -21,7 +21,7 @@ class PostFragment : Fragment() {
     ): View? {
         postViewModel =
                 ViewModelProvider(this).get(PostViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_notifications, container, false)
+        val root = inflater.inflate(R.layout.post_status_fragment, container, false)
         val textView: TextView = root.findViewById(R.id.text_notifications)
         postViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it

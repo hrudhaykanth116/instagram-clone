@@ -85,7 +85,7 @@ class HomeFragmentAdapter(private val postClickListener: IPostClickListener) :
     companion object{
 
         private const val TYPE_PUBLIC_STATUS = R.layout.stories_view
-        private const val TYPE_POST = R.layout.post_view_item
+        private const val TYPE_POST = R.layout.tv_show_episode_item
         private const val TYPE_PROGRESS = R.layout.progress_bar_row
 
         // TODO: 19-06-2020 Fix issue: On initial load, loadAfter is also called. Make this count 1
@@ -94,7 +94,7 @@ class HomeFragmentAdapter(private val postClickListener: IPostClickListener) :
     }
 
     interface IPostClickListener {
-        fun onProfileNameClicked(tvData: Int?)
+        fun onProfileNameClicked(tvShowData: TvShowData)
     }
 
 }

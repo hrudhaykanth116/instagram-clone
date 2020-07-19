@@ -1,8 +1,12 @@
 package com.hrudhaykanth116.instagramclone.models
 
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.recyclerview.widget.DiffUtil
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class TvShowData(
     @SerializedName("backdrop_path")
     val backdropPath: String? = "",
@@ -30,9 +34,7 @@ data class TvShowData(
     val voteAverage: Double? = 0.0,
     @SerializedName("vote_count")
     val voteCount: Int? = 0
-){
-
-
+) : Parcelable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

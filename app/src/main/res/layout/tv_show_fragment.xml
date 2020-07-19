@@ -1,19 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/toolbarView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/tvShowBackBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/ic_back_24"
+        app:layout_constraintBottom_toBottomOf="@id/toolbarView"
+        app:layout_constraintStart_toStartOf="@id/toolbarView"
+        app:layout_constraintTop_toTopOf="@id/toolbarView" />
 
     <TextView
+        android:id="@+id/tvShowName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Tv show name"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="@id/toolbarView"
+        app:layout_constraintEnd_toStartOf="@+id/tvShowMenu"
+        app:layout_constraintStart_toEndOf="@id/tvShowBackBtn"
+        app:layout_constraintTop_toTopOf="@id/toolbarView" />
+
+    <Button
+        android:id="@+id/tvShowMenu"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/ic_kebab_menu_white_24dp"
+        android:backgroundTint="#000000"
+        app:layout_constraintBottom_toBottomOf="@id/toolbarView"
+        app:layout_constraintEnd_toEndOf="@id/toolbarView"
+        app:layout_constraintTop_toTopOf="@id/toolbarView" />
+
+    <include
+        android:id="@+id/tvShowImage"
+        layout="@layout/rounded_image_container"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/showBasicInfoContainer"
+        app:layout_constraintStart_toStartOf="@id/tvShowBackBtn"
+        app:layout_constraintTop_toTopOf="@+id/showBasicInfoContainer" />
+
+    <View
+        android:id="@+id/showBasicInfoContainer"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/toolbarView"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarView" />
+
+    <TextView
+        android:id="@+id/postsCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="USer profile screen"
+        android:text="404"
+        android:textStyle="bold"
         android:textSize="18sp"
-        android:textColor="#000000"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/postsTV"
+        app:layout_constraintEnd_toEndOf="@+id/postsTV"
+        app:layout_constraintStart_toStartOf="@+id/postsTV"
+        app:layout_constraintTop_toTopOf="@+id/showBasicInfoContainer"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/postsTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Posts"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/showBasicInfoContainer"
+        app:layout_constraintEnd_toStartOf="@id/followersTV"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toEndOf="@+id/tvShowImage"
+        app:layout_constraintTop_toBottomOf="@+id/postsCount" />
+
+    <TextView
+        android:id="@+id/followersCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="223K"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/followersTV"
+        app:layout_constraintEnd_toEndOf="@+id/followersTV"
+        app:layout_constraintStart_toStartOf="@+id/followersTV"
+        app:layout_constraintTop_toTopOf="@+id/showBasicInfoContainer"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/followersTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Followers"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/showBasicInfoContainer"
+        app:layout_constraintEnd_toStartOf="@id/followingTV"
+        app:layout_constraintStart_toEndOf="@+id/postsTV"
+        app:layout_constraintTop_toBottomOf="@+id/followersCount" />
+
+    <TextView
+        android:id="@+id/followingCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1,203"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/followingTV"
+        app:layout_constraintEnd_toEndOf="@+id/followingTV"
+        app:layout_constraintStart_toStartOf="@+id/followingTV"
+        app:layout_constraintTop_toTopOf="@+id/showBasicInfoContainer"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/followingTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Following"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/showBasicInfoContainer"
+        app:layout_constraintEnd_toEndOf="@+id/showBasicInfoContainer"
+        app:layout_constraintStart_toEndOf="@+id/followersTV"
+        app:layout_constraintTop_toBottomOf="@id/followingCount" />
+
+    <TextView
+        android:id="@+id/tvShowInformation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Tv show information"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvShowImage"
+        app:layout_constraintTop_toBottomOf="@+id/showBasicInfoContainer" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tvShowImages"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvShowInformation"
+        app:layout_constraintVertical_bias="1.0"
+        app:spanCount="3"
+        tools:itemCount="20"
+        tools:listitem="@layout/image_view" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

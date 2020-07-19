@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hrudhaykanth116.instagramclone.R
 
-class SearchResultsAdapter(private val list: List<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+class TvShowImagesAdapter(private val list: List<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 

@@ -11,7 +11,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.hrudhaykanth116.instagramclone.MainActivity
 import com.hrudhaykanth116.instagramclone.R
-import kotlinx.android.synthetic.main.activity_sign_in.*
+import kotlinx.android.synthetic.main.sign_in_activity.*
 
 class SignInActivity : AppCompatActivity() {
 
@@ -23,7 +23,7 @@ class SignInActivity : AppCompatActivity() {
         }
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_in)
+        setContentView(R.layout.sign_in_activity)
 
         signInBtn.setOnClickListener {
             signInWithEmailPassword(

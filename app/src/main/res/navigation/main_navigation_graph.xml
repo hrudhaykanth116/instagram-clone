@@ -9,7 +9,14 @@
         android:id="@+id/navigation_home"
         android:name="com.hrudhaykanth116.instagramclone.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/tvShowFragmentAction"
+            app:destination="@id/navigation_user_profile"
+            />
+
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_search"
@@ -19,9 +26,9 @@
 
     <fragment
         android:id="@+id/navigation_post"
-        android:name="com.hrudhaykanth116.instagramclone.ui.post.PostFragment"
-        android:label="@string/title_post"
-        tools:layout="@layout/fragment_notifications" />
+        android:name="com.hrudhaykanth116.instagramclone.ui.post.PostStatusFragment"
+        android:label="Post status"
+        tools:layout="@layout/post_status_fragment" />
 
     <fragment
         android:id="@+id/navigation_activity"
@@ -40,6 +47,10 @@
         android:name="com.hrudhaykanth116.instagramclone.ui.profile.TvShowFragment"
         android:label="User profile"
         tools:layout="@layout/tv_show_fragment"
-        />
+        >
+        <argument
+            android:name="tvShowData"
+            app:argType="com.hrudhaykanth116.instagramclone.models.TvShowData" />
+    </fragment>
 
 </navigation>

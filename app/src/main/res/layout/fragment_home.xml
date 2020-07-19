@@ -73,7 +73,7 @@
             android:id="@+id/main_posts_rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/post_view_item"
+            tools:listitem="@layout/tv_show_episode_item"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

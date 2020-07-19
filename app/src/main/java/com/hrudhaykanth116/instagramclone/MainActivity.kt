@@ -6,6 +6,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
+import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -15,14 +16,20 @@ import kotlinx.android.synthetic.main.main_activity.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var bottomNavigationView: BottomNavigationView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
-        bottomNavigationView = findViewById(R.id.bottomNavigationView)
 
         val navController = findNavController(R.id.nav_host_fragment)
+        setUpBottomNavigationView(navController)
+
+        FirebaseTokenGenerator().generateToken()
+        NotificationsChannelsManager().createDefaultNotificationChannel(applicationContext)
+
+    }
+
+    private fun setUpBottomNavigationView(navController: NavController) {
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             onBottomMenuItemSelected(menuItem, navController)
         }
@@ -30,14 +37,10 @@ class MainActivity : AppCompatActivity() {
             // Do nothing when menu item reselected.
         }
         bottomNavigationView.itemIconTintList = null
-
-        FirebaseTokenGenerator().generateToken()
-        NotificationsChannelsManager().createDefaultNotificationChannel(applicationContext)
-
     }
 
     override fun onBackPressed() {
-        Toast.makeText(this, "Back button disabled until further development", Toast.LENGTH_SHORT).show()
+        super.onBackPressed()
     }
 
     private fun onBottomMenuItemSelected(

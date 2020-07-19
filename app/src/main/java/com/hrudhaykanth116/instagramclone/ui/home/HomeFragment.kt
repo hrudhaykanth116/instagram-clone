@@ -20,6 +20,7 @@ import com.hrudhaykanth116.instagramclone.models.TvShowData
 import com.hrudhaykanth116.instagramclone.network.RetroApiClient
 import com.hrudhaykanth116.instagramclone.network.RetroApis
 import com.hrudhaykanth116.instagramclone.repository.databases.AppDatabase
+import com.hrudhaykanth116.instagramclone.ui.profile.TvShowFragmentArgs
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import retrofit2.Call
@@ -78,8 +79,9 @@ class HomeFragment : Fragment() {
 
     private fun initMainPostsRecyclerView(view: View) {
         homeFragmentAdapter = HomeFragmentAdapter(object : HomeFragmentAdapter.IPostClickListener{
-            override fun onProfileNameClicked(tvData: Int?) {
-                findNavController().navigate(R.id.navigation_user_profile)
+            override fun onProfileNameClicked(tvShowData: TvShowData) {
+                val tvShowFragmentAction = HomeFragmentDirections.tvShowFragmentAction(tvShowData)
+                findNavController().navigate(tvShowFragmentAction)
             }
 
         })

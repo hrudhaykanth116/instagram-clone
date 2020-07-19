@@ -10,7 +10,7 @@ import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.adapters.HomeFragmentAdapter
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
 import com.hrudhaykanth116.instagramclone.models.TvShowData
-import kotlinx.android.synthetic.main.post_view_item.view.*
+import kotlinx.android.synthetic.main.tv_show_episode_item.view.*
 import kotlinx.android.synthetic.main.rounded_image_container.view.*
 
 class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -31,7 +31,7 @@ class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         userNameTV.text = tvShowData.originalName
         userNameTV.setOnClickListener {
-            postClickListener.onProfileNameClicked(tvShowData.id)
+            postClickListener.onProfileNameClicked(tvShowData)
         }
 
         likedDescriptionTV.text = context.getString(R.string.likes, tvShowData.voteCount.toString())

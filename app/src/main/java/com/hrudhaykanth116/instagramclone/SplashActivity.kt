@@ -34,22 +34,18 @@ class SplashActivity : AppCompatActivity() {
 
     private fun navigateToMainActivity() {
         val mainActivityIntent = Intent(applicationContext, MainActivity::class.java)
-//        mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-//        mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(mainActivityIntent)
         finish()
     }
 
     private fun navigateToSignInActivity() {
         val mainActivityIntent = Intent(applicationContext, SignInActivity::class.java)
-//        mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-//        mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(mainActivityIntent)
         finish()
     }
 
     companion object{
-        private const val SPLASH_DISPLAY_LENGTH: Long = 5000
+        private const val SPLASH_DISPLAY_LENGTH: Long = 2000
 
     }
 

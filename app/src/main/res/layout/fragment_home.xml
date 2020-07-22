@@ -67,6 +67,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbarView">
 
+        <!-- TODO: 22-07-2020-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/main_posts_rv"
             android:layout_width="match_parent"

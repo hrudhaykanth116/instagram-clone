@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:src="@drawable/post_sample_image"
     android:scaleType="fitXY"
+    android:padding="8dp"
     >
 
 </ImageView>

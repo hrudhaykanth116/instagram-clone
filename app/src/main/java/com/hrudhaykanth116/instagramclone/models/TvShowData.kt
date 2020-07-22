@@ -1,6 +1,5 @@
 package com.hrudhaykanth116.instagramclone.models
 
-import android.os.Parcel
 import android.os.Parcelable
 import androidx.recyclerview.widget.DiffUtil
 import com.google.gson.annotations.SerializedName

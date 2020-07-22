@@ -13,29 +13,28 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
+import com.hrudhaykanth116.instagramclone.MainActivity
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.adapters.HomeFragmentAdapter
 import com.hrudhaykanth116.instagramclone.models.PopularMoviesResponse
+import com.hrudhaykanth116.instagramclone.models.PopularTvShowsResponse
 import com.hrudhaykanth116.instagramclone.models.TvShowData
-import com.hrudhaykanth116.instagramclone.network.RetroApiClient
+import com.hrudhaykanth116.instagramclone.models.TvShowDetails
 import com.hrudhaykanth116.instagramclone.network.RetroApis
 import com.hrudhaykanth116.instagramclone.repository.databases.AppDatabase
-import com.hrudhaykanth116.instagramclone.ui.profile.TvShowFragmentArgs
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
 
 
 class HomeFragment : Fragment() {
 
     private lateinit var homeFragmentAdapter: HomeFragmentAdapter
     private lateinit var homeViewModel: HomeViewModel
-    private lateinit var retrofit: Retrofit
     private lateinit var apisClient: RetroApis
-    private lateinit var popularMoviesRetroCall: Call<PopularMoviesResponse>
+    private lateinit var tvShowDetailsCall: Call<PopularTvShowsResponse>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,7 +54,8 @@ class HomeFragment : Fragment() {
             AppDatabase::class.java, "app-db"
         ).allowMainThreadQueries().build()
 
-        initRetrofit()
+        this.apisClient = (activity as MainActivity).apisClient
+
         initMainPostsRecyclerView(view)
         initViewModel()
 
@@ -78,7 +78,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initMainPostsRecyclerView(view: View) {
-        homeFragmentAdapter = HomeFragmentAdapter(object : HomeFragmentAdapter.IPostClickListener{
+        homeFragmentAdapter = HomeFragmentAdapter(object : HomeFragmentAdapter.IPostClickListener {
             override fun onProfileNameClicked(tvShowData: TvShowData) {
                 val tvShowFragmentAction = HomeFragmentDirections.tvShowFragmentAction(tvShowData)
                 findNavController().navigate(tvShowFragmentAction)
@@ -94,15 +94,10 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun initRetrofit() {
-        retrofit = RetroApiClient.getRetrofitInstance()
-        apisClient = retrofit.create(RetroApis::class.java)
-    }
-
     private fun refreshPosts() {
         // TODO: 13-06-2020 Create logic to get/stimulate recent movies.
-        val callback = object : Callback<PopularMoviesResponse> {
-            override fun onFailure(call: Call<PopularMoviesResponse>, t: Throwable) {
+        val callback = object : Callback<PopularTvShowsResponse> {
+            override fun onFailure(call: Call<PopularTvShowsResponse>, t: Throwable) {
                 Log.i(TAG, "onFailure: ${t.message}")
                 context?.let {
                     Toast.makeText(it, "Error retrieving posts", Toast.LENGTH_SHORT).show()
@@ -111,8 +106,8 @@ class HomeFragment : Fragment() {
             }
 
             override fun onResponse(
-                call: Call<PopularMoviesResponse>,
-                response: Response<PopularMoviesResponse>
+                call: Call<PopularTvShowsResponse>,
+                response: Response<PopularTvShowsResponse>
             ) {
                 Log.i(TAG, "onResponse: ")
                 Toast.makeText(context, "No new posts", Toast.LENGTH_SHORT).show()
@@ -120,11 +115,11 @@ class HomeFragment : Fragment() {
             }
 
         }
-        popularMoviesRetroCall = apisClient.getPopularMoviesList(1)
-        popularMoviesRetroCall.clone().enqueue(callback)
+        tvShowDetailsCall = apisClient.getPopularTvShows(1)
+        tvShowDetailsCall.clone().enqueue(callback)
     }
 
-    companion object{
+    companion object {
         private val TAG = HomeFragment::class.java.simpleName
     }
 

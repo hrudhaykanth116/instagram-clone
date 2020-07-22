@@ -17,10 +17,6 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        val firebaseAuth = Firebase.auth
-        if (firebaseAuth.currentUser != null) {
-            navigateToMainActivity()
-        }
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.sign_in_activity)
@@ -28,28 +24,20 @@ class SignInActivity : AppCompatActivity() {
         signInBtn.setOnClickListener {
             signInWithEmailPassword(
                 emailTextField.text.toString(),
-                passwordTextField.text.toString(),
-                firebaseAuth
+                passwordTextField.text.toString()
             )
         }
 
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
     private fun signInWithEmailPassword(
         email: String,
-        password: String,
-        firebaseAuth: FirebaseAuth
+        password: String
     ) {
         signInBtn.visibility = View.INVISIBLE
         signInProgressBar.visibility = View.VISIBLE
+
+        val firebaseAuth = Firebase.auth
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Log.d(TAG, "signInWithEmailPassword: Authentication successful.")
@@ -64,8 +52,10 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun navigateToMainActivity() {
-        finishAffinity()
-        startActivity(Intent(applicationContext, MainActivity::class.java))
+        val mainActivityIntent = Intent(applicationContext, MainActivity::class.java)
+        mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(mainActivityIntent)
     }
 
     companion object{

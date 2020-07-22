@@ -11,14 +11,22 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hrudhaykanth116.instagramclone.fcm.FirebaseTokenGenerator
+import com.hrudhaykanth116.instagramclone.network.RetroApiClient
+import com.hrudhaykanth116.instagramclone.network.RetroApis
 import com.hrudhaykanth116.instagramclone.notifications.NotificationsChannelsManager
 import kotlinx.android.synthetic.main.main_activity.*
+import retrofit2.Retrofit
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var retrofit: Retrofit
+    public lateinit var apisClient: RetroApis
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
+
+        initRetrofit()
 
         val navController = findNavController(R.id.nav_host_fragment)
         setUpBottomNavigationView(navController)
@@ -26,6 +34,11 @@ class MainActivity : AppCompatActivity() {
         FirebaseTokenGenerator().generateToken()
         NotificationsChannelsManager().createDefaultNotificationChannel(applicationContext)
 
+    }
+
+    private fun initRetrofit() {
+        retrofit = RetroApiClient.getRetrofitInstance()
+        apisClient = retrofit.create(RetroApis::class.java)
     }
 
     private fun setUpBottomNavigationView(navController: NavController) {

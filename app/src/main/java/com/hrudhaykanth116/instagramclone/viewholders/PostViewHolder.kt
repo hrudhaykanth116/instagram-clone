@@ -19,7 +19,8 @@ class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val contentTV: ImageView = itemView.postContent as ImageView
     val userNameTV: TextView = itemView.postUserNameTV as TextView
     val likedDescriptionTV: TextView = itemView.likedDescriptionTV as TextView
-    val captionTV: TextView = itemView.captionTV as TextView
+    val showNameTV: TextView = itemView.showNameTV as TextView
+    val showOverViewTV: TextView = itemView.showOverView as TextView
 
     public fun bind(
         tvShowData: TvShowData,
@@ -35,13 +36,18 @@ class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
 
         likedDescriptionTV.text = context.getString(R.string.likes, tvShowData.voteCount.toString())
-        val captionTV = captionTV
-        captionTV.text = context.getString(R.string.post_caption, tvShowData.originalName, tvShowData.overview)
-        captionTV.post {
-            if (captionTV.lineCount > 2){
-                captionTV.setLines(2)
+        showNameTV.text = tvShowData.originalName
+
+        showOverViewTV.text = tvShowData.overview
+        // Add proper logic to set number of lines appropriately.
+        showOverViewTV.post {
+            // Update view, after the view is rendered.
+            if (showOverViewTV.lineCount > 3) {
+                showOverViewTV.setLines(3)
             }
         }
+
+
 
         loadImg(context, postImgUrl, contentTV)
         loadImg(context, postDpUrl, userDpView)

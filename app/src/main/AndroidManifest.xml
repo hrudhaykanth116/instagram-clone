@@ -12,19 +12,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".ui.signin.SignInActivity"
-            android:windowSoftInputMode="adjustResize"
-            >
+
+        <activity android:name=".SplashActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
+        <activity
+            android:name=".ui.signin.SignInActivity"
+            android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" /> <!-- Service to handle fcm messages, notifications -->
+            android:label="@string/app_name" />
+
+        <!-- Service to handle fcm messages, notifications -->
         <service
             android:name=".fcm.services.MyFirebaseMessagingService"
             android:exported="false">
@@ -49,6 +56,9 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

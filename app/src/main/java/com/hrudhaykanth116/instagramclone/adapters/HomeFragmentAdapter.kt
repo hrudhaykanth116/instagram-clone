@@ -23,7 +23,7 @@ class HomeFragmentAdapter(private val postClickListener: IPostClickListener) :
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         when (viewHolder.itemViewType) {
-            TYPE_PUBLIC_STATUS -> {
+            TYPE_PUBLIC_STORIES -> {
                 PublicStatusViewFiller().fillPublicStatusView(viewHolder as PublicStatusViewHolder)
             }
             TYPE_POST -> {
@@ -53,7 +53,7 @@ class HomeFragmentAdapter(private val postClickListener: IPostClickListener) :
             return TYPE_PROGRESS
         }
         return when (position) {
-            0 -> TYPE_PUBLIC_STATUS
+            0 -> TYPE_PUBLIC_STORIES
             else -> TYPE_POST
         }
     }
@@ -84,7 +84,7 @@ class HomeFragmentAdapter(private val postClickListener: IPostClickListener) :
 
     companion object{
 
-        private const val TYPE_PUBLIC_STATUS = R.layout.stories_view
+        private const val TYPE_PUBLIC_STORIES = R.layout.stories_view
         private const val TYPE_POST = R.layout.tv_show_episode_item
         private const val TYPE_PROGRESS = R.layout.progress_bar_row
 

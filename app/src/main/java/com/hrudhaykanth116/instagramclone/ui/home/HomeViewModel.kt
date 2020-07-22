@@ -26,8 +26,8 @@ class HomeViewModel : ViewModel() {
 
         val pagedListConfig: PagedList.Config = PagedList.Config.Builder()
 //            .setEnablePlaceholders(false)
-            .setInitialLoadSizeHint(20)
-            .setPageSize(10) // x items will be loaded from data source. after getting last set(last x), loadAfter() is called.
+            .setInitialLoadSizeHint(10)
+            .setPageSize(7) // x items will be loaded from data source. after getting last set(last x), loadAfter() is called.
             .build()
 
         // x threads will be used to execute data loading one after the other.iterates again.

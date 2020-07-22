@@ -61,7 +61,7 @@
         />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/search_results_container"
+        android:id="@+id/searchResultsContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:spanCount="3"

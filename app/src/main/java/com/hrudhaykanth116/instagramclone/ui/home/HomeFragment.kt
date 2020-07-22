@@ -20,6 +20,7 @@ import com.hrudhaykanth116.instagramclone.models.PopularMoviesResponse
 import com.hrudhaykanth116.instagramclone.models.PopularTvShowsResponse
 import com.hrudhaykanth116.instagramclone.models.TvShowData
 import com.hrudhaykanth116.instagramclone.models.TvShowDetails
+import com.hrudhaykanth116.instagramclone.network.RetroApiClient
 import com.hrudhaykanth116.instagramclone.network.RetroApis
 import com.hrudhaykanth116.instagramclone.repository.databases.AppDatabase
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -54,7 +55,7 @@ class HomeFragment : Fragment() {
             AppDatabase::class.java, "app-db"
         ).allowMainThreadQueries().build()
 
-        this.apisClient = (activity as MainActivity).apisClient
+        this.apisClient = RetroApiClient.getRetroApiService()
 
         initMainPostsRecyclerView(view)
         initViewModel()

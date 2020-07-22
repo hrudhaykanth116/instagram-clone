@@ -4,11 +4,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hrudhaykanth116.instagramclone.R
+import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
+import com.hrudhaykanth116.instagramclone.models.TvShowData
 
-class SearchResultsAdapter(private val list: List<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SearchResultsAdapter() :
+    PagedListAdapter<TvShowData, RecyclerView.ViewHolder>(TvShowData.diffUtillCallback) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -19,16 +23,19 @@ class SearchResultsAdapter(private val list: List<String>) : RecyclerView.Adapte
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return super.getItemCount()
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val searchResultImg = holder.itemView as ImageView
 
-        val searchImgUrl = "https://picsum.photos/id/${holder.adapterPosition * 8}/300"
+        // Sample data
+        // val imgUrl = "https://picsum.photos/id/${holder.adapterPosition * 8}/300"
+        val tvShowData: TvShowData = getItem(position) as TvShowData
+        val imgUrl = MoviesDbConstants.IMAGES_BASE_URL + tvShowData.posterPath
         Glide
             .with(searchResultImg)
-            .load(searchImgUrl)
+            .load(imgUrl)
             .into(searchResultImg)
 
     }

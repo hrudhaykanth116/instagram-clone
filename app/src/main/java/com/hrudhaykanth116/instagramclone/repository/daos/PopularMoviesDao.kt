@@ -8,10 +8,10 @@ import com.hrudhaykanth116.instagramclone.models.MovieData
 @Dao
 interface PopularMoviesDao {
 
-    @Query("SELECT * FROM movie_data")
+    /*@Query("SELECT * FROM movie_data")
     fun getAll(): List<MovieData>
 
     @Insert
-    fun insertMovieData(movieDataList: List<MovieData>)
+    fun insertMovieData(movieDataList: List<MovieData>)*/
 
 }

@@ -46,6 +46,12 @@ public interface RetroApis {
                                  @Query("api_key") apiKey: String = MoviesDbConstants.API_KEY
     ): Call<PopularTvShowsResponse>
 
+    @GET("tv/top_rated/")
+    public fun getTopRatedTvShows(@Query("page") pageId: Int,
+                                 @Query("api_key") apiKey: String = MoviesDbConstants.API_KEY
+    ): Call<PopularTvShowsResponse>
+
+
     @GET("tv/{tvShowId}")
     public fun getTvShowDetails(@Path("tvShowId") tvShowId: Int,
                                 @Query("api_key") apiKey: String = MoviesDbConstants.API_KEY

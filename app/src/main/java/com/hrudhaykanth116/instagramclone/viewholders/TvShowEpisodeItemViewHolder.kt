@@ -1,6 +1,8 @@
 package com.hrudhaykanth116.instagramclone.viewholders
 
 import android.content.Context
+import android.graphics.Color
+import android.os.Handler
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,14 +15,17 @@ import com.hrudhaykanth116.instagramclone.models.TvShowData
 import kotlinx.android.synthetic.main.tv_show_episode_item.view.*
 import kotlinx.android.synthetic.main.rounded_image_container.view.*
 
-class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class TvShowEpisodeItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    val userDpView: ImageView = itemView.dpView.innerImg as ImageView
-    val contentTV: ImageView = itemView.postContent as ImageView
-    val userNameTV: TextView = itemView.postUserNameTV as TextView
-    val likedDescriptionTV: TextView = itemView.likedDescriptionTV as TextView
-    val showNameTV: TextView = itemView.showNameTV as TextView
-    val showOverViewTV: TextView = itemView.showOverView as TextView
+    // Can use view directly instead of this private field
+    private val userDpView: ImageView = itemView.dpView.innerImg as ImageView
+    private val tvShowImageView: ImageView = itemView.tvShowImageView as ImageView
+    private val heartImageView: ImageView = itemView.heartImageView as ImageView
+    private val likedIcon: ImageView = itemView.likeIcon as ImageView
+    private val userNameTV: TextView = itemView.postUserNameTV as TextView
+    private val likedDescriptionTV: TextView = itemView.likedDescriptionTV as TextView
+    private val showNameTV: TextView = itemView.showNameTV as TextView
+    private val showOverViewTV: TextView = itemView.showOverView as TextView
 
     public fun bind(
         tvShowData: TvShowData,
@@ -34,6 +39,8 @@ class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         userNameTV.setOnClickListener {
             postClickListener.onProfileNameClicked(tvShowData)
         }
+        // Tv show not liked case
+        likedIcon.clearColorFilter()
 
         likedDescriptionTV.text = context.getString(R.string.likes, tvShowData.voteCount.toString())
         showNameTV.text = tvShowData.originalName
@@ -47,9 +54,27 @@ class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             }
         }
 
+        var lastClickTime: Long = 0
+        tvShowImageView.setOnClickListener {
+            if(System.currentTimeMillis() - lastClickTime < 300){
+                // Double clicked
+
+                likedIcon.setColorFilter(Color.rgb(255, 0, 0))
+
+                heartImageView.visibility = View.VISIBLE
+                Handler().postDelayed({
+                    // TODO: 26-07-2020 perform bounce visible animation 
+                    heartImageView.visibility = View.GONE
+                }, 1000)
+
+                lastClickTime = 0
+            }else{
+                lastClickTime = System.currentTimeMillis()
+            }
+        }
 
 
-        loadImg(context, postImgUrl, contentTV)
+        loadImg(context, postImgUrl, tvShowImageView)
         loadImg(context, postDpUrl, userDpView)
 
     }

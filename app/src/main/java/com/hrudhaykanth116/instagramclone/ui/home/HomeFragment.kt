@@ -3,6 +3,7 @@ package com.hrudhaykanth116.instagramclone.ui.home
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.hrudhaykanth116.instagramclone.MainActivity
 import com.hrudhaykanth116.instagramclone.R
@@ -57,7 +59,7 @@ class HomeFragment : Fragment() {
 
         this.apisClient = RetroApiClient.getRetroApiService()
 
-        initMainPostsRecyclerView(view)
+        initMainPostsRecyclerView()
         initViewModel()
 
         super.onViewCreated(view, savedInstanceState)
@@ -78,7 +80,7 @@ class HomeFragment : Fragment() {
         )
     }
 
-    private fun initMainPostsRecyclerView(view: View) {
+    private fun initMainPostsRecyclerView() {
         homeFragmentAdapter = HomeFragmentAdapter(object : HomeFragmentAdapter.IPostClickListener {
             override fun onProfileNameClicked(tvShowData: TvShowData) {
                 val tvShowFragmentAction = HomeFragmentDirections.tvShowFragmentAction(tvShowData)
@@ -86,8 +88,8 @@ class HomeFragment : Fragment() {
             }
 
         })
-        view.main_posts_rv.layoutManager = LinearLayoutManager(context)
-        view.main_posts_rv.adapter = homeFragmentAdapter
+        main_posts_rv.layoutManager = LinearLayoutManager(context)
+        main_posts_rv.adapter = homeFragmentAdapter
 
         mainPostsSwipeRefreshLayout.setOnRefreshListener {
             refreshPosts()

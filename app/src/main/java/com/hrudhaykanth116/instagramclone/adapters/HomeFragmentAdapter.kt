@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.models.NetworkState
 import com.hrudhaykanth116.instagramclone.models.TvShowData
-import com.hrudhaykanth116.instagramclone.viewholders.PostViewHolder
+import com.hrudhaykanth116.instagramclone.viewholders.TvShowEpisodeItemViewHolder
 import com.hrudhaykanth116.instagramclone.viewholders.ProgressViewHolder
 import com.hrudhaykanth116.instagramclone.viewholders.PublicStatusViewHolder
 import com.hrudhaykanth116.instagramclone.viewholders.ViewHoldersCreator
@@ -28,7 +28,7 @@ class HomeFragmentAdapter(private val postClickListener: IPostClickListener) :
             }
             TYPE_POST -> {
                 val tvShowData: TvShowData = getItem(position - 1) as TvShowData
-                val postViewHolder = viewHolder as PostViewHolder
+                val postViewHolder = viewHolder as TvShowEpisodeItemViewHolder
                 postViewHolder.bind(tvShowData, postClickListener)
             }
             TYPE_PROGRESS -> {

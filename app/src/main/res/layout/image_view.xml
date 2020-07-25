@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:src="@drawable/post_sample_image"
-    android:background="#DADADA"
+    android:background="@color/images_bg_color"
     android:scaleType="fitXY"
     android:layout_marginEnd="8dp"
     android:layout_marginBottom="8dp"

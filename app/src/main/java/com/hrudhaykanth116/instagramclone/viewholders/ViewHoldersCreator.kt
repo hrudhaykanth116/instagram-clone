@@ -17,7 +17,7 @@ class ViewHoldersCreator {
                     PublicStatusViewHolder(itemView)
                 }
                 R.layout.tv_show_episode_item -> {
-                    PostViewHolder(itemView)
+                    TvShowEpisodeItemViewHolder(itemView)
                 }
                 R.layout.progress_bar_row -> {
                     ProgressViewHolder(itemView)

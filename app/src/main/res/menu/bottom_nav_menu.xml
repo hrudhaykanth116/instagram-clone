@@ -18,7 +18,7 @@
 
     <item
         android:id="@+id/navigation_activity"
-        android:icon="@drawable/ic_heart_white_24dp"
+        android:icon="@drawable/ic_white_heart_black_border_24dp"
         android:title="@string/title_activity" />
 
     <item

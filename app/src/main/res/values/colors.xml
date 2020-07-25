@@ -7,6 +7,7 @@
     <color name="transparentColor">#00000000</color>
     <color name="red">#FF0000</color>
     <color name="green">#48FF00</color>
+    <color name="images_bg_color">#DADADA</color>
 
 
 </resources>

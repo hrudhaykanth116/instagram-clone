@@ -3,6 +3,7 @@
 
 // Priority
 
+Handle network retries, force retry.
 chat with firebase notifications and @Embeded room entities
 Exo player
 dagger

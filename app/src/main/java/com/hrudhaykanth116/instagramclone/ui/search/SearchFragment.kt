@@ -5,20 +5,25 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.adapters.SearchCategoriesAdapter
 import com.hrudhaykanth116.instagramclone.adapters.SearchResultsAdapter
+import com.hrudhaykanth116.instagramclone.models.NetworkState
 import com.hrudhaykanth116.instagramclone.models.TvShowData
 import kotlinx.android.synthetic.main.search_fragment.*
 
 class SearchFragment : Fragment() {
 
+    // Initial state would be loading always followed by loaded or failed
+    private var networkState: NetworkState = NetworkState.LOADING
     private lateinit var searchResultsAdapter: SearchResultsAdapter
     private lateinit var searchViewModel: SearchViewModel
 
@@ -67,10 +72,19 @@ class SearchFragment : Fragment() {
         )
         searchViewModel.networkState.observe(viewLifecycleOwner,
             Observer { networkState ->
-//                searchResultsAdapter.setNetworkState(networkState)
+                this.networkState = networkState
+                updateProgressBarVisibility(networkState != NetworkState.LOADED)
                 Log.i(TAG, "initViewModel: ")
             }
         )
+    }
+
+    private fun updateLoadingState(networkState: NetworkState) {
+        if(networkState == NetworkState.LOADED){
+            progressBar.visibility = View.GONE
+        }else{
+            progressBar.visibility = View.VISIBLE
+        }
     }
 
     private fun initMainPostsRecyclerView() {
@@ -85,7 +99,25 @@ class SearchFragment : Fragment() {
         searchResultsContainer.adapter = searchResultsAdapter
         searchResultsContainer.layoutManager = staggeredGridLayoutManager
 
+        // TODO: 25-07-2020 Add better way of handling progress bar
+        searchResultsContainer.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!searchResultsContainer.canScrollVertically(1) && networkState != NetworkState.LOADED) {
+                    updateProgressBarVisibility(true)
+                }else{
+                    updateProgressBarVisibility(false)
+                }
+            }
+        })
+    }
 
+    private fun updateProgressBarVisibility(isVisible: Boolean) {
+        /*if (isVisible && !progressBar.isVisible) {
+            progressBar.visibility = View.VISIBLE
+        }else if(!isVisible && progressBar.isVisible){
+            progressBar.visibility = View.GONE
+        }*/
     }
 
     companion object{

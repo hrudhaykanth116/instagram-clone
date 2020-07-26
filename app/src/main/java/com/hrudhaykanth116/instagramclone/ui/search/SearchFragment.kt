@@ -101,15 +101,30 @@ class SearchFragment : Fragment() {
 
         // TODO: 25-07-2020 Add better way of handling progress bar
         searchResultsContainer.addOnScrollListener(object: RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            /*override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!searchResultsContainer.canScrollVertically(1) && networkState != NetworkState.LOADED) {
                     updateProgressBarVisibility(true)
                 }else{
                     updateProgressBarVisibility(false)
                 }
+            }*/
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (!recyclerView.canScrollVertically(1))
+                    onScrolledToBottom()
             }
         })
+    }
+
+    private fun onScrolledToBottom() {
+        // TODO: 26-07-2020 Show progress bar if needed
+        /*if (!searchResultsContainer.canScrollVertically(1) && networkState != NetworkState.LOADED) {
+            updateProgressBarVisibility(true)
+        }else{
+            updateProgressBarVisibility(false)
+        }*/
     }
 
     private fun updateProgressBarVisibility(isVisible: Boolean) {

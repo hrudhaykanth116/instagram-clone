@@ -88,8 +88,8 @@ class HomeFragment : Fragment() {
             }
 
         })
-        main_posts_rv.layoutManager = LinearLayoutManager(context)
-        main_posts_rv.adapter = homeFragmentAdapter
+        homePopularTvShowsRV.layoutManager = LinearLayoutManager(context)
+        homePopularTvShowsRV.adapter = homeFragmentAdapter
 
         mainPostsSwipeRefreshLayout.setOnRefreshListener {
             refreshPosts()

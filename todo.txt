@@ -13,6 +13,7 @@ Camerax and post mechanism
 
 
 // TODO
+recycler view best practices and performance performance
 vector assets and animation. shapeshifter.design
 Maintain neat architecture.
 Room(https://medium.com/androiddevelopers/7-pro-tips-for-room-fbadea4bfbd1)

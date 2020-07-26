@@ -2,7 +2,7 @@ package com.hrudhaykanth116.instagramclone.network
 
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
 import com.hrudhaykanth116.instagramclone.models.PopularMoviesResponse
-import com.hrudhaykanth116.instagramclone.models.PopularTvShowsResponse
+import com.hrudhaykanth116.instagramclone.models.TvShowDataPagedResponse
 import com.hrudhaykanth116.instagramclone.models.TvShowDetails
 import com.hrudhaykanth116.instagramclone.models.UserPost
 import retrofit2.Call
@@ -44,12 +44,12 @@ public interface RetroApis {
     @GET("tv/popular/")
     public fun getPopularTvShows(@Query("page") pageId: Int,
                                  @Query("api_key") apiKey: String = MoviesDbConstants.API_KEY
-    ): Call<PopularTvShowsResponse>
+    ): Call<TvShowDataPagedResponse>
 
     @GET("tv/top_rated/")
     public fun getTopRatedTvShows(@Query("page") pageId: Int,
                                  @Query("api_key") apiKey: String = MoviesDbConstants.API_KEY
-    ): Call<PopularTvShowsResponse>
+    ): Call<TvShowDataPagedResponse>
 
 
     @GET("tv/{tvShowId}")

@@ -31,6 +31,7 @@
         />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/activityRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         tools:listitem="@layout/profile_suggestion_layout"
@@ -40,6 +41,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/activityRecyclerView"
+        app:layout_constraintBottom_toBottomOf="@id/activityRecyclerView"
+        app:layout_constraintStart_toStartOf="@id/activityRecyclerView"
+        app:layout_constraintEnd_toEndOf="@id/activityRecyclerView"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

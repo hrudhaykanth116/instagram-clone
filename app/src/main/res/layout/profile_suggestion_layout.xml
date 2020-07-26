@@ -4,48 +4,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    >
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="10dp">
 
     <include
-        android:id="@+id/profileDp"
+        android:id="@+id/showImage"
         layout="@layout/rounded_image_container"
         android:layout_width="70dp"
         android:layout_height="70dp" />
 
     <TextView
-        android:id="@+id/profileId"
-        android:layout_width="wrap_content"
+        android:id="@+id/showName"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="RishiRoman96"
+        tools:text="Show name ksjdhfskjdhfkjsdfhksjdfhkdsjfhskdjfh"
         android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/profileDp"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        app:layout_constraintStart_toEndOf="@+id/showImage"
+        app:layout_constraintEnd_toStartOf="@id/followBtn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/showRating"
+        />
 
     <TextView
-        android:id="@+id/profileFullName"
+        android:id="@+id/showRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Rishi kanth Thangella"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/profileDp"
-        app:layout_constraintTop_toBottomOf="@+id/profileId" />
-
-    <TextView
-        android:id="@+id/suggestionDetail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Followed by cherry"
+        tools:text="8.6"
         android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/profileDp"
-        app:layout_constraintTop_toBottomOf="@+id/profileFullName" />
+        app:layout_constraintStart_toEndOf="@id/showImage"
+        app:layout_constraintTop_toBottomOf="@id/showName"
+        app:layout_constraintBottom_toBottomOf="@id/showImage"
+        />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/followBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -56,18 +54,18 @@
         android:paddingBottom="5dp"
         android:text="Follow"
         android:textColor="#ffffff"
-        app:layout_constraintBottom_toBottomOf="@+id/profileDp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintBottom_toBottomOf="@+id/showImage"
+        app:layout_constraintEnd_toStartOf="@+id/closeBtn"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+    <Button
+        android:id="@+id/closeBtn"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_marginEnd="8dp"
-        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
-        android:tint="#000000"
-        app:layout_constraintBottom_toBottomOf="@+id/profileDp"
+        android:background="@android:drawable/ic_menu_close_clear_cancel"
+        android:backgroundTint="#000000"
+        app:layout_constraintBottom_toBottomOf="@+id/showImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />

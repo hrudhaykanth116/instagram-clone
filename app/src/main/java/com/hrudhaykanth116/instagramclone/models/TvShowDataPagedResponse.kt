@@ -2,7 +2,7 @@ package com.hrudhaykanth116.instagramclone.models
 import com.google.gson.annotations.SerializedName
 
 
-data class PopularTvShowsResponse(
+data class TvShowDataPagedResponse(
     @SerializedName("page")
     val page: Int? = 0,
     @SerializedName("results")

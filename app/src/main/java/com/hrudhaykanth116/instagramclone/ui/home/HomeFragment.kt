@@ -3,7 +3,6 @@ package com.hrudhaykanth116.instagramclone.ui.home
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -13,20 +12,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import com.hrudhaykanth116.instagramclone.MainActivity
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.adapters.HomeFragmentAdapter
-import com.hrudhaykanth116.instagramclone.models.PopularMoviesResponse
-import com.hrudhaykanth116.instagramclone.models.PopularTvShowsResponse
+import com.hrudhaykanth116.instagramclone.models.TvShowDataPagedResponse
 import com.hrudhaykanth116.instagramclone.models.TvShowData
-import com.hrudhaykanth116.instagramclone.models.TvShowDetails
 import com.hrudhaykanth116.instagramclone.network.RetroApiClient
 import com.hrudhaykanth116.instagramclone.network.RetroApis
 import com.hrudhaykanth116.instagramclone.repository.databases.AppDatabase
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,7 +31,7 @@ class HomeFragment : Fragment() {
     private lateinit var homeFragmentAdapter: HomeFragmentAdapter
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var apisClient: RetroApis
-    private lateinit var tvShowDetailsCall: Call<PopularTvShowsResponse>
+    private lateinit var tvShowDetailsCall: Call<TvShowDataPagedResponse>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -99,8 +93,8 @@ class HomeFragment : Fragment() {
 
     private fun refreshPosts() {
         // TODO: 13-06-2020 Create logic to get/stimulate recent movies.
-        val callback = object : Callback<PopularTvShowsResponse> {
-            override fun onFailure(call: Call<PopularTvShowsResponse>, t: Throwable) {
+        val callback = object : Callback<TvShowDataPagedResponse> {
+            override fun onFailure(call: Call<TvShowDataPagedResponse>, t: Throwable) {
                 Log.i(TAG, "onFailure: ${t.message}")
                 context?.let {
                     Toast.makeText(it, "Error retrieving posts", Toast.LENGTH_SHORT).show()
@@ -109,8 +103,8 @@ class HomeFragment : Fragment() {
             }
 
             override fun onResponse(
-                call: Call<PopularTvShowsResponse>,
-                response: Response<PopularTvShowsResponse>
+                call: Call<TvShowDataPagedResponse>,
+                response: Response<TvShowDataPagedResponse>
             ) {
                 Log.i(TAG, "onResponse: ")
                 Toast.makeText(context, "No new posts", Toast.LENGTH_SHORT).show()

@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.hrudhaykanth116.instagramclone.models.NetworkState
-import com.hrudhaykanth116.instagramclone.models.PopularTvShowsResponse
+import com.hrudhaykanth116.instagramclone.models.TvShowDataPagedResponse
 import com.hrudhaykanth116.instagramclone.models.TvShowData
 import com.hrudhaykanth116.instagramclone.network.RetroApiClient
 import com.hrudhaykanth116.instagramclone.network.RetroApis
@@ -71,20 +71,20 @@ class PopularTvShowsDataSource: PageKeyedDataSource<Int, TvShowData>() {
         Log.i(TAG, "loadAfter: ")
         networkState.postValue(NetworkState.LOADING)
 
-        val callBack = object : Callback<PopularTvShowsResponse> {
-            override fun onFailure(call: Call<PopularTvShowsResponse>, t: Throwable) {
+        val callBack = object : Callback<TvShowDataPagedResponse> {
+            override fun onFailure(call: Call<TvShowDataPagedResponse>, t: Throwable) {
                 networkState.postValue(NetworkState.FAILED)
             }
 
             override fun onResponse(
-                call: Call<PopularTvShowsResponse>,
-                response: Response<PopularTvShowsResponse>
+                call: Call<TvShowDataPagedResponse>,
+                response: Response<TvShowDataPagedResponse>
             ) {
                 if (response.isSuccessful) {
                     networkState.postValue(NetworkState.LOADED)
-                    val popularTvShowsResponse: PopularTvShowsResponse? = response.body()
-                    popularTvShowsResponse?.let {
-                        callback.onResult(popularTvShowsResponse.tvShowsList, params.key + 1)
+                    val tvShowDataPagedResponse: TvShowDataPagedResponse? = response.body()
+                    tvShowDataPagedResponse?.let {
+                        callback.onResult(tvShowDataPagedResponse.tvShowsList, params.key + 1)
                     }
                 } else {
                     networkState.postValue(NetworkState.FAILED)

@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -40,7 +39,7 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        initMainPostsRecyclerView()
+        initSearchResultsRecyclerView()
         initViewModel()
         initCategoriesRecyclerView()
 
@@ -87,7 +86,7 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun initMainPostsRecyclerView() {
+    private fun initSearchResultsRecyclerView() {
 
         val staggeredGridLayoutManager = GridLayoutManager(
             context,

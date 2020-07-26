@@ -22,7 +22,14 @@
         android:id="@+id/navigation_search"
         android:name="com.hrudhaykanth116.instagramclone.ui.search.SearchFragment"
         android:label="@string/title_search"
-        tools:layout="@layout/search_fragment" />
+        tools:layout="@layout/search_fragment">
+
+        <action
+            android:id="@+id/tvShowFragmentAction"
+            app:destination="@id/navigation_user_profile"
+            />
+
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_post"

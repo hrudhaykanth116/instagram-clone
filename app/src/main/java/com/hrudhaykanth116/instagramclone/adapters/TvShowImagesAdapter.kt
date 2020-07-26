@@ -1,6 +1,5 @@
 package com.hrudhaykanth116.instagramclone.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,7 @@ class TvShowImagesAdapter(private val imagesList: List<String>) : RecyclerView.A
 
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.image_view, parent, false)
 
-        return SearchResultsViewHolder(itemView)
+        return TvShowImageViewHolder(itemView)
     }
 
     override fun getItemCount(): Int {
@@ -23,19 +22,27 @@ class TvShowImagesAdapter(private val imagesList: List<String>) : RecyclerView.A
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val searchResultImg = holder.itemView as ImageView
 
-        // dummy data for testing.
-        // val imgUrl = "https://picsum.photos/id/${holder.adapterPosition * 8}/300"
         val imgUrl = imagesList[position]
-        Glide
-            .with(searchResultImg)
-            .load(imgUrl)
-            .into(searchResultImg)
+        (holder as TvShowImageViewHolder).bind(imgUrl)
 
     }
 
-    class SearchResultsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+
+
+    class TvShowImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+
+        val searchResultImg = itemView as ImageView
+
+        public fun bind(imgUrl: String) {
+            // dummy data for testing.
+            // val imgUrl = "https://picsum.photos/id/${holder.adapterPosition * 8}/300"
+
+            Glide
+                .with(searchResultImg)
+                .load(imgUrl)
+                .into(searchResultImg)
+        }
 
     }
 

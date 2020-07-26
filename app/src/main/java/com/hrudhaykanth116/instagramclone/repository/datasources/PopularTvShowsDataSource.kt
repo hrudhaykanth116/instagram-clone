@@ -21,14 +21,8 @@ class PopularTvShowsDataSource: PageKeyedDataSource<Int, TvShowData>() {
 
     private val TAG: String = PopularTvShowsDataSource::class.java.name
 
-    private var retroApiClient: Retrofit = RetroApiClient.getRetrofitInstance()
-    private var retroApis: RetroApis
     val networkState = MutableLiveData<NetworkState>()
-
-    init {
-        retroApis = retroApiClient.create(RetroApis::class.java)
-    }
-
+    private var retroApis: RetroApis = RetroApiClient.getRetroApiService()
 
     override fun loadInitial(
         params: LoadInitialParams<Int>,

@@ -10,7 +10,7 @@
     >
 
     <View
-        android:id="@+id/profile_status_container"
+        android:id="@+id/container"
         android:layout_width="75dp"
         android:layout_height="75dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,14 +19,14 @@
         />
 
     <include
-        android:id="@+id/profile_status_thumbnail"
+        android:id="@+id/roundedImgContainer"
         layout="@layout/rounded_image_container"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        app:layout_constraintEnd_toEndOf="@id/profile_status_container"
-        app:layout_constraintStart_toStartOf="@id/profile_status_container"
+        app:layout_constraintEnd_toEndOf="@id/container"
+        app:layout_constraintStart_toStartOf="@id/container"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/profile_status_container"
+        app:layout_constraintBottom_toBottomOf="@id/container"
         />
 
     <ImageView
@@ -38,8 +38,8 @@
         android:tint="#4D6EDC"
         android:visibility="gone"
         tools:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@id/profile_status_container"
-        app:layout_constraintEnd_toEndOf="@id/profile_status_container" />
+        app:layout_constraintBottom_toBottomOf="@id/container"
+        app:layout_constraintEnd_toEndOf="@id/container" />
 
     <View
         android:layout_width="0dp"
@@ -53,7 +53,7 @@
         app:layout_constraintBottom_toBottomOf="@id/myStatusAddIcon" />
 
     <TextView
-        android:id="@+id/profile_name"
+        android:id="@+id/description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Hrudhay kanth"
@@ -63,8 +63,8 @@
         android:layout_marginTop="2dp"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/profile_status_container"
-        app:layout_constraintStart_toStartOf="@id/profile_status_container"
-        app:layout_constraintTop_toBottomOf="@id/profile_status_container" />
+        app:layout_constraintEnd_toEndOf="@id/container"
+        app:layout_constraintStart_toStartOf="@id/container"
+        app:layout_constraintTop_toBottomOf="@id/container" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

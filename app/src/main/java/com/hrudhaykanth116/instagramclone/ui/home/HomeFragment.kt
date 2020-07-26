@@ -72,6 +72,11 @@ class HomeFragment : Fragment() {
                 homeFragmentAdapter.setNetworkState(networkState)
             }
         )
+
+        homeViewModel.popularMoviesLiveData.observe(viewLifecycleOwner, Observer {
+            homeFragmentAdapter.updateMovieDataList(it)
+        })
+
     }
 
     private fun initMainPostsRecyclerView() {

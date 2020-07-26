@@ -13,7 +13,7 @@ class RetroApiClient {
         private var retrofit: Retrofit? = null
         private var retroApis: RetroApis? = null
 
-        public fun getRetrofitInstance(): Retrofit {
+        private fun getRetrofitInstance(): Retrofit {
             if (retrofit == null) {
 
                 val gson = GsonBuilder()

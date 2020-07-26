@@ -14,7 +14,7 @@ class ViewHoldersCreator {
             val itemView: View = LayoutInflater.from(parent.context).inflate(viewId, parent, false)
             viewHolder = when (viewId) {
                 R.layout.stories_view -> {
-                    PublicStatusViewHolder(itemView)
+                    PublicStoriesViewHolder(itemView)
                 }
                 R.layout.tv_show_episode_item -> {
                     TvShowEpisodeItemViewHolder(itemView)

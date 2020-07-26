@@ -19,7 +19,8 @@ import retrofit2.Retrofit
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var retrofit: Retrofit
+    lateinit var navController: NavController
+
     public lateinit var apisClient: RetroApis
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         initRetrofit()
 
-        val navController = findNavController(R.id.nav_host_fragment)
+        navController = findNavController(R.id.nav_host_fragment)
         setUpBottomNavigationView(navController)
 
         FirebaseTokenGenerator().generateToken()
@@ -37,12 +38,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initRetrofit() {
-        retrofit = RetroApiClient.getRetrofitInstance()
-        apisClient = retrofit.create(RetroApis::class.java)
+        apisClient = RetroApiClient.getRetroApiService()
     }
 
     private fun setUpBottomNavigationView(navController: NavController) {
-        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             onBottomMenuItemSelected(menuItem, navController)
         }

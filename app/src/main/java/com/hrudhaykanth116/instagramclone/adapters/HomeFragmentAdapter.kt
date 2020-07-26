@@ -4,18 +4,27 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hrudhaykanth116.instagramclone.R
+import com.hrudhaykanth116.instagramclone.models.MovieData
 import com.hrudhaykanth116.instagramclone.models.NetworkState
 import com.hrudhaykanth116.instagramclone.models.TvShowData
 import com.hrudhaykanth116.instagramclone.viewholders.TvShowEpisodeItemViewHolder
 import com.hrudhaykanth116.instagramclone.viewholders.ProgressViewHolder
-import com.hrudhaykanth116.instagramclone.viewholders.PublicStatusViewHolder
+import com.hrudhaykanth116.instagramclone.viewholders.PublicStoriesViewHolder
 import com.hrudhaykanth116.instagramclone.viewholders.ViewHoldersCreator
 
 class HomeFragmentAdapter(private val postClickListener: IPostClickListener) :
     PagedListAdapter<TvShowData, RecyclerView.ViewHolder>(TvShowData.diffUtillCallback) {
 
+    private val movieDataList: ArrayList<MovieData> = ArrayList()
     private var currentNetworkState: NetworkState = NetworkState.LOADING
     private var previousNetworkState: NetworkState = NetworkState.LOADING
+
+    public fun updateMovieDataList(movieDataList: List<MovieData>){
+        this.movieDataList.clear()
+        this.movieDataList.addAll(movieDataList)
+        // Notify first item(public story) changed
+        notifyItemChanged(0)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ViewHoldersCreator.createViewHolder(parent, viewType)
@@ -24,7 +33,7 @@ class HomeFragmentAdapter(private val postClickListener: IPostClickListener) :
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         when (viewHolder.itemViewType) {
             TYPE_PUBLIC_STORIES -> {
-                PublicStatusViewFiller().fillPublicStatusView(viewHolder as PublicStatusViewHolder)
+                PublicStoriesViewFiller().fillView(viewHolder as PublicStoriesViewHolder, movieDataList)
             }
             TYPE_POST -> {
                 val tvShowData: TvShowData = getItem(position - 1) as TvShowData

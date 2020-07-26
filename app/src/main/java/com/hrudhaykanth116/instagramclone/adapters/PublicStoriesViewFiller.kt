@@ -1,18 +1,17 @@
 package com.hrudhaykanth116.instagramclone.adapters
 
-import com.hrudhaykanth116.instagramclone.viewholders.PublicStatusViewHolder
+import com.hrudhaykanth116.instagramclone.models.MovieData
+import com.hrudhaykanth116.instagramclone.viewholders.PublicStoriesViewHolder
 
 class PublicStoriesViewFiller{
 
-    public fun fillPublicStatusView(publicStatusViewHolder: PublicStatusViewHolder) {
-        val testList = ArrayList<String>()
+    public fun fillView(publicStoryViewHolder: PublicStoriesViewHolder, movieDataList: List<MovieData>) {
+        /*val testList = ArrayList<String>()
         for (i in 1..20) {
             testList.add("Item: $i")
-        }
+        }*/
 
-
-        publicStatusViewHolder.publicStoriesContainer.adapter =
-            PublicStoryThumbnailAdapter(testList)
+        publicStoryViewHolder.bind(movieDataList)
     }
 
 }

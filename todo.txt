@@ -5,6 +5,7 @@
 
 // Priority
 
+Back navigation should update bottom navigation view
 Handle network retries, force retry.
 chat with firebase notifications and @Embeded room entities
 Exo player

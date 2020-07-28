@@ -11,8 +11,8 @@ import com.hrudhaykanth116.instagramclone.network.RetroApis
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
 import java.net.UnknownHostException
+import kotlin.random.Random
 
 /**
  * Data source which is used to load data initially and when new data is required.
@@ -23,6 +23,7 @@ class PopularTvShowsDataSource: PageKeyedDataSource<Int, TvShowData>() {
 
     val networkState = MutableLiveData<NetworkState>()
     private var retroApis: RetroApis = RetroApiClient.getRetroApiService()
+    private val initialPageId = Random.nextInt(1, 20)
 
     override fun loadInitial(
         params: LoadInitialParams<Int>,
@@ -32,7 +33,8 @@ class PopularTvShowsDataSource: PageKeyedDataSource<Int, TvShowData>() {
         networkState.postValue(NetworkState.LOADING)
 
         try {
-            val popularTvShowsCall = retroApis.getPopularTvShows(1)
+
+            val popularTvShowsCall = retroApis.getPopularTvShows(initialPageId)
             val response = popularTvShowsCall.execute()
             if (response.isSuccessful) {
                 networkState.postValue(NetworkState.LOADED)
@@ -78,7 +80,8 @@ class PopularTvShowsDataSource: PageKeyedDataSource<Int, TvShowData>() {
                     networkState.postValue(NetworkState.LOADED)
                     val tvShowDataPagedResponse: TvShowDataPagedResponse? = response.body()
                     tvShowDataPagedResponse?.let {
-                        callback.onResult(tvShowDataPagedResponse.tvShowsList, params.key + 1)
+                        val nextPageId = params.key + 1
+                        callback.onResult(tvShowDataPagedResponse.tvShowsList, nextPageId)
                     }
                 } else {
                     networkState.postValue(NetworkState.FAILED)

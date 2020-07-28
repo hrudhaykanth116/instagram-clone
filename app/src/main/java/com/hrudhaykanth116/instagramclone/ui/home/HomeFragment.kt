@@ -1,11 +1,10 @@
 package com.hrudhaykanth116.instagramclone.ui.home
 
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -22,8 +21,6 @@ import com.hrudhaykanth116.instagramclone.network.RetroApis
 import com.hrudhaykanth116.instagramclone.repository.databases.AppDatabase
 import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class HomeFragment : Fragment() {
@@ -60,7 +57,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        val homeViewModel: HomeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         homeViewModel.popularTvShowsLiveData.observe(viewLifecycleOwner,
             Observer<PagedList<TvShowData>> { pagedList ->
                 // Data source changed.
@@ -97,8 +94,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun refreshPosts() {
-        // TODO: 13-06-2020 Create logic to get/stimulate recent movies.
-        val callback = object : Callback<TvShowDataPagedResponse> {
+
+        homeViewModel.refreshData()
+        Handler().postDelayed(Runnable {
+            mainPostsSwipeRefreshLayout.isRefreshing = false
+        }, 1000)
+
+        /*val callback = object : Callback<TvShowDataPagedResponse> {
             override fun onFailure(call: Call<TvShowDataPagedResponse>, t: Throwable) {
                 Log.i(TAG, "onFailure: ${t.message}")
                 context?.let {
@@ -118,7 +120,9 @@ class HomeFragment : Fragment() {
 
         }
         tvShowDetailsCall = apisClient.getPopularTvShows(1)
-        tvShowDetailsCall.clone().enqueue(callback)
+        tvShowDetailsCall.clone().enqueue(callback)*/
+
+
     }
 
     companion object {

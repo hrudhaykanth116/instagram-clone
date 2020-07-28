@@ -33,7 +33,8 @@ class HomeFragmentAdapter(private val postClickListener: IPostClickListener) :
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         when (viewHolder.itemViewType) {
             TYPE_PUBLIC_STORIES -> {
-                PublicStoriesViewFiller().fillView(viewHolder as PublicStoriesViewHolder, movieDataList)
+                val publicStoryViewHolder = viewHolder as PublicStoriesViewHolder
+                publicStoryViewHolder.bind(movieDataList)
             }
             TYPE_POST -> {
                 val tvShowData: TvShowData = getItem(position - 1) as TvShowData

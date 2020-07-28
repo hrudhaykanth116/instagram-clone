@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.rounded_image_container.view.*
 class TvShowEpisodeItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     // Can use view directly instead of this private field
-    private val userDpView: ImageView = itemView.dpView.innerImg as ImageView
+    private val movieDpView: ImageView = itemView.dpView.innerImg as ImageView
     private val tvShowImageView: ImageView = itemView.tvShowImageView as ImageView
     private val heartImageView: ImageView = itemView.heartImageView as ImageView
     private val likedIcon: ImageView = itemView.likeIcon as ImageView
@@ -35,7 +35,7 @@ class TvShowEpisodeItemViewHolder(itemView: View) : RecyclerView.ViewHolder(item
         val postDpUrl = MoviesDbConstants.IMAGES_BASE_URL + tvShowData.posterPath
         val context = itemView.context
 
-        userNameTV.text = tvShowData.originalName
+        userNameTV.text = tvShowData.name
         userNameTV.setOnClickListener {
             postClickListener.onProfileNameClicked(tvShowData)
         }
@@ -75,7 +75,7 @@ class TvShowEpisodeItemViewHolder(itemView: View) : RecyclerView.ViewHolder(item
 
 
         loadImg(context, postImgUrl, tvShowImageView)
-        loadImg(context, postDpUrl, userDpView)
+        loadImg(context, postDpUrl, movieDpView)
 
     }
 

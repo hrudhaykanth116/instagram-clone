@@ -10,15 +10,14 @@ import com.bumptech.glide.Glide
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
 import com.hrudhaykanth116.instagramclone.models.MovieData
-import kotlinx.android.synthetic.main.rounded_image_container.view.*
-import kotlinx.android.synthetic.main.stories_view_item.view.*
+import kotlinx.android.synthetic.main.movie_story_view_item.view.*
 
 
 class PublicStoryThumbnailAdapter(private val movieDataList: List<MovieData>) :
     RecyclerView.Adapter<PublicStoryThumbnailAdapter.PublicStoryViewHolder>() {
 
-    private val MY_STATUS_VIEW_TYPE = 0
-    private val PUBLIC_STATUS_VIEW_TYPE = 1
+    private val MY_STORY_VIEW_TYPE = 0
+    private val PUBLIC_STORY_VIEW_TYPE = 1
 
     class PublicStoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val thumbnailImageView: ImageView = itemView.innerImg as ImageView
@@ -47,7 +46,7 @@ class PublicStoryThumbnailAdapter(private val movieDataList: List<MovieData>) :
         viewType: Int
     ): PublicStoryThumbnailAdapter.PublicStoryViewHolder {
         val itemView: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.stories_view_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.movie_story_view_item, parent, false)
         return PublicStoryThumbnailAdapter.PublicStoryViewHolder(itemView)
     }
 
@@ -57,9 +56,9 @@ class PublicStoryThumbnailAdapter(private val movieDataList: List<MovieData>) :
 
     override fun getItemViewType(position: Int): Int {
         return if (position == 0) {
-            MY_STATUS_VIEW_TYPE
+            MY_STORY_VIEW_TYPE
         } else {
-            PUBLIC_STATUS_VIEW_TYPE
+            PUBLIC_STORY_VIEW_TYPE
         }
     }
 

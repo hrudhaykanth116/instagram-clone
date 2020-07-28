@@ -11,6 +11,11 @@ class PublicStoriesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
 
     public fun bind(movieDataList: List<MovieData>) {
 
+        /*val testList = ArrayList<String>()
+        for (i in 1..20) {
+            testList.add("Item: $i")
+        }*/
+
         // TODO: 27-07-2020 Do not reset the adapter on every bind
         publicStoriesContainer.adapter = PublicStoryThumbnailAdapter(movieDataList)
 

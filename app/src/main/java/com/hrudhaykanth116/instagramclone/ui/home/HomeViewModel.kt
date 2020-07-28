@@ -24,10 +24,10 @@ class HomeViewModel : ViewModel() {
     public var networkState: LiveData<NetworkState>
     public var popularTvShowsLiveData: LiveData<PagedList<TvShowData>>
     public var popularMoviesLiveData: MutableLiveData<List<MovieData>> = MutableLiveData()
+    private val popularTvShowsDataFactory: PopularTvShowsDataFactory = PopularTvShowsDataFactory()
 
     init {
 
-        val popularTvShowsDataFactory = PopularTvShowsDataFactory()
         // When data source changes in factory, network state live data is also updated.
         networkState = Transformations.switchMap(popularTvShowsDataFactory.popularTvShowsLiveData) {
             it.networkState
@@ -35,8 +35,8 @@ class HomeViewModel : ViewModel() {
 
         val pagedListConfig: PagedList.Config = PagedList.Config.Builder()
 //            .setEnablePlaceholders(false)
-            .setInitialLoadSizeHint(10)
-            .setPageSize(7) // x items will be loaded from data source. after getting last set(last x), loadAfter() is called.
+            .setInitialLoadSizeHint(20)
+            .setPageSize(10) // x items will be loaded from data source. after getting last set(last x), loadAfter() is called.
             .build()
 
         // x threads will be used to execute data loading one after the other.iterates again.
@@ -45,9 +45,20 @@ class HomeViewModel : ViewModel() {
             .setFetchExecutor(executor)
             .build()
 
-        val pageId = Random.nextInt(1, 10)
+        fetchMoviesList()
+
+
+    }
+
+    public fun refreshData(){
+        fetchMoviesList()
+        popularTvShowsDataFactory.invalidateDataSource()
+    }
+
+    private fun fetchMoviesList() {
+        val pageId = Random.nextInt(1, 20)
         RetroApiClient.getRetroApiService().getPopularMoviesList(pageId)
-            .enqueue(object: Callback<PopularMoviesResponse>{
+            .enqueue(object : Callback<PopularMoviesResponse> {
                 override fun onFailure(call: Call<PopularMoviesResponse>, t: Throwable) {
                     TODO("Not yet implemented")
                 }
@@ -59,8 +70,6 @@ class HomeViewModel : ViewModel() {
                     onMoviesDataLoaded(response)
                 }
             })
-
-
     }
 
     private fun onMoviesDataLoaded(response: Response<PopularMoviesResponse>) {

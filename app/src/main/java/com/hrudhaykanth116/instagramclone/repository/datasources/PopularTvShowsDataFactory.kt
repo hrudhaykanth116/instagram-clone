@@ -22,4 +22,9 @@ class PopularTvShowsDataFactory: DataSource.Factory<Int, TvShowData>() {
         return popularTvShowsDataSource
     }
 
+    public fun invalidateDataSource(){
+        popularTvShowsDataSource.invalidate()
+    }
+
+
 }

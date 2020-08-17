@@ -19,7 +19,6 @@ import retrofit2.Retrofit
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var navController: NavController
 
     public lateinit var apisClient: RetroApis
 
@@ -29,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         initRetrofit()
 
-        navController = findNavController(R.id.nav_host_fragment)
+        val navController: NavController = findNavController(R.id.nav_host_fragment)
         setUpBottomNavigationView(navController)
 
         FirebaseTokenGenerator().generateToken()
@@ -52,7 +51,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+        // TODO: 29-07-2020 Handle fragment destinations change vs bottom bar view selection.
+        Toast.makeText(this, "Back functionality not yet implemented", Toast.LENGTH_SHORT).show();
     }
 
     private fun onBottomMenuItemSelected(

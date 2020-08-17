@@ -1,10 +1,13 @@
 package com.hrudhaykanth116.instagramclone.models
 
+import android.os.Parcelable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity
 data class MovieData(
     @PrimaryKey
@@ -30,7 +33,7 @@ data class MovieData(
     var voteAverage: Double?,
     @SerializedName("vote_count")
     var voteCount: Int?
-){
+) : Parcelable {
 
     override fun equals(other: Any?): Boolean {
         if (other == this){

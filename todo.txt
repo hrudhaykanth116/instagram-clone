@@ -5,17 +5,22 @@
 
 // Priority
 
+dagger
+Performance analysis
+Handle null pointer exceptions, screen navigation before the data loaded.
 Back navigation should update bottom navigation view
 Handle network retries, force retry.
 chat with firebase notifications and @Embeded room entities
 Exo player
-dagger
+Kotlinx coroutines
 Learn and implement cache mechanism
+
 
 Camerax and post mechanism
 
 
 // TODO
+https://developer.android.com/topic/libraries/architecture/lifecycle
 recycler view best practices and performance performance
 vector assets and animation. shapeshifter.design
 Maintain neat architecture.

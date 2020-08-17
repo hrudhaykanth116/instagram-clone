@@ -79,7 +79,7 @@ class HomeFragment : Fragment() {
     private fun initMainPostsRecyclerView() {
         homeFragmentAdapter = HomeFragmentAdapter(object : HomeFragmentAdapter.IPostClickListener {
             override fun onProfileNameClicked(tvShowData: TvShowData) {
-                val tvShowFragmentAction = HomeFragmentDirections.tvShowFragmentAction(tvShowData)
+                val tvShowFragmentAction = HomeFragmentDirections.actionTvShowFragment(tvShowData)
                 findNavController().navigate(tvShowFragmentAction)
             }
 

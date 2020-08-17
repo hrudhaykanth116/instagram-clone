@@ -1,10 +1,7 @@
 package com.hrudhaykanth116.instagramclone.network
 
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
-import com.hrudhaykanth116.instagramclone.models.PopularMoviesResponse
-import com.hrudhaykanth116.instagramclone.models.TvShowDataPagedResponse
-import com.hrudhaykanth116.instagramclone.models.TvShowDetails
-import com.hrudhaykanth116.instagramclone.models.UserPost
+import com.hrudhaykanth116.instagramclone.models.*
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -56,5 +53,12 @@ public interface RetroApis {
     public fun getTvShowDetails(@Path("tvShowId") tvShowId: Int,
                                 @Query("api_key") apiKey: String = MoviesDbConstants.API_KEY
     ): Call<TvShowDetails>
+
+    @GET("movie/{movie_id}/videos")
+    public fun getMovieVideos(@Path("movie_id") movieId: Int,
+                                @Query("api_key") apiKey: String = MoviesDbConstants.API_KEY
+    ): Call<MovieVideosResponse>
+
+
 
 }

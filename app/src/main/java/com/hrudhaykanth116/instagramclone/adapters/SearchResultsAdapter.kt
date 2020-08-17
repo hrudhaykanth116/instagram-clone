@@ -52,7 +52,7 @@ class SearchResultsAdapter() :
                 .into(searchResultImg)
 
             searchResultImg.setOnClickListener {
-                val tvShowFragmentAction = SearchFragmentDirections.tvShowFragmentAction(tvShowData)
+                val tvShowFragmentAction = SearchFragmentDirections.actionTvShowFragment(tvShowData)
                 itemView.findNavController().navigate(tvShowFragmentAction)
             }
 

@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.stories_view.view.*
 class PublicStoriesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val publicStoriesContainer = itemView.public_stories_rv
 
-    public fun bind(movieDataList: List<MovieData>) {
+    public fun bind(movieDataList: ArrayList<MovieData>) {
 
         /*val testList = ArrayList<String>()
         for (i in 1..20) {

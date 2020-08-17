@@ -1,5 +1,6 @@
 package com.hrudhaykanth116.instagramclone.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +11,11 @@ import com.bumptech.glide.Glide
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
 import com.hrudhaykanth116.instagramclone.models.MovieData
+import com.hrudhaykanth116.instagramclone.ui.moviestories.MoviesStoriesActivity
 import kotlinx.android.synthetic.main.movie_story_view_item.view.*
 
 
-class PublicStoryThumbnailAdapter(private val movieDataList: List<MovieData>) :
+class PublicStoryThumbnailAdapter(private val movieDataList: ArrayList<MovieData>) :
     RecyclerView.Adapter<PublicStoryThumbnailAdapter.PublicStoryViewHolder>() {
 
     private val MY_STORY_VIEW_TYPE = 0
@@ -37,6 +39,20 @@ class PublicStoryThumbnailAdapter(private val movieDataList: List<MovieData>) :
 
             // publicStoryViewHolder.addIcon.visibility = View.VISIBLE
             publicStoryViewHolder.description.text = movieData.title
+
+
+            itemView.setOnClickListener {
+//                navigateToMovieStoriesScreen(movieData, it)
+            }
+
+        }
+
+        private fun navigateToMovieStoriesScreen(
+            movieData: MovieData,
+            it: View
+        ) {
+
+
         }
 
     }
@@ -66,10 +82,14 @@ class PublicStoryThumbnailAdapter(private val movieDataList: List<MovieData>) :
         publicStoryViewHolder: PublicStoryThumbnailAdapter.PublicStoryViewHolder,
         position: Int
     ) {
-        // val imgUrl = "https://picsum.photos/id/${holder.adapterPosition * 15}/300"
 
         val movieData: MovieData = movieDataList[position]
         publicStoryViewHolder.bind(movieData, publicStoryViewHolder)
+
+        val itemView = publicStoryViewHolder.itemView
+        itemView.setOnClickListener {
+            MoviesStoriesActivity.start(itemView.context, movieDataList, position)
+        }
     }
 
 

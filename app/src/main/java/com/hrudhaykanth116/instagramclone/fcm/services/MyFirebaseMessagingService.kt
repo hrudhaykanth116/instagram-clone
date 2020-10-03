@@ -8,6 +8,18 @@ import com.hrudhaykanth116.instagramclone.notifications.NotificationsManager
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
+
+    /*[google.delivered_priority=high]
+    [google.sent_time=1597862327233]
+    [google.ttl=2419200]
+    [google.original_priority=high]
+    [Last date=30-08-2020]
+    [id=116]
+    [Name=Hrudhay]
+    [from=1029922099872]
+    [google.message_id=0:1597862327252756%0202bacd0202bacd]
+    [collapse_key=com.hrudhaykanth116.smartschoolmanger]*/
+
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         Log.d(TAG, "onMessageReceived: ")
         if(remoteMessage.data.isNotEmpty()){

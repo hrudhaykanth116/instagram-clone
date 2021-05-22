@@ -7,14 +7,18 @@ import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.hrudhaykanth116.instagramclone.databinding.ActivitySplashBinding
 import com.hrudhaykanth116.instagramclone.ui.signin.SignInActivity
 
 class SplashActivity : AppCompatActivity() {
 
+    private val binding: ActivitySplashBinding by lazy {
+        ActivitySplashBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        setContentView(binding.root)
 
         // Can be triggered for api calls to manage the first screen to be shown
         Handler().postDelayed(Runnable {

@@ -14,24 +14,25 @@ import com.hrudhaykanth116.instagramclone.MainActivity
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.adapters.TvShowImagesAdapter
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
+import com.hrudhaykanth116.instagramclone.databinding.TvShowFragmentBinding
 import com.hrudhaykanth116.instagramclone.models.TvShowData
 import com.hrudhaykanth116.instagramclone.models.TvShowDetails
 import com.hrudhaykanth116.instagramclone.network.RetroApis
-import kotlinx.android.synthetic.main.rounded_image_container.view.*
-import kotlinx.android.synthetic.main.tv_show_fragment.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class TvShowFragment : Fragment() {
 
+    lateinit var binding: TvShowFragmentBinding
     private lateinit var apisClient: RetroApis
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.tv_show_fragment, container, false)
+        binding = TvShowFragmentBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,7 +44,7 @@ class TvShowFragment : Fragment() {
     }
 
     private fun initViews() {
-        tvShowBackBtn.setOnClickListener {
+        binding.tvShowBackBtn.setOnClickListener {
             findNavController().popBackStack()
         }
 
@@ -52,9 +53,9 @@ class TvShowFragment : Fragment() {
         }
 
         tvShowData?.let {
-            tvShowName.text = it.name ?: "Tv show name"
+            binding.tvShowName.text = it.name ?: "Tv show name"
 
-            val tvShowImageView = tvShowImage.innerImg
+            val tvShowImageView = binding.tvShowImage.innerImg
             Glide
                 .with(tvShowImageView)
                 .load(MoviesDbConstants.IMAGES_BASE_URL + it.posterPath)
@@ -92,15 +93,15 @@ class TvShowFragment : Fragment() {
 
     private fun fillView(tvShowDetails: TvShowDetails) {
 
-        showRatingTV.text = tvShowDetails.voteAverage.toString()
-        showSeasonsCountTV.text = tvShowDetails.numberOfSeasons.toString()
-        showEpisodesCountTv.text = tvShowDetails.numberOfEpisodes.toString()
+        binding.showRatingTV.text = tvShowDetails.voteAverage.toString()
+        binding.showSeasonsCountTV.text = tvShowDetails.numberOfSeasons.toString()
+        binding.showEpisodesCountTv.text = tvShowDetails.numberOfEpisodes.toString()
         if (tvShowDetails.homepage.isNullOrEmpty()) {
-            tvShowWebPage.visibility = View.GONE
+            binding.tvShowWebPage.visibility = View.GONE
         }else{
-            tvShowWebPage.text = tvShowDetails.homepage
+            binding.tvShowWebPage.text = tvShowDetails.homepage
         }
-        tvShowOverview.text = tvShowDetails.overview
+        binding.tvShowOverview.text = tvShowDetails.overview
 
 
         val seasonPosterPathList = ArrayList<String>()
@@ -116,9 +117,9 @@ class TvShowFragment : Fragment() {
         }*/
 
 
-        tvShowImages.adapter = TvShowImagesAdapter(seasonPosterPathList)
+        binding.tvShowImages.adapter = TvShowImagesAdapter(seasonPosterPathList)
         val gridLayoutManager = GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false)
-        tvShowImages.layoutManager = gridLayoutManager
+        binding.tvShowImages.layoutManager = gridLayoutManager
     }
 
 }

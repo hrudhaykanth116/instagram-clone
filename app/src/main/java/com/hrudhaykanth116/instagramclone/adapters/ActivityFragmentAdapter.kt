@@ -1,17 +1,14 @@
 package com.hrudhaykanth116.instagramclone.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
+import com.hrudhaykanth116.instagramclone.databinding.ProfileSuggestionLayoutBinding
 import com.hrudhaykanth116.instagramclone.models.TvShowData
-import kotlinx.android.synthetic.main.profile_suggestion_layout.view.*
-import kotlinx.android.synthetic.main.rounded_image_container.view.*
 
 class ActivityFragmentAdapter(private val tvShowDataList: List<TvShowData>):
     RecyclerView.Adapter<ActivityFragmentAdapter.ActivityShowViewHolder>() {
@@ -19,8 +16,8 @@ class ActivityFragmentAdapter(private val tvShowDataList: List<TvShowData>):
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActivityShowViewHolder {
-        val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.profile_suggestion_layout, parent, false)
-        return ActivityShowViewHolder(itemView)
+        val binding = ProfileSuggestionLayoutBinding.inflate(LayoutInflater.from(parent.context))
+        return ActivityShowViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -33,11 +30,11 @@ class ActivityFragmentAdapter(private val tvShowDataList: List<TvShowData>):
     }
 
 
-    class ActivityShowViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    class ActivityShowViewHolder(binding: ProfileSuggestionLayoutBinding): RecyclerView.ViewHolder(binding.root) {
 
-        private val showName: TextView = itemView.showName as TextView
-        private val showRatings: TextView = itemView.showRating as TextView
-        private val showImageView: ImageView = itemView.showImage.innerImg as ImageView
+        private val showName: TextView = binding.showName
+        private val showRatings: TextView = binding.showRating
+        private val showImageView: ImageView = binding.showImage.innerImg
 
         public fun bind(tvShowData: TvShowData) {
 

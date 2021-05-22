@@ -12,19 +12,19 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
-import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.adapters.HomeFragmentAdapter
-import com.hrudhaykanth116.instagramclone.models.TvShowDataPagedResponse
+import com.hrudhaykanth116.instagramclone.databinding.FragmentHomeBinding
 import com.hrudhaykanth116.instagramclone.models.TvShowData
+import com.hrudhaykanth116.instagramclone.models.TvShowDataPagedResponse
 import com.hrudhaykanth116.instagramclone.network.RetroApiClient
 import com.hrudhaykanth116.instagramclone.network.RetroApis
 import com.hrudhaykanth116.instagramclone.repository.databases.AppDatabase
-import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
 
 
 class HomeFragment : Fragment() {
 
+    private lateinit var binding: FragmentHomeBinding
     private lateinit var homeFragmentAdapter: HomeFragmentAdapter
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var apisClient: RetroApis
@@ -37,8 +37,8 @@ class HomeFragment : Fragment() {
     ): View? {
         homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        return root
+        binding = FragmentHomeBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -84,10 +84,10 @@ class HomeFragment : Fragment() {
             }
 
         })
-        homePopularTvShowsRV.layoutManager = LinearLayoutManager(context)
-        homePopularTvShowsRV.adapter = homeFragmentAdapter
+        binding.homePopularTvShowsRV.layoutManager = LinearLayoutManager(context)
+        binding.homePopularTvShowsRV.adapter = homeFragmentAdapter
 
-        mainPostsSwipeRefreshLayout.setOnRefreshListener {
+        binding.mainPostsSwipeRefreshLayout.setOnRefreshListener {
             refreshPosts()
         }
 
@@ -97,7 +97,7 @@ class HomeFragment : Fragment() {
 
         homeViewModel.refreshData()
         Handler().postDelayed(Runnable {
-            mainPostsSwipeRefreshLayout.isRefreshing = false
+            binding.mainPostsSwipeRefreshLayout.isRefreshing = false
         }, 1000)
 
         /*val callback = object : Callback<TvShowDataPagedResponse> {

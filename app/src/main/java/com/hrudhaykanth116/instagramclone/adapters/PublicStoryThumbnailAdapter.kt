@@ -1,18 +1,17 @@
 package com.hrudhaykanth116.instagramclone.adapters
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
+import com.hrudhaykanth116.instagramclone.databinding.MovieStoryViewItemBinding
 import com.hrudhaykanth116.instagramclone.models.MovieData
 import com.hrudhaykanth116.instagramclone.ui.moviestories.MoviesStoriesActivity
-import kotlinx.android.synthetic.main.movie_story_view_item.view.*
 
 
 class PublicStoryThumbnailAdapter(private val movieDataList: ArrayList<MovieData>) :
@@ -21,10 +20,10 @@ class PublicStoryThumbnailAdapter(private val movieDataList: ArrayList<MovieData
     private val MY_STORY_VIEW_TYPE = 0
     private val PUBLIC_STORY_VIEW_TYPE = 1
 
-    class PublicStoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val thumbnailImageView: ImageView = itemView.innerImg as ImageView
-        private val addIcon: ImageView = itemView.myStatusAddIcon as ImageView
-        private val description: TextView = itemView.description as TextView
+    class PublicStoryViewHolder(binding: MovieStoryViewItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val thumbnailImageView: ImageView = binding.innerImg
+        private val addIcon: ImageView = binding.myStatusAddIcon
+        private val description: TextView = binding.description
 
         public fun bind(
             movieData: MovieData,
@@ -61,9 +60,8 @@ class PublicStoryThumbnailAdapter(private val movieDataList: ArrayList<MovieData
         parent: ViewGroup,
         viewType: Int
     ): PublicStoryThumbnailAdapter.PublicStoryViewHolder {
-        val itemView: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.movie_story_view_item, parent, false)
-        return PublicStoryThumbnailAdapter.PublicStoryViewHolder(itemView)
+        val binding = MovieStoryViewItemBinding.inflate(LayoutInflater.from(parent.context))
+        return PublicStoryThumbnailAdapter.PublicStoryViewHolder(binding)
     }
 
     override fun getItemCount(): Int {

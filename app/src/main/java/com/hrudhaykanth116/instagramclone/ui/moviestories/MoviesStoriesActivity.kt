@@ -8,14 +8,18 @@ import androidx.appcompat.app.AppCompatActivity
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.adapters.MoviePagerAdapter
 import com.hrudhaykanth116.instagramclone.animations.CubeTransformer
+import com.hrudhaykanth116.instagramclone.databinding.ActivityMoviesStoriesBinding
 import com.hrudhaykanth116.instagramclone.models.MovieData
-import kotlinx.android.synthetic.main.activity_movies_stories.*
 
 class MoviesStoriesActivity : AppCompatActivity() {
 
+    val binding: ActivityMoviesStoriesBinding by lazy {
+        ActivityMoviesStoriesBinding.inflate(layoutInflater)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_movies_stories)
+        setContentView(binding.root)
 
         val extras = intent.extras
         val movieDataList: ArrayList<MovieData>? = extras?.getParcelableArrayList<MovieData>(KEY_MOVIE_DATA_LIST)
@@ -23,9 +27,9 @@ class MoviesStoriesActivity : AppCompatActivity() {
 
         movieDataList?.let {
             val moviePagerAdapter = MoviePagerAdapter(it)
-            movieViewPager.adapter = moviePagerAdapter
-            movieViewPager.setCurrentItem(selectedPosition, false)
-            movieViewPager.setPageTransformer(CubeTransformer())
+            binding.movieViewPager.adapter = moviePagerAdapter
+            binding.movieViewPager.setCurrentItem(selectedPosition, false)
+            binding.movieViewPager.setPageTransformer(CubeTransformer())
         }
 
 

@@ -1,30 +1,28 @@
 package com.hrudhaykanth116.instagramclone
 
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.hrudhaykanth116.instagramclone.databinding.MainActivityBinding
 import com.hrudhaykanth116.instagramclone.fcm.FirebaseTokenGenerator
 import com.hrudhaykanth116.instagramclone.network.RetroApiClient
 import com.hrudhaykanth116.instagramclone.network.RetroApis
 import com.hrudhaykanth116.instagramclone.notifications.NotificationsChannelsManager
-import kotlinx.android.synthetic.main.main_activity.*
-import retrofit2.Retrofit
 
 class MainActivity : AppCompatActivity() {
 
+    private val binding: MainActivityBinding by lazy {
+        MainActivityBinding.inflate(layoutInflater)
+    }
 
     public lateinit var apisClient: RetroApis
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
+        setContentView(binding.root)
 
         initRetrofit()
 
@@ -41,13 +39,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpBottomNavigationView(navController: NavController) {
-        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
+        binding.bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             onBottomMenuItemSelected(menuItem, navController)
         }
-        bottomNavigationView.setOnNavigationItemReselectedListener {
+        binding.bottomNavigationView.setOnNavigationItemReselectedListener {
             // Do nothing when menu item reselected.
         }
-        bottomNavigationView.itemIconTintList = null
+        binding.bottomNavigationView.itemIconTintList = null
     }
 
     override fun onBackPressed() {

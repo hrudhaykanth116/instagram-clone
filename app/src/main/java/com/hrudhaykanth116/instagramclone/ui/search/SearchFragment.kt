@@ -12,14 +12,15 @@ import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.adapters.SearchCategoriesAdapter
 import com.hrudhaykanth116.instagramclone.adapters.SearchResultsAdapter
+import com.hrudhaykanth116.instagramclone.databinding.SearchFragmentBinding
 import com.hrudhaykanth116.instagramclone.models.NetworkState
 import com.hrudhaykanth116.instagramclone.models.TvShowData
-import kotlinx.android.synthetic.main.search_fragment.*
 
 class SearchFragment : Fragment() {
+
+    private lateinit var binding: SearchFragmentBinding
 
     // Initial state would be loading always followed by loaded or failed
     private var networkState: NetworkState = NetworkState.LOADING
@@ -27,14 +28,14 @@ class SearchFragment : Fragment() {
     private lateinit var searchViewModel: SearchViewModel
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         searchViewModel =
-                ViewModelProvider(this).get(SearchViewModel::class.java)
-        val root = inflater.inflate(R.layout.search_fragment, container, false)
-        return root
+            ViewModelProvider(this).get(SearchViewModel::class.java)
+        binding = SearchFragmentBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,8 +54,8 @@ class SearchFragment : Fragment() {
             testList.add("Item: $i")
         }
 
-        categories.adapter = SearchCategoriesAdapter(testList)
-        categories.layoutManager = LinearLayoutManager(
+        binding.categories.adapter = SearchCategoriesAdapter(testList)
+        binding.categories.layoutManager = LinearLayoutManager(
             context,
             LinearLayoutManager.HORIZONTAL,
             false
@@ -62,7 +63,8 @@ class SearchFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        val searchViewModel: SearchViewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
+        val searchViewModel: SearchViewModel =
+            ViewModelProvider(this).get(SearchViewModel::class.java)
         searchViewModel.topRatedTvShowsLiveData.observe(viewLifecycleOwner,
             Observer<PagedList<TvShowData>> { pagedList ->
                 // Data source changed.
@@ -79,10 +81,10 @@ class SearchFragment : Fragment() {
     }
 
     private fun updateLoadingState(networkState: NetworkState) {
-        if(networkState == NetworkState.LOADED){
-            progressBar.visibility = View.GONE
-        }else{
-            progressBar.visibility = View.VISIBLE
+        if (networkState == NetworkState.LOADED) {
+            binding.progressBar.visibility = View.GONE
+        } else {
+            binding.progressBar.visibility = View.VISIBLE
         }
     }
 
@@ -95,11 +97,12 @@ class SearchFragment : Fragment() {
             false
         )
         searchResultsAdapter = SearchResultsAdapter()
-        searchResultsContainer.adapter = searchResultsAdapter
-        searchResultsContainer.layoutManager = staggeredGridLayoutManager
+        binding.searchResultsContainer.adapter = searchResultsAdapter
+        binding.searchResultsContainer.layoutManager = staggeredGridLayoutManager
 
         // TODO: 25-07-2020 Add better way of handling progress bar
-        searchResultsContainer.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+        binding.searchResultsContainer.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
             /*override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!searchResultsContainer.canScrollVertically(1) && networkState != NetworkState.LOADED) {
@@ -134,7 +137,7 @@ class SearchFragment : Fragment() {
         }*/
     }
 
-    companion object{
+    companion object {
         private val TAG = SearchFragment::class.java.simpleName
     }
 

@@ -1,8 +1,9 @@
 package com.hrudhaykanth116.instagramclone.viewholders
 
-import android.view.View
+import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
+import com.hrudhaykanth116.instagramclone.databinding.ProgressBarRowBinding
 
-class ProgressViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val progressBar = itemView
+class ProgressViewHolder(binding: ProgressBarRowBinding) : RecyclerView.ViewHolder(binding.root) {
+    val progressBar = binding.root
 }

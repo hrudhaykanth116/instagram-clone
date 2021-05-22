@@ -1,16 +1,15 @@
 package com.hrudhaykanth116.instagramclone.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
+import com.hrudhaykanth116.instagramclone.databinding.MovieStoriesFragmentBinding
 import com.hrudhaykanth116.instagramclone.models.MovieData
-import kotlinx.android.synthetic.main.movie_stories_fragment.view.*
 
 class MoviePagerAdapter(private val movieDataList: ArrayList<MovieData>) :
     RecyclerView.Adapter<MoviePagerAdapter.MoviePagerViewHolder>() {
@@ -20,9 +19,8 @@ class MoviePagerAdapter(private val movieDataList: ArrayList<MovieData>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviePagerViewHolder {
-        val itemView: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.movie_stories_fragment, parent, false)
-        return MoviePagerViewHolder(itemView)
+        val binding = MovieStoriesFragmentBinding.inflate(LayoutInflater.from(parent.context))
+        return MoviePagerViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MoviePagerViewHolder, position: Int) {
@@ -31,10 +29,10 @@ class MoviePagerAdapter(private val movieDataList: ArrayList<MovieData>) :
     }
 
 
-    class MoviePagerViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+    class MoviePagerViewHolder(private val binding: MovieStoriesFragmentBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        private val movieNameTv: TextView = view.movieNameTv
-        private val mainImgView: ImageView = view.mainImgView
+        private val movieNameTv: TextView = binding.movieNameTv
+        private val mainImgView: ImageView = binding.mainImgView
 
 
         fun bind(movieData: MovieData) {

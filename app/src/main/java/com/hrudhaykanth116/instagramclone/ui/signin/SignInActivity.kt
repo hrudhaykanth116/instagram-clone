@@ -6,25 +6,25 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.hrudhaykanth116.instagramclone.MainActivity
-import com.hrudhaykanth116.instagramclone.R
-import kotlinx.android.synthetic.main.sign_in_activity.*
+import com.hrudhaykanth116.instagramclone.databinding.SignInActivityBinding
 
 class SignInActivity : AppCompatActivity() {
 
+    private val binding: SignInActivityBinding by lazy {
+        SignInActivityBinding.inflate(layoutInflater)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.sign_in_activity)
+        setContentView(binding.root)
 
-        signInBtn.setOnClickListener {
+        binding.signInBtn.setOnClickListener {
             signInWithEmailPassword(
-                emailTextField.text.toString(),
-                passwordTextField.text.toString()
+                binding.emailTextField.text.toString(),
+                binding.passwordTextField.text.toString()
             )
         }
 
@@ -34,8 +34,8 @@ class SignInActivity : AppCompatActivity() {
         email: String,
         password: String
     ) {
-        signInBtn.visibility = View.INVISIBLE
-        signInProgressBar.visibility = View.VISIBLE
+        binding.signInBtn.visibility = View.INVISIBLE
+        binding.signInProgressBar.visibility = View.VISIBLE
 
         val firebaseAuth = Firebase.auth
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
@@ -45,8 +45,8 @@ class SignInActivity : AppCompatActivity() {
             }else{
                 Log.e(TAG, "signInWithEmailPassword: Authentication failure: ${task.exception}")
                 Toast.makeText(this, "Email or Password is incorrect", Toast.LENGTH_SHORT).show()
-                signInBtn.visibility = View.VISIBLE
-                signInProgressBar.visibility = View.INVISIBLE
+                binding.signInBtn.visibility = View.VISIBLE
+                binding.signInProgressBar.visibility = View.INVISIBLE
             }
         }
     }

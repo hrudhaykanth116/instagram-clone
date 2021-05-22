@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="issues">
+    <option name="index">
+      <map>
+        <entry key="$PROJECT_DIR$/../../../Biofourmis/projects/hh-android-patient/app/build/generated/source/kapt/staging/com/biofourmis/careathomerpm/schedulers/receivers/ReminderReceiver_GeneratedInjector.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../Biofourmis/projects/hh-android-patient/app/src/main/java/com/biofourmis/careathomerpm/di/module/ApplicationModule.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../Biofourmis/projects/hh-android-patient/app/src/main/java/com/biofourmis/careathomerpm/schedulers/ReminderScheduler.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../Biofourmis/projects/hh-android-patient/app/src/main/java/com/biofourmis/careathomerpm/schedulers/receivers/ReminderReceiver.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../Biofourmis/projects/hh-android-patient/app/src/main/java/com/biofourmis/careathomerpm/utils/ReminderHandler.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../Biofourmis/projects/hh-android-patient/app/src/main/java/com/biofourmis/careathomerpm/utils/actions/CalendarTasksHandler.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../../Biofourmis/projects/hh-android-patient/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="/private/var/folders/qc/mntmzpmx6zxgjlw3692wbn000000gn/T/tmp__classes.jar!/jp/co/ohq/ble/OHQConfig.class">
+          <value>
+            <set />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

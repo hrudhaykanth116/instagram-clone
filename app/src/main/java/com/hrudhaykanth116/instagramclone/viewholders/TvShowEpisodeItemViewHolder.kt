@@ -6,26 +6,16 @@ import android.os.Handler
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.adapters.HomeFragmentAdapter
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
+import com.hrudhaykanth116.instagramclone.databinding.TvShowEpisodeItemBinding
 import com.hrudhaykanth116.instagramclone.models.TvShowData
-import kotlinx.android.synthetic.main.tv_show_episode_item.view.*
-import kotlinx.android.synthetic.main.rounded_image_container.view.*
 
-class TvShowEpisodeItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-    // Can use view directly instead of this private field
-    private val movieDpView: ImageView = itemView.dpView.innerImg as ImageView
-    private val tvShowImageView: ImageView = itemView.tvShowImageView as ImageView
-    private val heartImageView: ImageView = itemView.heartImageView as ImageView
-    private val likedIcon: ImageView = itemView.likeIcon as ImageView
-    private val userNameTV: TextView = itemView.postUserNameTV as TextView
-    private val likedDescriptionTV: TextView = itemView.likedDescriptionTV as TextView
-    private val showNameTV: TextView = itemView.showNameTV as TextView
-    private val showOverViewTV: TextView = itemView.showOverView as TextView
+class TvShowEpisodeItemViewHolder(private val binding: TvShowEpisodeItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
     public fun bind(
         tvShowData: TvShowData,
@@ -35,36 +25,36 @@ class TvShowEpisodeItemViewHolder(itemView: View) : RecyclerView.ViewHolder(item
         val postDpUrl = MoviesDbConstants.IMAGES_BASE_URL + tvShowData.posterPath
         val context = itemView.context
 
-        userNameTV.text = tvShowData.name
-        userNameTV.setOnClickListener {
+        binding.postUserNameTV.text = tvShowData.name
+        binding.postUserNameTV.setOnClickListener {
             postClickListener.onProfileNameClicked(tvShowData)
         }
         // Tv show not liked case
-        likedIcon.clearColorFilter()
+        binding.likeIcon.clearColorFilter()
 
-        likedDescriptionTV.text = context.getString(R.string.likes, tvShowData.voteCount.toString())
-        showNameTV.text = tvShowData.originalName
+        binding.likedDescriptionTV.text = context.getString(R.string.likes, tvShowData.voteCount.toString())
+        binding.showNameTV.text = tvShowData.originalName
 
-        showOverViewTV.text = tvShowData.overview
+        binding.showOverView.text = tvShowData.overview
         // Add proper logic to set number of lines appropriately.
-        showOverViewTV.post {
+        binding.showOverView.post {
             // Update view, after the view is rendered.
-            if (showOverViewTV.lineCount > 3) {
-                showOverViewTV.setLines(3)
+            if (binding.showOverView.lineCount > 3) {
+                binding.showOverView.setLines(3)
             }
         }
 
         var lastClickTime: Long = 0
-        tvShowImageView.setOnClickListener {
+        binding.tvShowImageView.setOnClickListener {
             if(System.currentTimeMillis() - lastClickTime < 300){
                 // Double clicked
 
-                likedIcon.setColorFilter(Color.rgb(255, 0, 0))
+                binding.likeIcon.setColorFilter(Color.rgb(255, 0, 0))
 
-                heartImageView.visibility = View.VISIBLE
+                binding.heartImageView.visibility = View.VISIBLE
                 Handler().postDelayed({
                     // TODO: 26-07-2020 perform bounce visible animation 
-                    heartImageView.visibility = View.GONE
+                    binding.heartImageView.visibility = View.GONE
                 }, 1000)
 
                 lastClickTime = 0
@@ -74,8 +64,8 @@ class TvShowEpisodeItemViewHolder(itemView: View) : RecyclerView.ViewHolder(item
         }
 
 
-        loadImg(context, postImgUrl, tvShowImageView)
-        loadImg(context, postDpUrl, movieDpView)
+        loadImg(context, postImgUrl, binding.tvShowImageView)
+        loadImg(context, postDpUrl, binding.dpView.innerImg)
 
     }
 
@@ -87,6 +77,8 @@ class TvShowEpisodeItemViewHolder(itemView: View) : RecyclerView.ViewHolder(item
         Glide
             .with(context)
             .load(postImgUrl)
+            .placeholder(R.drawable.ic_image_24)
+            .error(R.drawable.ic_broken_image_24)
             .into(imageView)
     }
 

@@ -10,10 +10,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.hrudhaykanth116.instagramclone.R
+import com.hrudhaykanth116.instagramclone.databinding.MyAccountFragmentBinding
 import com.hrudhaykanth116.instagramclone.ui.signin.SignInActivity
-import kotlinx.android.synthetic.main.my_account_fragment.*
 
 class MyAccountFragment : Fragment() {
+
+    lateinit var binding: MyAccountFragmentBinding
 
     companion object {
         fun newInstance() = MyAccountFragment()
@@ -25,7 +27,8 @@ class MyAccountFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.my_account_fragment, container, false)
+        binding = MyAccountFragmentBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -37,7 +40,7 @@ class MyAccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        signOutBtn.setOnClickListener {
+        binding.signOutBtn.setOnClickListener {
             val auth = Firebase.auth
             auth.signOut()
             activity?.finishAffinity()

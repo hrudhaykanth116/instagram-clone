@@ -46,11 +46,11 @@
         android:layout_height="20dp"
         android:elevation="5dp"
         android:src="@drawable/ic_add_circle_white_24dp"
-        android:tint="#4D6EDC"
         android:visibility="gone"
         tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@id/roundedImgContainer"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="#4D6EDC" />
 
     <View
         android:id="@+id/addIconBg"

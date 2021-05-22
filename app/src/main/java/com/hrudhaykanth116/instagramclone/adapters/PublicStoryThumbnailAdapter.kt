@@ -20,24 +20,20 @@ class PublicStoryThumbnailAdapter(private val movieDataList: ArrayList<MovieData
     private val MY_STORY_VIEW_TYPE = 0
     private val PUBLIC_STORY_VIEW_TYPE = 1
 
-    class PublicStoryViewHolder(binding: MovieStoryViewItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        private val thumbnailImageView: ImageView = binding.innerImg
-        private val addIcon: ImageView = binding.myStatusAddIcon
-        private val description: TextView = binding.description
+    class PublicStoryViewHolder(private val binding: MovieStoryViewItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         public fun bind(
             movieData: MovieData,
-            publicStoryViewHolder: PublicStoryViewHolder
         ) {
             val imgUrl = MoviesDbConstants.IMAGES_BASE_URL + movieData.posterPath
 
             Glide
-                .with(publicStoryViewHolder.itemView)
+                .with(binding.root)
                 .load(imgUrl)
-                .into(publicStoryViewHolder.thumbnailImageView)
+                .into(binding.innerImg)
 
-            // publicStoryViewHolder.addIcon.visibility = View.VISIBLE
-            publicStoryViewHolder.description.text = movieData.title
+            // binding.addIcon.visibility = View.VISIBLE
+            binding.description.text = movieData.title
 
 
             itemView.setOnClickListener {
@@ -82,7 +78,7 @@ class PublicStoryThumbnailAdapter(private val movieDataList: ArrayList<MovieData
     ) {
 
         val movieData: MovieData = movieDataList[position]
-        publicStoryViewHolder.bind(movieData, publicStoryViewHolder)
+        publicStoryViewHolder.bind(movieData)
 
         val itemView = publicStoryViewHolder.itemView
         itemView.setOnClickListener {

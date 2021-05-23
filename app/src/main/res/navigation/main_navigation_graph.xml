@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.hrudhaykanth116.instagramclone.ui.home.HomeFragment"
+        android:name="com.hrudhaykanth116.instagramclone.ui.screens.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home">
 
@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/navigation_search"
-        android:name="com.hrudhaykanth116.instagramclone.ui.search.SearchFragment"
+        android:name="com.hrudhaykanth116.instagramclone.ui.screens.search.SearchFragment"
         android:label="@string/title_search"
         tools:layout="@layout/search_fragment">
 
@@ -36,43 +36,43 @@
 
     <fragment
         android:id="@+id/navigation_post"
-        android:name="com.hrudhaykanth116.instagramclone.ui.post.PostStatusFragment"
+        android:name="com.hrudhaykanth116.instagramclone.ui.screens.post.PostStatusFragment"
         android:label="Post status"
         tools:layout="@layout/post_status_fragment" />
 
     <fragment
         android:id="@+id/navigation_activity"
-        android:name="com.hrudhaykanth116.instagramclone.ui.activity.ActivityFragment"
+        android:name="com.hrudhaykanth116.instagramclone.ui.screens.activity.ActivityFragment"
         android:label="Activity"
         tools:layout="@layout/activity_fragment" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.hrudhaykanth116.instagramclone.ui.account.MyAccountFragment"
+        android:name="com.hrudhaykanth116.instagramclone.ui.screens.account.MyAccountFragment"
         android:label="Profile"
         tools:layout="@layout/my_account_fragment" />
 
     <fragment
         android:id="@+id/navigation_user_profile"
-        android:name="com.hrudhaykanth116.instagramclone.ui.profile.TvShowFragment"
+        android:name="com.hrudhaykanth116.instagramclone.ui.screens.profile.TvShowFragment"
         android:label="User profile"
         tools:layout="@layout/tv_show_fragment"
         >
         <argument
             android:name="tvShowData"
-            app:argType="com.hrudhaykanth116.instagramclone.models.TvShowData" />
+            app:argType="com.hrudhaykanth116.instagramclone.repository.models.TvShowData" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_movies_stories"
-        android:name="com.hrudhaykanth116.instagramclone.ui.moviestories.MovieStoriesFragment"
+        android:name="com.hrudhaykanth116.instagramclone.ui.screens.moviestories.MovieStoriesFragment"
         android:label="Movie stories"
         tools:layout="@layout/movie_stories_fragment"
         >
 
         <argument
             android:name="movieData"
-            app:argType="com.hrudhaykanth116.instagramclone.models.MovieData" />
+            app:argType="com.hrudhaykanth116.instagramclone.repository.models.MovieData" />
     </fragment>
 
 

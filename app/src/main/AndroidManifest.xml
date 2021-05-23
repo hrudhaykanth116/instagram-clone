@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,8 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.moviestories.MoviesStoriesActivity" />
-        <activity android:name=".SplashActivity">
+        <activity android:name="com.hrudhaykanth116.instagramclone.ui.screens.moviestories.MoviesStoriesActivity" />
+        <activity android:name=".ui.screens.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,10 +22,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.signin.SignInActivity"
+            android:name="com.hrudhaykanth116.instagramclone.ui.screens.signin.SignInActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.screens.MainActivity"
             android:label="@string/app_name" />
 
         <!-- Service to handle fcm messages, notifications -->

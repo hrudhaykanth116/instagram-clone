@@ -3,19 +3,20 @@ package com.hrudhaykanth116.instagramclone.repository.datasources
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
-import com.hrudhaykanth116.instagramclone.models.NetworkState
-import com.hrudhaykanth116.instagramclone.models.TvShowDataPagedResponse
-import com.hrudhaykanth116.instagramclone.models.TvShowData
-import com.hrudhaykanth116.instagramclone.network.RetroApiClient
-import com.hrudhaykanth116.instagramclone.network.RetroApis
+import com.hrudhaykanth116.instagramclone.repository.models.NetworkState
+import com.hrudhaykanth116.instagramclone.repository.models.TvShowDataPagedResponse
+import com.hrudhaykanth116.instagramclone.repository.models.TvShowData
+import com.hrudhaykanth116.instagramclone.repository.datasources.remote.RetroApis
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.net.UnknownHostException
+import javax.inject.Inject
 
-class TopRatedTvShowsDataSource: PageKeyedDataSource<Int, TvShowData>() {
+class TopRatedTvShowsDataSource @Inject constructor(
+    private val retroApis: RetroApis
+): PageKeyedDataSource<Int, TvShowData>() {
 
-    private var retroApis: RetroApis = RetroApiClient.getRetroApiService()
     val networkState = MutableLiveData<NetworkState>()
 
     override fun loadInitial(

@@ -1,0 +1,14 @@
+package com.hrudhaykanth116.instagramclone.ui.screens.base
+
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+
+open class BaseActivity: AppCompatActivity() {
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // TODO: 22/05/21 Set content view here.
+    }
+
+}

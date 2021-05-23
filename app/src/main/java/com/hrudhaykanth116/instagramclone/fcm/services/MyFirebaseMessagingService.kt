@@ -4,8 +4,9 @@ import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.hrudhaykanth116.instagramclone.notifications.NotificationsManager
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
 

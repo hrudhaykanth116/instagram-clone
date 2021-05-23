@@ -3,26 +3,30 @@ package com.hrudhaykanth116.instagramclone.repository.datasources
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
-import com.hrudhaykanth116.instagramclone.models.NetworkState
-import com.hrudhaykanth116.instagramclone.models.TvShowDataPagedResponse
-import com.hrudhaykanth116.instagramclone.models.TvShowData
-import com.hrudhaykanth116.instagramclone.network.RetroApiClient
-import com.hrudhaykanth116.instagramclone.network.RetroApis
+import com.hrudhaykanth116.instagramclone.repository.models.NetworkState
+import com.hrudhaykanth116.instagramclone.repository.models.TvShowDataPagedResponse
+import com.hrudhaykanth116.instagramclone.repository.models.TvShowData
+import com.hrudhaykanth116.instagramclone.repository.datasources.remote.RetroApis
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.net.UnknownHostException
+import javax.inject.Inject
 import kotlin.random.Random
 
 /**
  * Data source which is used to load data initially and when new data is required.
  */
-class PopularTvShowsDataSource: PageKeyedDataSource<Int, TvShowData>() {
+class PopularTvShowsDataSource @Inject constructor(
+
+): PageKeyedDataSource<Int, TvShowData>() {
 
     private val TAG: String = PopularTvShowsDataSource::class.java.name
 
+    @Inject
+    lateinit var retroApis: RetroApis
+
     val networkState = MutableLiveData<NetworkState>()
-    private var retroApis: RetroApis = RetroApiClient.getRetroApiService()
     private var initialPageId = Random.nextInt(1, 20)
 
     override fun invalidate() {

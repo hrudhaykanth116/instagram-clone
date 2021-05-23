@@ -1,13 +1,12 @@
 package com.hrudhaykanth116.instagramclone.viewholders
 
-import androidx.annotation.NonNull
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hrudhaykanth116.instagramclone.adapters.PublicStoryThumbnailAdapter
 import com.hrudhaykanth116.instagramclone.databinding.StoriesViewBinding
 import com.hrudhaykanth116.instagramclone.models.MovieData
 
-class PublicStoriesViewHolder(binding: StoriesViewBinding) : RecyclerView.ViewHolder(binding.root) {
-    private val publicStoriesContainer = binding.publicStoriesRv
+class PublicStoriesViewHolder(private val binding: StoriesViewBinding) : RecyclerView.ViewHolder(binding.root) {
 
     public fun bind(movieDataList: ArrayList<MovieData>) {
 
@@ -17,7 +16,8 @@ class PublicStoriesViewHolder(binding: StoriesViewBinding) : RecyclerView.ViewHo
         }*/
 
         // TODO: 27-07-2020 Do not reset the adapter on every bind
-        publicStoriesContainer.adapter = PublicStoryThumbnailAdapter(movieDataList)
+        binding.publicStoriesRv.layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, false)
+        binding.publicStoriesRv.adapter = PublicStoryThumbnailAdapter(movieDataList)
 
     }
 

@@ -23,7 +23,12 @@ class PopularTvShowsDataSource: PageKeyedDataSource<Int, TvShowData>() {
 
     val networkState = MutableLiveData<NetworkState>()
     private var retroApis: RetroApis = RetroApiClient.getRetroApiService()
-    private val initialPageId = Random.nextInt(1, 20)
+    private var initialPageId = Random.nextInt(1, 20)
+
+    override fun invalidate() {
+        super.invalidate()
+        initialPageId = Random.nextInt(1, 20)
+    }
 
     override fun loadInitial(
         params: LoadInitialParams<Int>,

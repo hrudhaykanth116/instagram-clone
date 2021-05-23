@@ -16,7 +16,7 @@ class ActivityFragmentAdapter(private val tvShowDataList: List<TvShowData>):
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActivityShowViewHolder {
-        val binding = ProfileSuggestionLayoutBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = ProfileSuggestionLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ActivityShowViewHolder(binding)
     }
 

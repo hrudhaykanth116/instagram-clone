@@ -100,29 +100,6 @@ class HomeFragment : Fragment() {
             binding.mainPostsSwipeRefreshLayout.isRefreshing = false
         }, 1000)
 
-        /*val callback = object : Callback<TvShowDataPagedResponse> {
-            override fun onFailure(call: Call<TvShowDataPagedResponse>, t: Throwable) {
-                Log.i(TAG, "onFailure: ${t.message}")
-                context?.let {
-                    Toast.makeText(it, "Error retrieving posts", Toast.LENGTH_SHORT).show()
-                }
-                mainPostsSwipeRefreshLayout.isRefreshing = false
-            }
-
-            override fun onResponse(
-                call: Call<TvShowDataPagedResponse>,
-                response: Response<TvShowDataPagedResponse>
-            ) {
-                Log.i(TAG, "onResponse: ")
-                Toast.makeText(context, "No new posts", Toast.LENGTH_SHORT).show()
-                mainPostsSwipeRefreshLayout.isRefreshing = false
-            }
-
-        }
-        tvShowDetailsCall = apisClient.getPopularTvShows(1)
-        tvShowDetailsCall.clone().enqueue(callback)*/
-
-
     }
 
     companion object {

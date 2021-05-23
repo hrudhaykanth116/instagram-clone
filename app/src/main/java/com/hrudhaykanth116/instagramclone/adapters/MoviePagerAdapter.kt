@@ -19,7 +19,7 @@ class MoviePagerAdapter(private val movieDataList: ArrayList<MovieData>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviePagerViewHolder {
-        val binding = MovieStoriesFragmentBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = MovieStoriesFragmentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MoviePagerViewHolder(binding)
     }
 

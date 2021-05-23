@@ -15,13 +15,13 @@ class ViewHoldersCreator {
             val inflater = LayoutInflater.from(parent.context)
             val viewHolder: RecyclerView.ViewHolder = when (viewId) {
                 R.layout.stories_view -> {
-                    PublicStoriesViewHolder(StoriesViewBinding.inflate(inflater))
+                    PublicStoriesViewHolder(StoriesViewBinding.inflate(inflater, parent, false))
                 }
                 R.layout.tv_show_episode_item -> {
-                    TvShowEpisodeItemViewHolder(TvShowEpisodeItemBinding.inflate(inflater))
+                    TvShowEpisodeItemViewHolder(TvShowEpisodeItemBinding.inflate(inflater, parent, false))
                 }
                 R.layout.progress_bar_row -> {
-                    ProgressViewHolder(ProgressBarRowBinding.inflate(inflater))
+                    ProgressViewHolder(ProgressBarRowBinding.inflate(inflater, parent, false))
                 }
                 else -> {
                     throw Exception("Wrong view type")

@@ -56,7 +56,7 @@ class PublicStoryThumbnailAdapter(private val movieDataList: ArrayList<MovieData
         parent: ViewGroup,
         viewType: Int
     ): PublicStoryThumbnailAdapter.PublicStoryViewHolder {
-        val binding = MovieStoryViewItemBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = MovieStoryViewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PublicStoryThumbnailAdapter.PublicStoryViewHolder(binding)
     }
 

@@ -8,6 +8,10 @@ import com.hrudhaykanth116.instagramclone.repository.models.MovieData
 
 class PublicStoriesViewHolder(private val binding: StoriesViewBinding) : RecyclerView.ViewHolder(binding.root) {
 
+    init {
+//        setIsRecyclable(false)
+    }
+
     public fun bind(movieDataList: ArrayList<MovieData>) {
 
         /*val testList = ArrayList<String>()

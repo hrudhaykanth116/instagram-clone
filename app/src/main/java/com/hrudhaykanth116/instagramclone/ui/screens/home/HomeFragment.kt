@@ -5,6 +5,8 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -33,7 +35,7 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        binding.shimmerFrameLayout.startShimmer()
         initMainPostsRecyclerView()
         initViewModel()
 
@@ -44,7 +46,14 @@ class HomeFragment : BaseFragment() {
         homeViewModel.popularTvShowsLiveData.observe(viewLifecycleOwner,
             Observer<PagedList<TvShowData>> { pagedList ->
                 // Data source changed.
-                homeFragmentAdapter.submitList(pagedList)
+                if (pagedList.isNullOrEmpty()) {
+
+                }else{
+                    binding.shimmerFrameLayout.stopShimmer()
+                    binding.shimmerFrameLayout.isGone = true
+//                    binding.homePopularTvShowsRV.isVisible = true
+                    homeFragmentAdapter.submitList(pagedList)
+                }
             }
         )
         homeViewModel.networkState.observe(viewLifecycleOwner,
@@ -67,6 +76,7 @@ class HomeFragment : BaseFragment() {
             }
 
         })
+//        binding.homePopularTvShowsRV.recycledViewPool.setMaxRecycledViews(HomeFragmentAdapter.TYPE_PUBLIC_STORIES, 1)
         binding.homePopularTvShowsRV.layoutManager = LinearLayoutManager(context)
         binding.homePopularTvShowsRV.adapter = homeFragmentAdapter
 

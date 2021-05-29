@@ -19,7 +19,7 @@ class HomeFragmentAdapter(private val postClickListener: IPostClickListener) :
     private var currentNetworkState: NetworkState = NetworkState.LOADING
     private var previousNetworkState: NetworkState = NetworkState.LOADING
 
-    public fun updateMovieDataList(movieDataList: List<MovieData>){
+    public fun updateMovieDataList(movieDataList: List<MovieData>) {
         this.movieDataList.clear()
         this.movieDataList.addAll(movieDataList)
         // Notify first item(public story) changed
@@ -88,13 +88,14 @@ class HomeFragmentAdapter(private val postClickListener: IPostClickListener) :
         }
     }
 
-    private fun shouldShowProgressIcon() = currentNetworkState != NetworkState.LOADED
+    private fun shouldShowProgressIcon() =
+        currentNetworkState != NetworkState.LOADED
 
     private fun isProgressIconShown() = previousNetworkState != NetworkState.LOADED
 
-    companion object{
+    companion object {
 
-        private const val TYPE_PUBLIC_STORIES = R.layout.stories_view
+        const val TYPE_PUBLIC_STORIES = R.layout.stories_view
         private const val TYPE_POST = R.layout.tv_show_episode_item
         private const val TYPE_PROGRESS = R.layout.progress_bar_row
 

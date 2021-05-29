@@ -75,8 +75,6 @@ class TvShowEpisodeItemViewHolder(private val binding: TvShowEpisodeItemBinding)
         Glide
             .with(context)
             .load(postImgUrl)
-            .placeholder(R.drawable.ic_image_24)
-            .error(R.drawable.ic_broken_image_24)
             .into(imageView)
     }
 

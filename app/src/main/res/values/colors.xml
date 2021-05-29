@@ -9,5 +9,6 @@
     <color name="green">#48FF00</color>
     <color name="images_bg_color">#DADADA</color>
 
+    <color name="shimmerBgColor">#dddddd</color>
 
 </resources>

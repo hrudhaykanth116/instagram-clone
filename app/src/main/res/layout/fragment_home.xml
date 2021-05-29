@@ -55,11 +55,13 @@
         app:layout_constraintTop_toTopOf="@id/toolbarView"
         app:tint="#000000" />
 
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/mainPostsSwipeRefreshLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
+        tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,5 +80,42 @@
 
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerFrameLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        tools:visibility="gone"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarView" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <include layout="@layout/movie_story_view_item_shimmer_place_holder" />
+                <include layout="@layout/movie_story_view_item_shimmer_place_holder" />
+                <include layout="@layout/movie_story_view_item_shimmer_place_holder" />
+                <include layout="@layout/movie_story_view_item_shimmer_place_holder" />
+
+            </LinearLayout>
+
+            <include layout="@layout/tv_show_episode_item_shimmer_place_holder" />
+            <include layout="@layout/tv_show_episode_item_shimmer_place_holder" />
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

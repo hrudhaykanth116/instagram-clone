@@ -21,10 +21,10 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:src="@drawable/ic_search_white_24dp"
-        android:tint="#000000"
         app:layout_constraintBottom_toBottomOf="@id/toolbarView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/toolbarView" />
+        app:layout_constraintTop_toTopOf="@id/toolbarView"
+        app:tint="#000000" />
 
 
     <TextView
@@ -43,10 +43,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:src="@drawable/ic_person_add_white_24dp"
-        android:tint="#000000"
         app:layout_constraintBottom_toBottomOf="@+id/toolbarView"
         app:layout_constraintEnd_toEndOf="@+id/toolbarView"
-        app:layout_constraintTop_toTopOf="@+id/toolbarView" />
+        app:layout_constraintTop_toTopOf="@+id/toolbarView"
+        app:tint="#000000" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categories"
@@ -87,41 +87,8 @@
                 android:layout_marginStart="8dp"
                 />
 
-            <androidx.core.widget.ContentLoadingProgressBar
-                android:id="@+id/progressBar"
-                style="@style/Widget.AppCompat.ProgressBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="visible"
-                />
-
         </LinearLayout>
 
     </ScrollView>
-
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/searchResultsContainer"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        app:spanCount="3"-->
-<!--        tools:listitem="@layout/image_view"-->
-<!--        android:layout_marginBottom="8dp"-->
-<!--        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/categories"-->
-<!--        />-->
-
-<!--    <androidx.core.widget.ContentLoadingProgressBar-->
-<!--        android:id="@+id/progressBar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        style="@style/Widget.AppCompat.ProgressBar"-->
-<!--        android:visibility="visible"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/searchResultsContainer"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        />-->
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

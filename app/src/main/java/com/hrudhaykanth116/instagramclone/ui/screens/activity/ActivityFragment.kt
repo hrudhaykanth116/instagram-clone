@@ -21,8 +21,6 @@ import kotlin.random.Random
 @AndroidEntryPoint
 class ActivityFragment : BaseFragment() {
 
-
-
     private lateinit var binding: ActivityFragmentBinding
     private val viewModel: ActivityViewModel by viewModels()
 
@@ -43,7 +41,8 @@ class ActivityFragment : BaseFragment() {
         binding.progressBar.visibility = View.VISIBLE
 
         val pageId = Random.nextInt(1, 10)
-        retroApis.getTopRatedTvShows(pageId)
+        // TODO: 30/05/21 Implement this
+        /*retroApis.getTopRatedTvShows(pageId)
             .enqueue(object : Callback<TvShowDataPagedResponse> {
                 override fun onFailure(call: Call<TvShowDataPagedResponse>, t: Throwable) {
                     binding.progressBar.visibility = View.GONE
@@ -63,7 +62,7 @@ class ActivityFragment : BaseFragment() {
                         handleError()
                     }
                 }
-            })
+            })*/
 
     }
 

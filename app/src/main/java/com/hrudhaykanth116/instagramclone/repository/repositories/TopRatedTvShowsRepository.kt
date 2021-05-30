@@ -6,11 +6,12 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.hrudhaykanth116.instagramclone.repository.datasources.remote.PopularTvShowsDataSource
 import com.hrudhaykanth116.instagramclone.repository.datasources.remote.RetroApis
+import com.hrudhaykanth116.instagramclone.repository.datasources.remote.TopRatedTvShowsDataSource
 import com.hrudhaykanth116.instagramclone.repository.models.TvShowData
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class PopularTvShowsRepository @Inject constructor(
+class TopRatedTvShowsRepository @Inject constructor(
     private val retroApis: RetroApis,
 ) {
 
@@ -25,16 +26,16 @@ class PopularTvShowsRepository @Inject constructor(
         return Pager(
             config = pagingConfig,
             pagingSourceFactory = {
-                PopularTvShowsDataSource(retroApis)
+                TopRatedTvShowsDataSource(retroApis)
             }
         ).flow
     }
 
     companion object {
 
-        private const val TAG = "PopularTvShowsRepositor"
+        private const val TAG = "TopRatedTvShowsReposito"
 
-        const val PAGE_SIZE = 5
+        private const val PAGE_SIZE = 12
     }
 
 }

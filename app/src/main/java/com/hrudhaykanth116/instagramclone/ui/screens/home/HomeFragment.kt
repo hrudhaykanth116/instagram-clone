@@ -84,7 +84,7 @@ class HomeFragment : BaseFragment() {
     private fun refreshPosts() {
         Log.d(TAG, "refreshPosts: ")
         homeViewModel.fetchMoviesList()
-        getPopularTvShows()
+        homeFragmentAdapter.refresh()
     }
 
     private fun getPopularTvShows(){

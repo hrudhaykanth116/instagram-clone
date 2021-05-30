@@ -4,8 +4,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagedList
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.hrudhaykanth116.instagramclone.repository.datasources.remote.RetroApis
 import com.hrudhaykanth116.instagramclone.repository.models.MovieData
 import com.hrudhaykanth116.instagramclone.repository.models.PopularMoviesResponse
@@ -53,9 +55,13 @@ class HomeViewModel @Inject constructor(
 
     fun getPopularTvShows(): Flow<PagingData<TvShowData>> {
         Log.d(TAG, "getPopularTvShows: ")
-        val newResult: Flow<PagingData<TvShowData>> = popularTvShowsRepository.getTvShows()
+        if(popularTvShowsLiveData != null){
+            return popularTvShowsLiveData!!
+        }
+        val newResult: Flow<PagingData<TvShowData>> =
+            popularTvShowsRepository.getTvShows().cachedIn(viewModelScope)
         popularTvShowsLiveData = newResult
-        return popularTvShowsLiveData!!
+        return newResult
     }
 
     private fun onMoviesDataLoaded(response: Response<PopularMoviesResponse>) {

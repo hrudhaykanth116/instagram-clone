@@ -53,11 +53,13 @@ class PopularTvShowsDataSource constructor(
         // We need to get the previous key (or next key if previous is null) of the page
         // that was closest to the most recently accessed index.
         // Anchor position is the most recently accessed index
-        val refreshKey = state.anchorPosition?.let { anchorPosition ->
-            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
-                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
-        }
+//        val refreshKey = state.anchorPosition?.let { anchorPosition ->
+//            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
+//                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
+//        }
+        val refreshKey = Random.nextInt(1, 20)
         Log.d(TAG, "getRefreshKey: refreshKey: $refreshKey")
+        initialPageId = refreshKey
         return refreshKey
     }
 

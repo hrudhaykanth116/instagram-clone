@@ -1,87 +1,74 @@
 package com.hrudhaykanth116.instagramclone.ui.screens.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import androidx.paging.PagingData
+import com.hrudhaykanth116.instagramclone.repository.datasources.remote.RetroApis
 import com.hrudhaykanth116.instagramclone.repository.models.MovieData
-import com.hrudhaykanth116.instagramclone.repository.models.NetworkState
 import com.hrudhaykanth116.instagramclone.repository.models.PopularMoviesResponse
 import com.hrudhaykanth116.instagramclone.repository.models.TvShowData
-import com.hrudhaykanth116.instagramclone.repository.datasources.remote.RetroApis
-import com.hrudhaykanth116.instagramclone.repository.datasources.PopularTvShowsDataFactory
+import com.hrudhaykanth116.instagramclone.repository.repositories.PopularTvShowsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.concurrent.Executors
 import javax.inject.Inject
 import kotlin.random.Random
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val retroApis: RetroApis,
-    private val popularTvShowsDataFactory: PopularTvShowsDataFactory
+    private val popularTvShowsRepository: PopularTvShowsRepository
 ): ViewModel() {
 
-    public var networkState: LiveData<NetworkState>
-    public var popularTvShowsLiveData: LiveData<PagedList<TvShowData>>
+    private var popularTvShowsLiveData: Flow<PagingData<TvShowData>>? = null
     public var popularMoviesLiveData: MutableLiveData<List<MovieData>> = MutableLiveData()
 
     init {
-
-        // When data source changes in factory, network state live data is also updated.
-        networkState = Transformations.switchMap(popularTvShowsDataFactory.popularTvShowsLiveData) {
-            it.networkState
-        }
-
-        val pagedListConfig: PagedList.Config = PagedList.Config.Builder()
-//            .setEnablePlaceholders(false)
-            .setInitialLoadSizeHint(20)
-            .setPageSize(10) // x items will be loaded from data source. after getting last set(last x), loadAfter() is called.
-            .build()
-
-        // x threads will be used to execute data loading one after the other.iterates again.
-        val executor = Executors.newFixedThreadPool(3)
-        popularTvShowsLiveData  = LivePagedListBuilder<Int, TvShowData>(popularTvShowsDataFactory, pagedListConfig)
-            .setFetchExecutor(executor)
-            .build()
-
-        fetchMoviesList()
-
-
+        Log.d(TAG, "init: ")
     }
 
-    public fun refreshData(){
-        fetchMoviesList()
-        popularTvShowsDataFactory.invalidateDataSource()
-    }
-
-    private fun fetchMoviesList() {
+    fun fetchMoviesList() {
+        Log.d(TAG, "fetchMoviesList: ")
         val pageId = Random.nextInt(1, 20)
         retroApis.getPopularMoviesList(pageId)
             .enqueue(object : Callback<PopularMoviesResponse> {
                 override fun onFailure(call: Call<PopularMoviesResponse>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    Log.e(TAG, "fetchMoviesList: onFailure: ", t)
                 }
 
                 override fun onResponse(
                     call: Call<PopularMoviesResponse>,
                     response: Response<PopularMoviesResponse>
                 ) {
+                    Log.d(TAG, "fetchMoviesList: onResponse: ")
                     onMoviesDataLoaded(response)
                 }
             })
     }
 
+    fun getPopularTvShows(): Flow<PagingData<TvShowData>> {
+        Log.d(TAG, "getPopularTvShows: ")
+        val newResult: Flow<PagingData<TvShowData>> = popularTvShowsRepository.getTvShows()
+        popularTvShowsLiveData = newResult
+        return popularTvShowsLiveData!!
+    }
+
     private fun onMoviesDataLoaded(response: Response<PopularMoviesResponse>) {
+        Log.d(TAG, "onMoviesDataLoaded: ")
         val popularMoviesResponse: PopularMoviesResponse? = response.body()
         val movieDataList: List<MovieData>? = popularMoviesResponse?.movieData
         movieDataList?.let {
             popularMoviesLiveData.value = it
         }
+    }
+
+    companion object{
+        private const val TAG = "HomeViewModel"
     }
 
 

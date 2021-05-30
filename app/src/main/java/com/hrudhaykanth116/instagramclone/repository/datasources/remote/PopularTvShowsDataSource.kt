@@ -1,35 +1,67 @@
-package com.hrudhaykanth116.instagramclone.repository.datasources
+package com.hrudhaykanth116.instagramclone.repository.datasources.remote
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.paging.PageKeyedDataSource
+import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.hrudhaykanth116.instagramclone.repository.models.NetworkState
 import com.hrudhaykanth116.instagramclone.repository.models.TvShowDataPagedResponse
 import com.hrudhaykanth116.instagramclone.repository.models.TvShowData
-import com.hrudhaykanth116.instagramclone.repository.datasources.remote.RetroApis
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.net.UnknownHostException
-import javax.inject.Inject
+import retrofit2.HttpException
+import java.io.IOException
 import kotlin.random.Random
 
 /**
  * Data source which is used to load data initially and when new data is required.
  */
-class PopularTvShowsDataSource @Inject constructor(
-
-): PageKeyedDataSource<Int, TvShowData>() {
-
-    private val TAG: String = PopularTvShowsDataSource::class.java.name
-
-    @Inject
-    lateinit var retroApis: RetroApis
+class PopularTvShowsDataSource constructor(
+    private val retroApis: RetroApis,
+): PagingSource<Int, TvShowData>() {
 
     val networkState = MutableLiveData<NetworkState>()
     private var initialPageId = Random.nextInt(1, 20)
 
-    override fun invalidate() {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, TvShowData> {
+        val currentKey = params.key ?: initialPageId
+
+        Log.d(TAG, "load: currentKey: $currentKey")
+
+        return try {
+            val tvShowDataPagedResponse: TvShowDataPagedResponse =
+                retroApis.getPopularTvShows(initialPageId)
+            val tvShowsList = tvShowDataPagedResponse.tvShowsList
+
+            // TODO: 29/05/21 Check if the response is successful
+
+            LoadResult.Page(
+                data = tvShowsList,
+                prevKey = if (currentKey == initialPageId) null else currentKey - 1,
+                nextKey = currentKey + 1
+            )
+
+        }catch (exception: IOException) {
+            Log.e(TAG, "load: ", exception)
+            LoadResult.Error(exception)
+        } catch (exception: HttpException) {
+            Log.e(TAG, "load: ", exception)
+            LoadResult.Error(exception)
+        }
+    }
+
+    // The refresh key is used for the initial load of the next PagingSource, after invalidation
+    override fun getRefreshKey(state: PagingState<Int, TvShowData>): Int? {
+        // We need to get the previous key (or next key if previous is null) of the page
+        // that was closest to the most recently accessed index.
+        // Anchor position is the most recently accessed index
+        val refreshKey = state.anchorPosition?.let { anchorPosition ->
+            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
+                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
+        }
+        Log.d(TAG, "getRefreshKey: refreshKey: $refreshKey")
+        return refreshKey
+    }
+
+    /*override fun invalidate() {
         super.invalidate()
         initialPageId = Random.nextInt(1, 20)
     }
@@ -106,6 +138,10 @@ class PopularTvShowsDataSource @Inject constructor(
         params: LoadParams<Int>,
         callback: LoadCallback<Int, TvShowData>
     ) {
+    }*/
+
+    companion object{
+        private const val TAG = "PopularTvShowsDataSourc"
     }
 
 }

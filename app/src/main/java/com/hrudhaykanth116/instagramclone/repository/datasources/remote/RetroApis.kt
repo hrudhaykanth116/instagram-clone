@@ -39,9 +39,9 @@ public interface RetroApis {
     ): Call<PopularMoviesResponse>
 
     @GET("tv/popular/")
-    public fun getPopularTvShows(@Query("page") pageId: Int,
+    suspend fun getPopularTvShows(@Query("page") pageId: Int,
                                  @Query("api_key") apiKey: String = MoviesDbConstants.API_KEY
-    ): Call<TvShowDataPagedResponse>
+    ): TvShowDataPagedResponse
 
     @GET("tv/top_rated/")
     public fun getTopRatedTvShows(@Query("page") pageId: Int,

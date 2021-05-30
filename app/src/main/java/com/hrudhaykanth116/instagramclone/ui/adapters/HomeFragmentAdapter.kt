@@ -2,6 +2,7 @@ package com.hrudhaykanth116.instagramclone.ui.adapters
 
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.repository.models.MovieData
@@ -13,7 +14,7 @@ import com.hrudhaykanth116.instagramclone.ui.viewholders.PublicStoriesViewHolder
 import com.hrudhaykanth116.instagramclone.ui.viewholders.ViewHoldersCreator
 
 class HomeFragmentAdapter(private val postClickListener: IPostClickListener) :
-    PagedListAdapter<TvShowData, RecyclerView.ViewHolder>(TvShowData.diffUtillCallback) {
+    PagingDataAdapter<TvShowData, RecyclerView.ViewHolder>(TvShowData.diffUtillCallback) {
 
     private val movieDataList: ArrayList<MovieData> = ArrayList()
     private var currentNetworkState: NetworkState = NetworkState.LOADING
@@ -53,15 +54,10 @@ class HomeFragmentAdapter(private val postClickListener: IPostClickListener) :
 
     override fun getItemCount(): Int {
         val pagedListCount = super.getItemCount()
-        val progressBarCount = if (shouldShowProgressIcon()) 1 else 0
-        return STORIES_ROWS_COUNT + pagedListCount + progressBarCount
+        return STORIES_ROWS_COUNT + pagedListCount
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (position == itemCount - 1 && shouldShowProgressIcon()) {
-            // If last view and should show network state view
-            return TYPE_PROGRESS
-        }
         return when (position) {
             0 -> TYPE_PUBLIC_STORIES
             else -> TYPE_POST

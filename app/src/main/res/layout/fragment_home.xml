@@ -81,6 +81,39 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/noDataTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="No Data"
+        android:textSize="@dimen/_25ssp"
+        android:gravity="center"
+        tools:visibility="visible"
+        android:visibility="gone"
+        android:fontFamily="@font/leckerli_one"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/dataLoadErrorView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Something went wrong"
+        android:textSize="@dimen/_25ssp"
+        android:gravity="center"
+        tools:visibility="visible"
+        android:visibility="gone"
+        android:fontFamily="@font/leckerli_one"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmerFrameLayout"
         android:layout_width="0dp"

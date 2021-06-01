@@ -7,6 +7,7 @@ import androidx.paging.PagingState
 import com.hrudhaykanth116.instagramclone.repository.models.NetworkState
 import com.hrudhaykanth116.instagramclone.repository.models.TvShowDataPagedResponse
 import com.hrudhaykanth116.instagramclone.repository.models.TvShowData
+import kotlinx.coroutines.delay
 import retrofit2.HttpException
 import java.io.IOException
 import kotlin.random.Random
@@ -18,7 +19,6 @@ class PopularTvShowsDataSource constructor(
     private val retroApis: RetroApis,
 ): PagingSource<Int, TvShowData>() {
 
-    val networkState = MutableLiveData<NetworkState>()
     private var initialPageId = Random.nextInt(1, 20)
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, TvShowData> {
@@ -28,10 +28,11 @@ class PopularTvShowsDataSource constructor(
 
         return try {
             val tvShowDataPagedResponse: TvShowDataPagedResponse =
-                retroApis.getPopularTvShows(initialPageId)
+                retroApis.getPopularTvShows(currentKey)
             val tvShowsList = tvShowDataPagedResponse.tvShowsList
 
             // TODO: 29/05/21 Check if the response is successful
+//            delay(5000)
 
             LoadResult.Page(
                 data = tvShowsList,

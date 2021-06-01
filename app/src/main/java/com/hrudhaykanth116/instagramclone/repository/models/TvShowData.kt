@@ -3,7 +3,7 @@ package com.hrudhaykanth116.instagramclone.repository.models
 import android.os.Parcelable
 import androidx.recyclerview.widget.DiffUtil
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class TvShowData(

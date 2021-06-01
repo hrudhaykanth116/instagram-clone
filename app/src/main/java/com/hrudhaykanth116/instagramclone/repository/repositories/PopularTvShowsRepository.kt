@@ -19,7 +19,10 @@ class PopularTvShowsRepository @Inject constructor(
         val pagingConfig = PagingConfig(
             pageSize = PAGE_SIZE,
             enablePlaceholders = false,
-            initialLoadSize = 2 * PAGE_SIZE
+            initialLoadSize = INITIAL_LOAD_SIZE,
+//            maxSize = MAX_SIZE,
+//            prefetchDistance = PRE_FETCH_DISTANCE,
+//            jumpThreshold = JUMP_THRESHOLD
         )
 
         return Pager(
@@ -34,7 +37,11 @@ class PopularTvShowsRepository @Inject constructor(
 
         private const val TAG = "PopularTvShowsRepositor"
 
-        const val PAGE_SIZE = 5
+        private const val PAGE_SIZE = 5
+        private const val INITIAL_LOAD_SIZE = 2 * PAGE_SIZE
+        private const val PRE_FETCH_DISTANCE = PAGE_SIZE
+        private const val MAX_SIZE = PAGE_SIZE + (2 * PRE_FETCH_DISTANCE)
+        private const val JUMP_THRESHOLD = Int.MIN_VALUE
     }
 
 }

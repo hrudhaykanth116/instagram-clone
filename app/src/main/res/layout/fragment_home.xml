@@ -8,7 +8,7 @@
     tools:context=".ui.screens.home.HomeFragment">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/toolbarView"
+        android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:elevation="1dp"
@@ -25,9 +25,9 @@
         android:elevation="2dp"
         android:scaleType="fitXY"
         android:src="@drawable/ic_camera_white_24dp"
-        app:layout_constraintBottom_toBottomOf="@id/toolbarView"
-        app:layout_constraintStart_toStartOf="@id/toolbarView"
-        app:layout_constraintTop_toTopOf="@id/toolbarView"
+        app:layout_constraintBottom_toBottomOf="@id/appBar"
+        app:layout_constraintStart_toStartOf="@id/appBar"
+        app:layout_constraintTop_toTopOf="@id/appBar"
         app:tint="#000000" />
 
     <TextView
@@ -39,9 +39,9 @@
         android:text="Instagram"
         android:textColor="#000000"
         android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="@id/toolbarView"
+        app:layout_constraintBottom_toBottomOf="@id/appBar"
         app:layout_constraintStart_toEndOf="@id/cameraIcon"
-        app:layout_constraintTop_toTopOf="@id/toolbarView" />
+        app:layout_constraintTop_toTopOf="@id/appBar" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -50,9 +50,9 @@
         android:layout_marginEnd="10dp"
         android:elevation="2dp"
         android:src="@drawable/ic_send_white_24dp"
-        app:layout_constraintBottom_toBottomOf="@id/toolbarView"
+        app:layout_constraintBottom_toBottomOf="@id/appBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/toolbarView"
+        app:layout_constraintTop_toTopOf="@id/appBar"
         app:tint="#000000" />
 
 
@@ -65,7 +65,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbarView">
+        app:layout_constraintTop_toBottomOf="@id/appBar">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/homePopularTvShowsRV"
@@ -125,7 +125,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbarView" >
+        app:layout_constraintTop_toBottomOf="@id/appBar" >
 
         <LinearLayout
             android:layout_width="match_parent"

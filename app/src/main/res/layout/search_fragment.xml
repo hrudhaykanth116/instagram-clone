@@ -8,7 +8,7 @@
     tools:context=".ui.screens.search.SearchFragment">
 
     <View
-        android:id="@+id/toolbarView"
+        android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,9 +21,9 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:src="@drawable/ic_search_white_24dp"
-        app:layout_constraintBottom_toBottomOf="@id/toolbarView"
+        app:layout_constraintBottom_toBottomOf="@id/appBar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/toolbarView"
+        app:layout_constraintTop_toTopOf="@id/appBar"
         app:tint="#000000" />
 
 
@@ -33,9 +33,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Search"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbarView"
+        app:layout_constraintBottom_toBottomOf="@+id/appBar"
         app:layout_constraintStart_toEndOf="@+id/toolBarSearchIcon"
-        app:layout_constraintTop_toTopOf="@+id/toolbarView" />
+        app:layout_constraintTop_toTopOf="@+id/appBar" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -43,9 +43,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:src="@drawable/ic_person_add_white_24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbarView"
-        app:layout_constraintEnd_toEndOf="@+id/toolbarView"
-        app:layout_constraintTop_toTopOf="@+id/toolbarView"
+        app:layout_constraintBottom_toBottomOf="@+id/appBar"
+        app:layout_constraintEnd_toEndOf="@+id/appBar"
+        app:layout_constraintTop_toTopOf="@+id/appBar"
         app:tint="#000000" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -57,7 +57,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbarView"
+        app:layout_constraintTop_toBottomOf="@id/appBar"
         />
 
     <ScrollView

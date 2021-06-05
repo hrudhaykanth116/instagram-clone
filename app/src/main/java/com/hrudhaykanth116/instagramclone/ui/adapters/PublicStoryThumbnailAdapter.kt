@@ -74,6 +74,8 @@ class PublicStoryThumbnailAdapter(private val movieDataList: ArrayList<MovieData
         position: Int
     ) {
 
+//        publicStoryViewHolder.setIsRecyclable(false)
+
         val movieData: MovieData = movieDataList[position]
         publicStoryViewHolder.bind(movieData)
 

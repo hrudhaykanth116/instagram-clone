@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
+import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.ui.adapters.TvShowImagesAdapter
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
 import com.hrudhaykanth116.instagramclone.databinding.TvShowFragmentBinding
@@ -15,6 +16,7 @@ import com.hrudhaykanth116.instagramclone.repository.models.TvShowData
 import com.hrudhaykanth116.instagramclone.repository.models.TvShowDetails
 import com.hrudhaykanth116.instagramclone.repository.datasources.remote.RetroApis
 import com.hrudhaykanth116.instagramclone.ui.screens.base.BaseFragment
+import com.hrudhaykanth116.instagramclone.utils.extensions.getNonEmptyString
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
@@ -44,7 +46,10 @@ class TvShowFragment : BaseFragment() {
     }
 
     private fun initViews() {
-        binding.tvShowBackBtn.setOnClickListener {
+
+
+
+        binding.topAppBar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
 
@@ -53,7 +58,7 @@ class TvShowFragment : BaseFragment() {
         }
 
         tvShowData?.let {
-            binding.tvShowName.text = it.name ?: "Tv show name"
+            binding.topAppBar.title = it.name?.getNonEmptyString() ?: getString(R.string.tv_show_name_unavailable)
 
             val tvShowImageView = binding.tvShowImage.innerImg
             Glide

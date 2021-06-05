@@ -46,10 +46,10 @@ class MainActivity : BaseActivity() {
         binding.bottomNavigationView.itemIconTintList = null
     }
 
-    override fun onBackPressed() {
-        // TODO: 29-07-2020 Handle fragment destinations change vs bottom bar view selection.
-        Toast.makeText(this, "Back functionality not yet implemented", Toast.LENGTH_SHORT).show();
-    }
+//    override fun onBackPressed() {
+//        // TODO: 29-07-2020 Handle fragment destinations change vs bottom bar view selection.
+//        Toast.makeText(this, "Back functionality not yet implemented", Toast.LENGTH_SHORT).show();
+//    }
 
     private fun onBottomMenuItemSelected(
         menuItem: MenuItem,

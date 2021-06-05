@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
 import com.hrudhaykanth116.instagramclone.databinding.ProfileSuggestionLayoutBinding
 import com.hrudhaykanth116.instagramclone.repository.models.TvShowData
+import com.hrudhaykanth116.instagramclone.utils.image.ImageLoader
 
 class ActivityFragmentAdapter(private val tvShowDataList: List<TvShowData>):
     RecyclerView.Adapter<ActivityFragmentAdapter.ActivityShowViewHolder>() {
@@ -41,7 +41,7 @@ class ActivityFragmentAdapter(private val tvShowDataList: List<TvShowData>):
             showName.text = tvShowData.name
             showRatings.text = tvShowData.voteAverage.toString()
             val showImgUrl: String = MoviesDbConstants.IMAGES_BASE_URL + tvShowData.posterPath
-            Glide.with(itemView.context).load(showImgUrl).into(showImageView)
+            ImageLoader.load(showImgUrl, showImageView)
 
         }
 

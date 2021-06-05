@@ -6,14 +6,14 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.repository.models.MovieData
-import com.hrudhaykanth116.instagramclone.repository.models.NetworkState
 import com.hrudhaykanth116.instagramclone.repository.models.TvShowData
-import com.hrudhaykanth116.instagramclone.ui.viewholders.TvShowEpisodeItemViewHolder
-import com.hrudhaykanth116.instagramclone.ui.viewholders.ProgressViewHolder
 import com.hrudhaykanth116.instagramclone.ui.viewholders.PublicStoriesViewHolder
+import com.hrudhaykanth116.instagramclone.ui.viewholders.TvShowEpisodeItemViewHolder
 import com.hrudhaykanth116.instagramclone.ui.viewholders.ViewHoldersCreator
 
-class HomeFragmentAdapter(private val postClickListener: IPostClickListener) :
+class HomeFragmentAdapter(
+    private val postClickListener: IPostClickListener
+) :
     PagingDataAdapter<TvShowData, RecyclerView.ViewHolder>(TvShowData.diffUtillCallback) {
 
     private val movieDataList: ArrayList<MovieData> = ArrayList()
@@ -31,7 +31,7 @@ class HomeFragmentAdapter(private val postClickListener: IPostClickListener) :
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         when (viewHolder) {
-            is  PublicStoriesViewHolder-> {
+            is PublicStoriesViewHolder -> {
                 val publicStoryViewHolder = viewHolder as PublicStoriesViewHolder
                 publicStoryViewHolder.bind(movieDataList)
             }

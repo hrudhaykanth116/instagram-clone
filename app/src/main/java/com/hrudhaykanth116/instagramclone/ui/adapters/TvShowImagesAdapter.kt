@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.hrudhaykanth116.instagramclone.R
+import com.hrudhaykanth116.instagramclone.utils.image.ImageLoader
 
 class TvShowImagesAdapter(private val imagesList: List<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -38,10 +38,7 @@ class TvShowImagesAdapter(private val imagesList: List<String>) : RecyclerView.A
             // dummy data for testing.
             // val imgUrl = "https://picsum.photos/id/${holder.adapterPosition * 8}/300"
 
-            Glide
-                .with(searchResultImg)
-                .load(imgUrl)
-                .into(searchResultImg)
+            ImageLoader.load(imgUrl, searchResultImg)
         }
 
     }

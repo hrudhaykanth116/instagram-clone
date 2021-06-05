@@ -1,17 +1,16 @@
 package com.hrudhaykanth116.instagramclone.ui.viewholders
 
-import android.content.Context
 import android.graphics.Color
 import android.os.Handler
+import android.os.Looper
 import android.view.View
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.hrudhaykanth116.instagramclone.R
-import com.hrudhaykanth116.instagramclone.ui.adapters.HomeFragmentAdapter
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
 import com.hrudhaykanth116.instagramclone.databinding.TvShowEpisodeItemBinding
 import com.hrudhaykanth116.instagramclone.repository.models.TvShowData
+import com.hrudhaykanth116.instagramclone.ui.adapters.HomeFragmentAdapter
+import com.hrudhaykanth116.instagramclone.utils.image.ImageLoader
 
 class TvShowEpisodeItemViewHolder(private val binding: TvShowEpisodeItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -50,7 +49,7 @@ class TvShowEpisodeItemViewHolder(private val binding: TvShowEpisodeItemBinding)
                 binding.likeIcon.setColorFilter(Color.rgb(255, 0, 0))
 
                 binding.heartImageView.visibility = View.VISIBLE
-                Handler().postDelayed({
+                Handler(Looper.getMainLooper()).postDelayed({
                     // TODO: 26-07-2020 perform bounce visible animation 
                     binding.heartImageView.visibility = View.GONE
                 }, 1000)
@@ -61,21 +60,18 @@ class TvShowEpisodeItemViewHolder(private val binding: TvShowEpisodeItemBinding)
             }
         }
 
+        // TODO: 06/06/21 Use data binding adapters to load images.
+        ImageLoader.load(
+            postImgUrl,
+            binding.tvShowImageView,
+            errorDrawable = R.drawable.ic_broken_image_24
+        )
+        ImageLoader.load(
+            postDpUrl,
+            binding.dpView.innerImg,
+            errorDrawable = R.drawable.ic_baseline_error_24
+        )
 
-        loadImg(context, postImgUrl, binding.tvShowImageView)
-        loadImg(context, postDpUrl, binding.dpView.innerImg)
-
-    }
-
-    private fun loadImg(
-        context: Context,
-        postImgUrl: String,
-        imageView: ImageView
-    ) {
-        Glide
-            .with(context)
-            .load(postImgUrl)
-            .into(imageView)
     }
 
 }

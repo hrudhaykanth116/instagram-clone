@@ -5,13 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.navigation.findNavController
-import androidx.paging.PagedListAdapter
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
 import com.hrudhaykanth116.instagramclone.repository.models.TvShowData
+import com.hrudhaykanth116.instagramclone.utils.image.ImageLoader
 
 class SearchResultsAdapter() :
     PagingDataAdapter<TvShowData, RecyclerView.ViewHolder>(TvShowData.diffUtillCallback) {
@@ -43,10 +42,7 @@ class SearchResultsAdapter() :
             // Sample data
             // val imgUrl = "https://picsum.photos/id/${holder.adapterPosition * 8}/300"
             val imgUrl = MoviesDbConstants.IMAGES_BASE_URL + tvShowData.posterPath
-            Glide
-                .with(searchResultImg)
-                .load(imgUrl)
-                .into(searchResultImg)
+            ImageLoader.load(imgUrl, searchResultImg)
 
             searchResultImg.setOnClickListener {
                 val tvShowFragmentAction = SearchFragmentDirections.actionTvShowFragment(tvShowData)

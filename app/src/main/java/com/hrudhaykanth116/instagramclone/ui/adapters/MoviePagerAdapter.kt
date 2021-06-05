@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
 import com.hrudhaykanth116.instagramclone.databinding.MovieStoriesFragmentBinding
 import com.hrudhaykanth116.instagramclone.repository.models.MovieData
+import com.hrudhaykanth116.instagramclone.utils.image.ImageLoader
 
 class MoviePagerAdapter(private val movieDataList: ArrayList<MovieData>) :
     RecyclerView.Adapter<MoviePagerAdapter.MoviePagerViewHolder>() {
@@ -39,10 +39,7 @@ class MoviePagerAdapter(private val movieDataList: ArrayList<MovieData>) :
 
             val imgUrl = MoviesDbConstants.IMAGES_BASE_URL + movieData.backdropPath
 
-            Glide
-                .with(itemView)
-                .load(imgUrl)
-                .into(mainImgView)
+            ImageLoader.load(imgUrl, mainImgView)
 
         }
 

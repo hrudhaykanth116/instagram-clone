@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
 import com.hrudhaykanth116.instagramclone.databinding.MovieStoryViewItemBinding
 import com.hrudhaykanth116.instagramclone.repository.models.MovieData
 import com.hrudhaykanth116.instagramclone.ui.screens.moviestories.MoviesStoriesActivity
+import com.hrudhaykanth116.instagramclone.utils.image.ImageLoader
 
 
 class PublicStoryThumbnailAdapter(private val movieDataList: ArrayList<MovieData>) :
@@ -24,10 +24,7 @@ class PublicStoryThumbnailAdapter(private val movieDataList: ArrayList<MovieData
         ) {
             val imgUrl = MoviesDbConstants.IMAGES_BASE_URL + movieData.posterPath
 
-            Glide
-                .with(binding.root)
-                .load(imgUrl)
-                .into(binding.innerImg)
+            ImageLoader.load(imgUrl, binding.innerImg)
 
             // binding.addIcon.visibility = View.VISIBLE
             binding.description.text = movieData.title

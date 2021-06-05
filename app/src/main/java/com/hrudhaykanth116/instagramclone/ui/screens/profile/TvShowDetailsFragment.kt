@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bumptech.glide.Glide
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
 import com.hrudhaykanth116.instagramclone.databinding.FragmentTvShowDetailsBinding
@@ -17,6 +16,7 @@ import com.hrudhaykanth116.instagramclone.repository.models.TvShowDetails
 import com.hrudhaykanth116.instagramclone.ui.adapters.TvShowImagesAdapter
 import com.hrudhaykanth116.instagramclone.ui.screens.base.BaseFragment
 import com.hrudhaykanth116.instagramclone.utils.extensions.getNonEmptyString
+import com.hrudhaykanth116.instagramclone.utils.image.ImageLoader
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
@@ -61,10 +61,7 @@ class TvShowDetailsFragment : BaseFragment() {
             binding.topAppBar.title = it.name?.getNonEmptyString() ?: getString(R.string.tv_show_name_unavailable)
 
             val tvShowImageView = binding.tvShowImage.innerImg
-            Glide
-                .with(tvShowImageView)
-                .load(MoviesDbConstants.IMAGES_BASE_URL + it.posterPath)
-                .into(tvShowImageView)
+            ImageLoader.load(MoviesDbConstants.IMAGES_BASE_URL + it.posterPath, tvShowImageView)
 
             getTvShowDetailsAndFillView(tvShowData)
         }

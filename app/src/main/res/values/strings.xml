@@ -16,4 +16,7 @@
     <string name="tv_show_name_unavailable">Tv show name unavailable</string>
     <string name="share">Share</string>
     <string name="report">Report</string>
+    <string name="seasons">Seasons</string>
+    <string name="episodes">Episodes</string>
+    <string name="rating">Rating</string>
 </resources>

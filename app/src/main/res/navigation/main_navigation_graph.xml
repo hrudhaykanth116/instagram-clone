@@ -54,9 +54,9 @@
 
     <fragment
         android:id="@+id/navigation_user_profile"
-        android:name="com.hrudhaykanth116.instagramclone.ui.screens.profile.TvShowFragment"
+        android:name="com.hrudhaykanth116.instagramclone.ui.screens.profile.TvShowDetailsFragment"
         android:label="User profile"
-        tools:layout="@layout/tv_show_fragment"
+        tools:layout="@layout/fragment_tv_show_details"
         >
         <argument
             android:name="tvShowData"

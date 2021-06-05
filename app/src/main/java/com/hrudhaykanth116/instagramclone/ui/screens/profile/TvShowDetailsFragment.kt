@@ -9,12 +9,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.hrudhaykanth116.instagramclone.R
-import com.hrudhaykanth116.instagramclone.ui.adapters.TvShowImagesAdapter
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
-import com.hrudhaykanth116.instagramclone.databinding.TvShowFragmentBinding
+import com.hrudhaykanth116.instagramclone.databinding.FragmentTvShowDetailsBinding
+import com.hrudhaykanth116.instagramclone.repository.datasources.remote.RetroApis
 import com.hrudhaykanth116.instagramclone.repository.models.TvShowData
 import com.hrudhaykanth116.instagramclone.repository.models.TvShowDetails
-import com.hrudhaykanth116.instagramclone.repository.datasources.remote.RetroApis
+import com.hrudhaykanth116.instagramclone.ui.adapters.TvShowImagesAdapter
 import com.hrudhaykanth116.instagramclone.ui.screens.base.BaseFragment
 import com.hrudhaykanth116.instagramclone.utils.extensions.getNonEmptyString
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,9 +24,9 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class TvShowFragment : BaseFragment() {
+class TvShowDetailsFragment : BaseFragment() {
 
-    lateinit var binding: TvShowFragmentBinding
+    lateinit var binding: FragmentTvShowDetailsBinding
 
     @Inject
     lateinit var retroApis: RetroApis
@@ -35,7 +35,7 @@ class TvShowFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = TvShowFragmentBinding.inflate(inflater)
+        binding = FragmentTvShowDetailsBinding.inflate(inflater)
         return binding.root
     }
 
@@ -54,7 +54,7 @@ class TvShowFragment : BaseFragment() {
         }
 
         val tvShowData = arguments?.let {
-            TvShowFragmentArgs.fromBundle(it).tvShowData
+            TvShowDetailsFragmentArgs.fromBundle(it).tvShowData
         }
 
         tvShowData?.let {

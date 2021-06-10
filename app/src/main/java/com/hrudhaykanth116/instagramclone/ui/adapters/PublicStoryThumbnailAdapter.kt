@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
 import com.hrudhaykanth116.instagramclone.databinding.MovieStoryViewItemBinding
-import com.hrudhaykanth116.instagramclone.repository.models.MovieData
+import com.hrudhaykanth116.instagramclone.data.models.MovieData
 import com.hrudhaykanth116.instagramclone.ui.screens.moviestories.MoviesStoriesActivity
 import com.hrudhaykanth116.instagramclone.utils.image.ImageLoader
 

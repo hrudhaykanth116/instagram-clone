@@ -6,11 +6,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
+import com.hrudhaykanth116.instagramclone.data.models.TvShowData
 import com.hrudhaykanth116.instagramclone.databinding.ProfileSuggestionLayoutBinding
-import com.hrudhaykanth116.instagramclone.repository.models.TvShowData
 import com.hrudhaykanth116.instagramclone.utils.image.ImageLoader
 
-class ActivityFragmentAdapter(private val tvShowDataList: List<TvShowData>):
+class ActivityFragmentAdapter(private val tvShowDataList: ArrayList<TvShowData>):
     RecyclerView.Adapter<ActivityFragmentAdapter.ActivityShowViewHolder>() {
 
 
@@ -27,6 +27,12 @@ class ActivityFragmentAdapter(private val tvShowDataList: List<TvShowData>):
     override fun onBindViewHolder(activityShowViewHolder: ActivityShowViewHolder, position: Int) {
         val tvShowData = tvShowDataList[position]
         activityShowViewHolder.bind(tvShowData)
+    }
+
+    fun updateList(tvShowsList: List<TvShowData>) {
+        tvShowDataList.clear()
+        tvShowDataList.addAll(tvShowsList)
+        notifyDataSetChanged()
     }
 
 

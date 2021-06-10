@@ -4,18 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import com.hrudhaykanth116.instagramclone.ui.adapters.ActivityFragmentAdapter
+import androidx.lifecycle.lifecycleScope
+import com.hrudhaykanth116.instagramclone.data.models.TvShowData
+import com.hrudhaykanth116.instagramclone.data.models.TvShowDataPagedResponse
+import com.hrudhaykanth116.instagramclone.data.models.network.Resource
 import com.hrudhaykanth116.instagramclone.databinding.ActivityFragmentBinding
-import com.hrudhaykanth116.instagramclone.repository.models.TvShowDataPagedResponse
-import com.hrudhaykanth116.instagramclone.repository.datasources.remote.RetroApis
+import com.hrudhaykanth116.instagramclone.ui.adapters.ActivityFragmentAdapter
 import com.hrudhaykanth116.instagramclone.ui.screens.base.BaseFragment
+import com.hrudhaykanth116.instagramclone.utils.errorutils.NetworkErrorToastManager
+import com.hrudhaykanth116.instagramclone.utils.toasts.ToastHelper
 import dagger.hilt.android.AndroidEntryPoint
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import javax.inject.Inject
 import kotlin.random.Random
 
 @AndroidEntryPoint
@@ -24,8 +25,18 @@ class ActivityFragment : BaseFragment() {
     private lateinit var binding: ActivityFragmentBinding
     private val viewModel: ActivityViewModel by viewModels()
 
-    @Inject
-    lateinit var retroApis: RetroApis
+    private val activityFragmentAdapter: ActivityFragmentAdapter by lazy {
+        ActivityFragmentAdapter(arrayListOf())
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        lifecycleScope.launchWhenStarted {
+            binding.progressBar.visibility = View.VISIBLE
+            fetchData()
+        }
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,39 +46,61 @@ class ActivityFragment : BaseFragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        binding.progressBar.visibility = View.VISIBLE
-
-        val pageId = Random.nextInt(1, 10)
-        // TODO: 30/05/21 Implement this
-        /*retroApis.getTopRatedTvShows(pageId)
-            .enqueue(object : Callback<TvShowDataPagedResponse> {
-                override fun onFailure(call: Call<TvShowDataPagedResponse>, t: Throwable) {
-                    binding.progressBar.visibility = View.GONE
-                    handleError()
-                }
-
-                override fun onResponse(
-                    call: Call<TvShowDataPagedResponse>,
-                    response: Response<TvShowDataPagedResponse>
-                ) {
-                    binding.progressBar.visibility = View.GONE
-                    val tvShowDataPagedResponse = response.body()
-                    val tvShowsList = tvShowDataPagedResponse?.tvShowsList
-                    if (tvShowsList != null) {
-                        binding.activityRecyclerView.adapter = ActivityFragmentAdapter(tvShowsList)
-                    } else {
-                        handleError()
-                    }
-                }
-            })*/
-
+        initViews()
+        initObservers()
     }
 
-    private fun handleError() {
-        Toast.makeText(context, "Error loading show list", Toast.LENGTH_SHORT).show();
+    private fun initViews() {
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            reloadData()
+        }
+
+        binding.activityRecyclerView.adapter = activityFragmentAdapter
+    }
+
+    private fun reloadData() {
+        fetchData()
+    }
+
+    private fun fetchData() {
+        val pageId = Random.nextInt(1, 10)
+        viewModel.getAiringTodayShows(pageId)
+    }
+
+    private fun initObservers() {
+        viewModel.airingTodayShowsLiveData.observe(viewLifecycleOwner) {
+
+            when (it.status) {
+
+                Resource.Status.LOADING -> { }
+
+                Resource.Status.SUCCESS -> {
+                    onDataLoaded(it)
+                }
+
+                Resource.Status.ERROR -> {
+                    binding.progressBar.isGone = true
+                    binding.swipeRefreshLayout.isRefreshing = false
+                    NetworkErrorToastManager.showToast(requireContext(), it.error)
+                }
+
+            }
+        }
+    }
+
+    private fun onDataLoaded(tvShowDataPagedResponseResource: Resource<TvShowDataPagedResponse>) {
+        binding.progressBar.isVisible = true
+        binding.swipeRefreshLayout.isRefreshing = false
+        val tvShowsList: List<TvShowData>? = tvShowDataPagedResponseResource.data?.tvShowsList
+        if (tvShowsList != null) {
+            activityFragmentAdapter.updateList(tvShowsList)
+        } else {
+            ToastHelper.showErrorToast(requireContext(), "No data found.")
+        }
     }
 
 }

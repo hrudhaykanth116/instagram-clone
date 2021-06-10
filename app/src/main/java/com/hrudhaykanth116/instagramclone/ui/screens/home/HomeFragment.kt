@@ -9,15 +9,14 @@ import android.widget.Toast
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.paging.PagingData
-import com.hrudhaykanth116.instagramclone.ui.adapters.HomeFragmentAdapter
+import com.hrudhaykanth116.instagramclone.data.models.TvShowData
 import com.hrudhaykanth116.instagramclone.databinding.FragmentHomeBinding
-import com.hrudhaykanth116.instagramclone.repository.models.TvShowData
+import com.hrudhaykanth116.instagramclone.ui.adapters.HomeFragmentAdapter
 import com.hrudhaykanth116.instagramclone.ui.adapters.PagingLoadStateAdapter
 import com.hrudhaykanth116.instagramclone.ui.screens.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +35,9 @@ class HomeFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate: ")
+//        lifecycleScope.launchWhenStarted {
+//            homeViewModel.fetchMoviesList()
+//        }
     }
 
     override fun onCreateView(
@@ -62,7 +64,7 @@ class HomeFragment : BaseFragment() {
         initMainPostsRecyclerView()
 
         binding.mainPostsSwipeRefreshLayout.setOnRefreshListener {
-            refreshPosts()
+            refreshData()
         }
     }
 
@@ -89,15 +91,15 @@ class HomeFragment : BaseFragment() {
             footer = PagingLoadStateAdapter { homeFragmentAdapter.retry() }
         )
 
-        homeFragmentAdapter.addLoadStateListener { loadState ->
-            onLoadStateChanged(loadState)
+        homeFragmentAdapter.addLoadStateListener { combinedLoadStates ->
+            onLoadStateChanged(combinedLoadStates)
         }
 
 //        binding.homePopularTvShowsRV.recycledViewPool.setMaxRecycledViews(HomeFragmentAdapter.TYPE_PUBLIC_STORIES, 1)
     }
 
-    private fun onLoadStateChanged(loadState: CombinedLoadStates) {
-        Log.d(TAG, "onLoadStateChanged: loadState.source: ${loadState.source}")
+    private fun onLoadStateChanged(combinedLoadStates: CombinedLoadStates) {
+        Log.d(TAG, "onLoadStateChanged: loadState.source: ${combinedLoadStates.source}")
 
         // refresh --> load overall(When initial load, adapter.refresh, adapter.retry)
         // append --> load state of end of list(When scrolled to last item in paging data)
@@ -110,8 +112,8 @@ class HomeFragment : BaseFragment() {
         // binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
 
         if (
-            (loadState.source.refresh is LoadState.NotLoading && loadState.prepend.endOfPaginationReached) ||
-            loadState.source.refresh is LoadState.Error
+            (combinedLoadStates.source.refresh is LoadState.NotLoading && combinedLoadStates.prepend.endOfPaginationReached) ||
+            combinedLoadStates.source.refresh is LoadState.Error
         ) {
             binding.mainPostsSwipeRefreshLayout.isRefreshing = false
             binding.shimmerFrameLayout.stopShimmer()
@@ -123,26 +125,26 @@ class HomeFragment : BaseFragment() {
 
         // Not loading and no error(Data loaded). Show empty list
         val isListEmpty =
-            loadState.refresh is LoadState.NotLoading &&
-                    loadState.prepend.endOfPaginationReached &&
+            combinedLoadStates.refresh is LoadState.NotLoading &&
+                    combinedLoadStates.prepend.endOfPaginationReached &&
                     homeFragmentAdapter.itemCount == 0
 
         binding.noDataTextView.isVisible = isListEmpty
 
         binding.dataLoadErrorView.isVisible =
-            loadState.source.refresh is LoadState.Error
+            combinedLoadStates.source.refresh is LoadState.Error
                     && homeFragmentAdapter.itemCount < 1
 
-        val refreshDataLoadError = loadState.source.refresh as? LoadState.Error?
+        val refreshDataLoadError = combinedLoadStates.source.refresh as? LoadState.Error?
         refreshDataLoadError?.let {
             Toast.makeText(requireContext(), it.error.toString(), Toast.LENGTH_SHORT).show()
         }
 
         // Toast on any error, regardless of whether it came from RemoteMediator or PagingSource
-        val errorState = loadState.source.append as? LoadState.Error
-            ?: loadState.source.prepend as? LoadState.Error
-            ?: loadState.append as? LoadState.Error
-            ?: loadState.prepend as? LoadState.Error
+        val errorState = combinedLoadStates.source.append as? LoadState.Error
+            ?: combinedLoadStates.source.prepend as? LoadState.Error
+            ?: combinedLoadStates.append as? LoadState.Error
+            ?: combinedLoadStates.prepend as? LoadState.Error
 
         errorState?.let {
             Log.e(TAG, "onLoadStateChanged: error: ", it.error)
@@ -150,9 +152,9 @@ class HomeFragment : BaseFragment() {
 
     }
 
-    private fun refreshPosts() {
+    private fun refreshData() {
         Log.d(TAG, "refreshPosts: ")
-        homeViewModel.fetchMoviesList()
+        homeViewModel.refreshData()
         homeFragmentAdapter.refresh()
     }
 

@@ -4,32 +4,37 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
+import com.hrudhaykanth116.instagramclone.data.models.TvShowData
+import com.hrudhaykanth116.instagramclone.data.models.TvShowDetails
+import com.hrudhaykanth116.instagramclone.data.models.network.Resource
 import com.hrudhaykanth116.instagramclone.databinding.FragmentTvShowDetailsBinding
-import com.hrudhaykanth116.instagramclone.repository.datasources.remote.RetroApis
-import com.hrudhaykanth116.instagramclone.repository.models.TvShowData
-import com.hrudhaykanth116.instagramclone.repository.models.TvShowDetails
 import com.hrudhaykanth116.instagramclone.ui.adapters.TvShowImagesAdapter
 import com.hrudhaykanth116.instagramclone.ui.screens.base.BaseFragment
 import com.hrudhaykanth116.instagramclone.utils.extensions.getNonEmptyString
 import com.hrudhaykanth116.instagramclone.utils.image.ImageLoader
+import com.hrudhaykanth116.instagramclone.utils.toasts.ToastHelper
 import dagger.hilt.android.AndroidEntryPoint
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class TvShowDetailsFragment : BaseFragment() {
 
     lateinit var binding: FragmentTvShowDetailsBinding
+    private val viewmodel: TvShowDetailsViewModel by viewModels()
+    private val tvShowDetailsFragmentArgs: TvShowDetailsFragmentArgs by navArgs()
 
-    @Inject
-    lateinit var retroApis: RetroApis
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        lifecycleScope.launchWhenStarted {
+            loadData(tvShowDetailsFragmentArgs.tvShowData)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,14 +45,38 @@ class TvShowDetailsFragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         initViews()
+        initObservers()
+    }
 
+    private fun initObservers() {
+        viewmodel.tvShowDetailsLiveData.observe(viewLifecycleOwner) { tvShowDetailsResource: Resource<TvShowDetails> ->
+            when (tvShowDetailsResource.status) {
+                Resource.Status.SUCCESS -> {
+                    if (tvShowDetailsResource.data != null) {
+                        fillView(tvShowDetailsResource.data)
+                    } else {
+                        handleError(message = "No data available")
+                    }
+                }
+                Resource.Status.ERROR -> {
+                    handleError(tvShowDetailsResource.error)
+                }
+                Resource.Status.LOADING -> {
+
+                }
+            }
+        }
+    }
+
+    private fun handleError(error: Resource.Error? = null, message: String? = null) {
+        ToastHelper.showErrorToast(
+            requireContext(),
+            error?.message ?: message
+        )
     }
 
     private fun initViews() {
-
-
 
         binding.topAppBar.setNavigationOnClickListener {
             findNavController().popBackStack()
@@ -58,49 +87,35 @@ class TvShowDetailsFragment : BaseFragment() {
         }
 
         tvShowData?.let {
-            binding.topAppBar.title = it.name?.getNonEmptyString() ?: getString(R.string.tv_show_name_unavailable)
+            binding.topAppBar.title =
+                it.name?.getNonEmptyString() ?: getString(R.string.tv_show_name_unavailable)
 
             val tvShowImageView = binding.tvShowImage.innerImg
             ImageLoader.load(MoviesDbConstants.IMAGES_BASE_URL + it.posterPath, tvShowImageView)
 
-            getTvShowDetailsAndFillView(tvShowData)
         }
 
 
     }
 
-    private fun getTvShowDetailsAndFillView(tvShowData: TvShowData) {
-        tvShowData.id?.let {
-            retroApis.getTvShowDetails(it).enqueue(object : Callback<TvShowDetails> {
-                override fun onFailure(call: Call<TvShowDetails>, t: Throwable) {
-                    Toast.makeText(context, "Unable to fetch tv show details", Toast.LENGTH_SHORT)
-                        .show()
-                }
-
-                override fun onResponse(
-                    call: Call<TvShowDetails>,
-                    response: Response<TvShowDetails>
-                ) {
-
-                    val tvShowDetails: TvShowDetails? = response.body()
-                    tvShowDetails?.let {
-                        fillView(tvShowDetails)
-                    }
-
-                }
-
-            })
+    private fun loadData(tvShowData: TvShowData) {
+        if (tvShowData.id == null) {
+            handleError(message = "No id for the Tv show")
+        } else {
+            viewmodel.getTvShowDetails(tvShowData.id)
         }
     }
 
     private fun fillView(tvShowDetails: TvShowDetails) {
+
+        // TODO: 07/06/21 Use data binding.
 
         binding.showRatingTV.text = tvShowDetails.voteAverage.toString()
         binding.showSeasonsCountTV.text = tvShowDetails.numberOfSeasons.toString()
         binding.showEpisodesCountTv.text = tvShowDetails.numberOfEpisodes.toString()
         if (tvShowDetails.homepage.isNullOrEmpty()) {
             binding.tvShowWebPage.visibility = View.GONE
-        }else{
+        } else {
             binding.tvShowWebPage.text = tvShowDetails.homepage
         }
         binding.tvShowOverview.text = tvShowDetails.overview
@@ -108,16 +123,10 @@ class TvShowDetailsFragment : BaseFragment() {
 
         val seasonPosterPathList = ArrayList<String>()
         tvShowDetails.seasons?.forEach { seasonDetail ->
-            if (seasonDetail != null) {
-                seasonDetail.posterPath?.let { seasonPosterPathList.add(MoviesDbConstants.IMAGES_BASE_URL + it) }
+            seasonDetail?.posterPath?.let {
+                seasonPosterPathList.add(MoviesDbConstants.IMAGES_BASE_URL + it)
             }
         }
-
-        // Dummy list size
-        /*for (i: Int in 1..100){
-            seasonPosterPathList.add("dummy")
-        }*/
-
 
         binding.tvShowImages.adapter = TvShowImagesAdapter(seasonPosterPathList)
         val gridLayoutManager = GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false)

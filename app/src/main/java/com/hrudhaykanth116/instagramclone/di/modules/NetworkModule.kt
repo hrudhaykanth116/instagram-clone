@@ -1,6 +1,6 @@
 package com.hrudhaykanth116.instagramclone.di.modules
 
-import com.hrudhaykanth116.instagramclone.repository.datasources.remote.RetroApis
+import com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.retrofit.RetroApis
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

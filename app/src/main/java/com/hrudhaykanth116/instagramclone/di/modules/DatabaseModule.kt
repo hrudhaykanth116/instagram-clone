@@ -2,8 +2,8 @@ package com.hrudhaykanth116.instagramclone.di.modules
 
 import android.content.Context
 import androidx.room.Room
-import com.hrudhaykanth116.instagramclone.repository.datasources.local.UserDao
-import com.hrudhaykanth116.instagramclone.repository.datasources.local.MyAppDb
+import com.hrudhaykanth116.instagramclone.data.repository.datasources.local.room.daos.UserDao
+import com.hrudhaykanth116.instagramclone.data.repository.datasources.local.room.MyAppDb
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

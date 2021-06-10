@@ -7,8 +7,8 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
+import com.hrudhaykanth116.instagramclone.data.models.TvShowData
 import com.hrudhaykanth116.instagramclone.databinding.TvShowEpisodeItemBinding
-import com.hrudhaykanth116.instagramclone.repository.models.TvShowData
 import com.hrudhaykanth116.instagramclone.ui.adapters.HomeFragmentAdapter
 import com.hrudhaykanth116.instagramclone.utils.image.ImageLoader
 

@@ -60,7 +60,7 @@
         >
         <argument
             android:name="tvShowData"
-            app:argType="com.hrudhaykanth116.instagramclone.repository.models.TvShowData" />
+            app:argType="com.hrudhaykanth116.instagramclone.data.models.TvShowData" />
     </fragment>
 
     <fragment
@@ -72,7 +72,7 @@
 
         <argument
             android:name="movieData"
-            app:argType="com.hrudhaykanth116.instagramclone.repository.models.MovieData" />
+            app:argType="com.hrudhaykanth116.instagramclone.data.models.MovieData" />
     </fragment>
 
 

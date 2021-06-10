@@ -2,13 +2,12 @@ package com.hrudhaykanth116.instagramclone.ui.screens
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.databinding.MainActivityBinding
 import com.hrudhaykanth116.instagramclone.fcm.FirebaseTokenGenerator
-import com.hrudhaykanth116.instagramclone.repository.datasources.remote.RetroApis
+import com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.retrofit.RetroApis
 import com.hrudhaykanth116.instagramclone.notifications.NotificationsChannelsManager
 import com.hrudhaykanth116.instagramclone.ui.screens.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint

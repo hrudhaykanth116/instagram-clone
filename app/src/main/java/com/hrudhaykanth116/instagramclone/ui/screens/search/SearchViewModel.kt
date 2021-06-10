@@ -1,21 +1,14 @@
 package com.hrudhaykanth116.instagramclone.ui.screens.search
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
-import com.hrudhaykanth116.instagramclone.repository.datasources.remote.RetroApis
-import com.hrudhaykanth116.instagramclone.repository.models.NetworkState
-import com.hrudhaykanth116.instagramclone.repository.models.TvShowData
-import com.hrudhaykanth116.instagramclone.repository.repositories.PopularTvShowsRepository
-import com.hrudhaykanth116.instagramclone.repository.repositories.TopRatedTvShowsRepository
-import com.hrudhaykanth116.instagramclone.ui.screens.home.HomeViewModel
+import androidx.paging.cachedIn
+import com.hrudhaykanth116.instagramclone.data.models.TvShowData
+import com.hrudhaykanth116.instagramclone.data.repository.repositories.TopRatedTvShowsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import java.util.concurrent.Executors
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,7 +24,11 @@ class SearchViewModel @Inject constructor(
 
     fun getTopRatedTvShows(): Flow<PagingData<TvShowData>> {
         Log.d(TAG, "getPopularTvShows: ")
-        val newResult: Flow<PagingData<TvShowData>> = topRatedTvShowsRepository.getTvShows()
+        if (topRatedTvShowsLiveData != null) {
+            return topRatedTvShowsLiveData!!
+        }
+        val newResult: Flow<PagingData<TvShowData>> =
+            topRatedTvShowsRepository.getTvShowsPagingData().cachedIn(viewModelScope)
         topRatedTvShowsLiveData = newResult
         return topRatedTvShowsLiveData!!
     }

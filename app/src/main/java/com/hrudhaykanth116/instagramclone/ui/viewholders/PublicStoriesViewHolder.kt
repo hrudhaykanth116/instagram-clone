@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hrudhaykanth116.instagramclone.ui.adapters.PublicStoryThumbnailAdapter
 import com.hrudhaykanth116.instagramclone.databinding.StoriesViewBinding
-import com.hrudhaykanth116.instagramclone.repository.models.MovieData
+import com.hrudhaykanth116.instagramclone.data.models.MovieData
 
 class PublicStoriesViewHolder(private val binding: StoriesViewBinding) : RecyclerView.ViewHolder(binding.root) {
 

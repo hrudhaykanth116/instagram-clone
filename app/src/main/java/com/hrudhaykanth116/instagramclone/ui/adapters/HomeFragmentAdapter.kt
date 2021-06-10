@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hrudhaykanth116.instagramclone.R
-import com.hrudhaykanth116.instagramclone.repository.models.MovieData
-import com.hrudhaykanth116.instagramclone.repository.models.TvShowData
+import com.hrudhaykanth116.instagramclone.data.models.MovieData
+import com.hrudhaykanth116.instagramclone.data.models.TvShowData
 import com.hrudhaykanth116.instagramclone.ui.viewholders.PublicStoriesViewHolder
 import com.hrudhaykanth116.instagramclone.ui.viewholders.TvShowEpisodeItemViewHolder
 import com.hrudhaykanth116.instagramclone.ui.viewholders.ViewHoldersCreator

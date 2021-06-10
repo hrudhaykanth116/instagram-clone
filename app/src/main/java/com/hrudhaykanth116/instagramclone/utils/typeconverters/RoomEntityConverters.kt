@@ -2,7 +2,7 @@ package com.hrudhaykanth116.instagramclone.utils.typeconverters
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
-import com.hrudhaykanth116.instagramclone.repository.models.UserPost
+import com.hrudhaykanth116.instagramclone.data.models.UserPost
 
 class RoomEntityConverters {
 

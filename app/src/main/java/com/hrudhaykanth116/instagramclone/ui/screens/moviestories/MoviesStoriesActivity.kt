@@ -3,10 +3,10 @@ package com.hrudhaykanth116.instagramclone.ui.screens.moviestories
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import com.hrudhaykanth116.instagramclone.data.models.MovieData
+import com.hrudhaykanth116.instagramclone.databinding.ActivityMoviesStoriesBinding
 import com.hrudhaykanth116.instagramclone.ui.adapters.MoviePagerAdapter
 import com.hrudhaykanth116.instagramclone.ui.animations.CubeTransformer
-import com.hrudhaykanth116.instagramclone.databinding.ActivityMoviesStoriesBinding
-import com.hrudhaykanth116.instagramclone.repository.models.MovieData
 import com.hrudhaykanth116.instagramclone.ui.screens.base.BaseActivity
 
 class MoviesStoriesActivity : BaseActivity() {

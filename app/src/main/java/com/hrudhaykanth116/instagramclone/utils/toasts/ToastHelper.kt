@@ -38,7 +38,6 @@ object ToastHelper {
         }
 
         if (toastMsg != null) {
-            // TODO: 20/4/21 hrudhay check if the drawables need to be dynamic.
             val customToast = getCustomToast(
                 context,
                 toastMsg,

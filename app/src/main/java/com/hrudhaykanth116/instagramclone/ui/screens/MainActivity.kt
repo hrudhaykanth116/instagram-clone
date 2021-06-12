@@ -5,9 +5,9 @@ import android.view.MenuItem
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.hrudhaykanth116.instagramclone.R
+import com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.retrofit.RetroApis
 import com.hrudhaykanth116.instagramclone.databinding.MainActivityBinding
 import com.hrudhaykanth116.instagramclone.fcm.FirebaseTokenGenerator
-import com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.retrofit.RetroApis
 import com.hrudhaykanth116.instagramclone.notifications.NotificationsChannelsManager
 import com.hrudhaykanth116.instagramclone.ui.screens.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,11 +44,6 @@ class MainActivity : BaseActivity() {
         }
         binding.bottomNavigationView.itemIconTintList = null
     }
-
-//    override fun onBackPressed() {
-//        // TODO: 29-07-2020 Handle fragment destinations change vs bottom bar view selection.
-//        Toast.makeText(this, "Back functionality not yet implemented", Toast.LENGTH_SHORT).show();
-//    }
 
     private fun onBottomMenuItemSelected(
         menuItem: MenuItem,

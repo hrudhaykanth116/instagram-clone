@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.hrudhaykanth116.instagramclone.databinding.MyAccountFragmentBinding
@@ -17,12 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MyAccountFragment : BaseFragment() {
 
     lateinit var binding: MyAccountFragmentBinding
-
-    companion object {
-        fun newInstance() = MyAccountFragment()
-    }
-
-    private lateinit var viewModel: MyAccountViewModel
+    private val viewModel: MyAccountViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,12 +25,6 @@ class MyAccountFragment : BaseFragment() {
     ): View? {
         binding = MyAccountFragmentBinding.inflate(inflater)
         return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MyAccountViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,7 +38,9 @@ class MyAccountFragment : BaseFragment() {
             signInIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(signInIntent)
         }
-
     }
 
+    companion object{
+        private const val TAG = "MyAccountFragment"
+    }
 }

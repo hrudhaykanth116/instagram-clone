@@ -60,7 +60,6 @@ class TvShowEpisodeItemViewHolder(private val binding: TvShowEpisodeItemBinding)
             }
         }
 
-        // TODO: 06/06/21 Use data binding adapters to load images.
         ImageLoader.load(
             postImgUrl,
             binding.tvShowImageView,

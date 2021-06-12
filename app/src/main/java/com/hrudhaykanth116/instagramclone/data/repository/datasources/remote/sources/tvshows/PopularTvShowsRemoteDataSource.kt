@@ -27,10 +27,8 @@ class PopularTvShowsRemoteDataSource constructor(
         return try {
             val tvShowDataPagedResponse: TvShowDataPagedResponse =
                 retroApis.getPopularTvShows(currentKey)
+            // TODO: 12/06/21 Check if response is successful
             val tvShowsList = tvShowDataPagedResponse.tvShowsList
-
-            // TODO: 29/05/21 Check if the response is successful
-//            delay(5000)
 
             LoadResult.Page(
                 data = tvShowsList,
@@ -61,85 +59,6 @@ class PopularTvShowsRemoteDataSource constructor(
         initialPageId = refreshKey
         return refreshKey
     }
-
-    /*override fun invalidate() {
-        super.invalidate()
-        initialPageId = Random.nextInt(1, 20)
-    }
-
-    override fun loadInitial(
-        params: LoadInitialParams<Int>,
-        callback: LoadInitialCallback<Int, TvShowData>
-    ) {
-        Log.i(TAG, "loadInitial: ")
-        networkState.postValue(NetworkState.LOADING)
-
-        try {
-
-            val popularTvShowsCall = retroApis.getPopularTvShows(initialPageId)
-            val response = popularTvShowsCall.execute()
-            if (response.isSuccessful) {
-                networkState.postValue(NetworkState.LOADED)
-                val popularMoviesResponse = response.body()
-                popularMoviesResponse?.let {
-                    val tvShowsList = popularMoviesResponse.tvShowsList
-                    callback.onResult(tvShowsList, null, 2)
-                }
-            }else{
-                handleFailure(response.message())
-            }
-        }catch (exception: UnknownHostException){
-            handleFailure(exception.message)
-            Log.e(TAG, "loadInitial: ", exception)
-        }catch (exception: Exception){
-            handleFailure(exception.message)
-        }
-
-    }
-
-    private fun handleFailure(error: String?) {
-        Log.e(TAG, "handleFailure: $error")
-        networkState.postValue(NetworkState.FAILED)
-    }
-
-    override fun loadAfter(
-        params: LoadParams<Int>,
-        callback: LoadCallback<Int, TvShowData>
-    ) {
-        Log.i(TAG, "loadAfter: ")
-        networkState.postValue(NetworkState.LOADING)
-
-        val callBack = object : Callback<TvShowDataPagedResponse> {
-            override fun onFailure(call: Call<TvShowDataPagedResponse>, t: Throwable) {
-                networkState.postValue(NetworkState.FAILED)
-            }
-
-            override fun onResponse(
-                call: Call<TvShowDataPagedResponse>,
-                response: Response<TvShowDataPagedResponse>
-            ) {
-                if (response.isSuccessful) {
-                    networkState.postValue(NetworkState.LOADED)
-                    val tvShowDataPagedResponse: TvShowDataPagedResponse? = response.body()
-                    tvShowDataPagedResponse?.let {
-                        val nextPageId = params.key + 1
-                        callback.onResult(tvShowDataPagedResponse.tvShowsList, nextPageId)
-                    }
-                } else {
-                    networkState.postValue(NetworkState.FAILED)
-                }
-            }
-
-        }
-        retroApis.getPopularTvShows(params.key).enqueue(callBack)
-
-    }
-
-    override fun loadBefore(
-        params: LoadParams<Int>,
-        callback: LoadCallback<Int, TvShowData>
-    ) {
-    }*/
 
     companion object{
         private const val TAG = "PopularTvShowsDataSourc"

@@ -9,6 +9,11 @@
     <color name="green">#48FF00</color>
     <color name="images_bg_color">#DADADA</color>
 
+    <!-- Shimmer colors -->
     <color name="shimmerBgColor">#dddddd</color>
+
+    <!-- Progress bar colors -->
+    <color name="progressBarTrackColor">#B4B4B4</color>
+    <color name="progressBarColor">#1153E2</color>
 
 </resources>

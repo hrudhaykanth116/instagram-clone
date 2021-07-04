@@ -45,7 +45,7 @@ class SearchResultsAdapter() :
             ImageLoader.load(imgUrl, searchResultImg)
 
             searchResultImg.setOnClickListener {
-                val tvShowFragmentAction = SearchFragmentDirections.actionTvShowFragment(tvShowData)
+                val tvShowFragmentAction = SearchScreenFragmentDirections.actionTvShowFragment(tvShowData)
                 itemView.findNavController().navigate(tvShowFragmentAction)
             }
 

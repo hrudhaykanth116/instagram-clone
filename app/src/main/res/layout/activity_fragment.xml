@@ -56,10 +56,10 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         tools:visibility="gone"
-        app:layout_constraintTop_toTopOf="@id/activityRecyclerView"
-        app:layout_constraintBottom_toBottomOf="@id/activityRecyclerView"
-        app:layout_constraintStart_toStartOf="@id/activityRecyclerView"
-        app:layout_constraintEnd_toEndOf="@id/activityRecyclerView"
+        app:layout_constraintTop_toTopOf="@id/swipeRefreshLayout"
+        app:layout_constraintBottom_toBottomOf="@id/swipeRefreshLayout"
+        app:layout_constraintStart_toStartOf="@id/swipeRefreshLayout"
+        app:layout_constraintEnd_toEndOf="@id/swipeRefreshLayout"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

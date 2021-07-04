@@ -2,6 +2,7 @@ package com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.re
 
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
 import com.hrudhaykanth116.instagramclone.data.models.*
+import com.hrudhaykanth116.instagramclone.data.models.search.TvShowSearchResults
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
@@ -69,6 +70,15 @@ public interface RetroApis {
         @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String = MoviesDbConstants.API_KEY
     ): Call<MovieVideosResponse>
+
+    @GET("search/tv")
+    suspend fun searchTv(
+        @Query("query") query: String,
+        @Query("api_key") apiKey: String = MoviesDbConstants.API_KEY,
+        @Query("language") language: String = "en-US",
+        @Query("page") page: String = "1",
+        @Query("include_adult") includeAdult: String = "false",
+    ): Response<TvShowSearchResults>
 
 
 }

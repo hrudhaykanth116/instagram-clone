@@ -7,14 +7,17 @@
 
     <fragment
         android:id="@+id/searchNavScreen"
-        android:name="com.hrudhaykanth116.instagramclone.ui.screens.search.SearchFragment"
+        android:name="com.hrudhaykanth116.instagramclone.ui.screens.search.SearchScreenFragment"
         android:label="@string/title_search"
-        tools:layout="@layout/search_fragment">
+        tools:layout="@layout/fragment_search_screen">
 
         <action
             android:id="@+id/action_tv_show_fragment"
             app:destination="@id/userProfileNavScreen"
             />
+        <action
+            android:id="@+id/action_searchNavScreen_to_searchFragment"
+            app:destination="@id/searchFragment" />
 
     </fragment>
 
@@ -27,6 +30,17 @@
         <argument
             android:name="tvShowData"
             app:argType="com.hrudhaykanth116.instagramclone.data.models.TvShowData" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.hrudhaykanth116.instagramclone.ui.common.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search"
+        >
+        <action
+            android:id="@+id/action_searchFragment_to_userProfileNavScreen"
+            app:destination="@id/userProfileNavScreen" />
     </fragment>
 
 

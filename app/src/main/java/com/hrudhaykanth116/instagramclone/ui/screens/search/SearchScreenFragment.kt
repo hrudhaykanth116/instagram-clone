@@ -9,13 +9,15 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.data.models.TvShowData
-import com.hrudhaykanth116.instagramclone.databinding.SearchFragmentBinding
+import com.hrudhaykanth116.instagramclone.databinding.FragmentSearchScreenBinding
 import com.hrudhaykanth116.instagramclone.ui.adapters.SearchCategoriesAdapter
 import com.hrudhaykanth116.instagramclone.ui.screens.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,13 +25,13 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class SearchFragment : BaseFragment() {
+class SearchScreenFragment : BaseFragment() {
 
-    private lateinit var binding: SearchFragmentBinding
+    private lateinit var binding: FragmentSearchScreenBinding
 
     // Initial state would be loading always followed by loaded or failed
     private lateinit var searchResultsAdapter: SearchResultsAdapter
-    private val searchViewModel: SearchViewModel by viewModels()
+    private val searchScreenViewModel: SearchScreenViewModel by viewModels()
 
     private var fetchTopRatedTvShowsJob: Job? = null
 
@@ -44,13 +46,14 @@ class SearchFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         Log.d(TAG, "onCreateView: ")
-        binding = SearchFragmentBinding.inflate(inflater)
+        binding = FragmentSearchScreenBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         initViews()
+        binding.progressBar.isVisible = true
         getTopRatedTvShows()
 
         super.onViewCreated(view, savedInstanceState)
@@ -73,6 +76,11 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun initClickListeners() {
+
+        binding.searchTextView.setOnClickListener {
+            findNavController().navigate(R.id.searchFragment)
+        }
+
         binding.swipeRefreshLayout.setOnRefreshListener {
             refresh()
         }
@@ -110,7 +118,7 @@ class SearchFragment : BaseFragment() {
         binding.searchResultsContainer.adapter = searchResultsAdapter
         binding.searchResultsContainer.layoutManager = staggeredGridLayoutManager
 
-        searchResultsAdapter.addLoadStateListener{ combinedLoadStates ->
+        searchResultsAdapter.addLoadStateListener { combinedLoadStates ->
             onLoadStateChanged(combinedLoadStates)
         }
 
@@ -126,8 +134,7 @@ class SearchFragment : BaseFragment() {
             // FIRST LOAD COMPLETED(either success or error)
 
             binding.swipeRefreshLayout.isRefreshing = false
-            // binding.shimmerFrameLayout.stopShimmer()
-            // binding.shimmerFrameLayout.isGone = true
+            binding.progressBar.isVisible = false
         }
 
         // Not loading and no error(Data loaded). Show empty list
@@ -160,22 +167,24 @@ class SearchFragment : BaseFragment() {
 
     }
 
-    private fun getTopRatedTvShows(){
+    private fun getTopRatedTvShows() {
         Log.d(TAG, "getPopularTvShows: ")
         // Make sure we cancel the previous job before creating a new one
         fetchTopRatedTvShowsJob?.cancel()
         fetchTopRatedTvShowsJob = lifecycleScope.launchWhenStarted {
             Log.d(TAG, "getPopularTvShows: launchWhenStarted")
-            searchViewModel.getTopRatedTvShows().collectLatest { tvShowPagingData: PagingData<TvShowData> ->
-                Log.d(TAG, "getPopularTvShows: collectLatest")
-                binding.swipeRefreshLayout.isRefreshing = false
-                searchResultsAdapter.submitData(tvShowPagingData)
-            }
+            searchScreenViewModel.getTopRatedTvShows()
+                .collectLatest { tvShowPagingData: PagingData<TvShowData> ->
+                    Log.d(TAG, "getPopularTvShows: collectLatest")
+                    binding.swipeRefreshLayout.isRefreshing = false
+                    binding.progressBar.isVisible = false
+                    searchResultsAdapter.submitData(tvShowPagingData)
+                }
         }
     }
 
     companion object {
-        private val TAG = SearchFragment::class.java.simpleName
+        private val TAG = SearchScreenFragment::class.java.simpleName
     }
 
 }

@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchViewModel @Inject constructor(
+class SearchScreenViewModel @Inject constructor(
     private val topRatedTvShowsRepository: TopRatedTvShowsRepository,
 ) : ViewModel() {
 

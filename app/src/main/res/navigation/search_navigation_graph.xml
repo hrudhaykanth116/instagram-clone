@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_search"
+    app:startDestination="@id/searchNavScreen">
+
+    <fragment
+        android:id="@+id/searchNavScreen"
+        android:name="com.hrudhaykanth116.instagramclone.ui.screens.search.SearchFragment"
+        android:label="@string/title_search"
+        tools:layout="@layout/search_fragment">
+
+        <action
+            android:id="@+id/action_tv_show_fragment"
+            app:destination="@id/userProfileNavScreen"
+            />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/userProfileNavScreen"
+        android:name="com.hrudhaykanth116.instagramclone.ui.screens.profile.TvShowDetailsFragment"
+        android:label="User profile"
+        tools:layout="@layout/fragment_tv_show_details"
+        >
+        <argument
+            android:name="tvShowData"
+            app:argType="com.hrudhaykanth116.instagramclone.data.models.TvShowData" />
+    </fragment>
+
+
+</navigation>

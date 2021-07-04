@@ -1,8 +1,8 @@
-package com.hrudhaykanth116.instagramclone.data.repository.repositories
+package com.hrudhaykanth116.instagramclone.data.repository.repositories.tv
 
-import com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.sources.tvshows.TvShowsRemoteDataSource
 import com.hrudhaykanth116.instagramclone.data.models.TvShowDetails
 import com.hrudhaykanth116.instagramclone.data.models.network.Resource
+import com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.sources.tvshows.TvShowsRemoteDataSource
 import javax.inject.Inject
 
 class TvShowsRepository @Inject constructor(

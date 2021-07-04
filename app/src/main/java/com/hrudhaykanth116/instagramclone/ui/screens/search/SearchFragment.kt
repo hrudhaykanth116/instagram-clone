@@ -35,7 +35,7 @@ class SearchFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        Log.d(TAG, "onCreate: ")
     }
 
     override fun onCreateView(
@@ -43,6 +43,7 @@ class SearchFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.d(TAG, "onCreateView: ")
         binding = SearchFragmentBinding.inflate(inflater)
         return binding.root
     }
@@ -53,6 +54,16 @@ class SearchFragment : BaseFragment() {
         getTopRatedTvShows()
 
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onDestroyView() {
+        Log.d(TAG, "onDestroyView: ")
+        super.onDestroyView()
+    }
+
+    override fun onDestroy() {
+        Log.d(TAG, "onDestroy: ")
+        super.onDestroy()
     }
 
     private fun initViews() {

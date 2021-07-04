@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_post"
+    app:startDestination="@id/postNavScreen">
+
+    <fragment
+        android:id="@+id/postNavScreen"
+        android:name="com.hrudhaykanth116.instagramclone.ui.screens.post.PostStatusFragment"
+        android:label="Post status"
+        tools:layout="@layout/post_status_fragment" />
+
+
+</navigation>

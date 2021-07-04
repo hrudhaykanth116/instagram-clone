@@ -3,15 +3,14 @@ package com.hrudhaykanth116.instagramclone.ui.screens
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hrudhaykanth116.instagramclone.R
-import com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.retrofit.RetroApis
 import com.hrudhaykanth116.instagramclone.databinding.MainActivityBinding
 import com.hrudhaykanth116.instagramclone.fcm.FirebaseTokenGenerator
 import com.hrudhaykanth116.instagramclone.notifications.NotificationsChannelsManager
 import com.hrudhaykanth116.instagramclone.ui.screens.base.BaseActivity
+import com.hrudhaykanth116.instagramclone.utils.extensions.navigation.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
@@ -20,29 +19,43 @@ class MainActivity : BaseActivity() {
         MainActivityBinding.inflate(layoutInflater)
     }
 
-    @Inject
-    lateinit var retroApis: RetroApis
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val navController: NavController = findNavController(R.id.nav_host_fragment)
-        setUpBottomNavigationView(navController)
+        setUpBottomNavigationView()
 
         FirebaseTokenGenerator().generateToken()
         NotificationsChannelsManager().createDefaultNotificationChannel(applicationContext)
 
     }
 
-    private fun setUpBottomNavigationView(navController: NavController) {
-        binding.bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
-            onBottomMenuItemSelected(menuItem, navController)
+//    override fun onSupportNavigateUp(): Boolean {
+//        return currentNavController?.value?.navigateUp() ?: false
+//    }
+
+    private fun setUpBottomNavigationView(navController: NavController? = null) {
+
+        val bottomNavigationView: BottomNavigationView = binding.bottomNavigationView
+
+        val navGraphIds = listOf(
+            R.navigation.home_navigation_graph,
+            R.navigation.search_navigation_graph,
+            R.navigation.post_navigation_graph,
+            R.navigation.activity_navigation_graph,
+            R.navigation.profile_navigation_graph,
+        )
+
+        bottomNavigationView.setupWithNavController(
+            navGraphIds = navGraphIds,
+            fragmentManager = supportFragmentManager,
+            containerId = R.id.nav_host_fragment,
+            intent = intent
+        ).observe(this){
+            // Sets up action bar with navigation controller to handle navigation icon.
+            // setupActionBarWithNavController(it)
         }
-        binding.bottomNavigationView.setOnNavigationItemReselectedListener {
-            // Do nothing when menu item reselected.
-        }
-        binding.bottomNavigationView.itemIconTintList = null
+        bottomNavigationView.itemIconTintList = null
     }
 
     private fun onBottomMenuItemSelected(

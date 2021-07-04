@@ -8,28 +8,19 @@ Use coroutines.
 Use data binding.
 
 
+
 chips for search categories.
 (https://classroom.udacity.com/courses/ud9012/lessons/d6418953-69fb-41ab-acc4-aafc681ccf41/concepts/54e06c1d-c0de-4fe3-8afa-432d69a4420b)
-Performance analysis
-Back navigation should update bottom navigation view
-Handle network retries, force retry.
-chat with firebase notifications and @Embeded room entities
+Motion layout
+Handle network failures
 Exo player
+Performance analysis
+Camerax
 
 
-Camerax and post mechanism
-
-
-https://developer.android.com/topic/libraries/architecture/lifecycle
 recycler view best practices and performance performance
 vector assets and animation. shapeshifter.design
 Room(https://medium.com/androiddevelopers/7-pro-tips-for-room-fbadea4bfbd1)
-Check network.
-
 Canvas drawing
 
-
-// Components
-
-Exo player.
 

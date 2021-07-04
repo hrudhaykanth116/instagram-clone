@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_home"
+    app:startDestination="@id/homeNavScreen">
+
+    <fragment
+        android:id="@+id/homeNavScreen"
+        android:name="com.hrudhaykanth116.instagramclone.ui.screens.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_tv_show_fragment"
+            app:destination="@id/userProfileNavScreen"
+            />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_movies_stories"
+            app:destination="@id/moviesStoriesNavScreen" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/userProfileNavScreen"
+        android:name="com.hrudhaykanth116.instagramclone.ui.screens.profile.TvShowDetailsFragment"
+        android:label="User profile"
+        tools:layout="@layout/fragment_tv_show_details"
+        >
+        <argument
+            android:name="tvShowData"
+            app:argType="com.hrudhaykanth116.instagramclone.data.models.TvShowData" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/moviesStoriesNavScreen"
+        android:name="com.hrudhaykanth116.instagramclone.ui.screens.moviestories.MovieStoriesFragment"
+        android:label="Movie stories"
+        tools:layout="@layout/movie_stories_fragment"
+        >
+
+        <argument
+            android:name="movieData"
+            app:argType="com.hrudhaykanth116.instagramclone.data.models.MovieData" />
+    </fragment>
+
+
+</navigation>

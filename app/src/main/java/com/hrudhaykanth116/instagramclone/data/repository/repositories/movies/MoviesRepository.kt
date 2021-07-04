@@ -1,4 +1,4 @@
-package com.hrudhaykanth116.instagramclone.data.repository.repositories
+package com.hrudhaykanth116.instagramclone.data.repository.repositories.movies
 
 import com.hrudhaykanth116.instagramclone.data.models.PopularMoviesResponse
 import com.hrudhaykanth116.instagramclone.data.models.network.Resource

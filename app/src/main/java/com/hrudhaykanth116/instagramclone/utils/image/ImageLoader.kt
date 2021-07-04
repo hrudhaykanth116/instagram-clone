@@ -22,19 +22,4 @@ object ImageLoader {
             .into(targetImageView)
     }
 
-    fun load(
-        context: Context,
-        imgUrl: String,
-        thumbNailImgUrl: String,
-        targetImageView: ImageView
-    ){
-        Glide
-            .with(context)
-            .load(imgUrl)
-            .thumbnail(
-                Glide.with(context).load(thumbNailImgUrl)
-            )
-            .into(targetImageView)
-    }
-
 }

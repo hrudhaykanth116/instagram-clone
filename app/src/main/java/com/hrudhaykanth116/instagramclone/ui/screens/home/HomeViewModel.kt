@@ -8,8 +8,8 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.hrudhaykanth116.instagramclone.data.models.MovieData
 import com.hrudhaykanth116.instagramclone.data.models.TvShowData
-import com.hrudhaykanth116.instagramclone.data.repository.repositories.MoviesRepository
-import com.hrudhaykanth116.instagramclone.data.repository.repositories.PopularTvShowsRepository
+import com.hrudhaykanth116.instagramclone.data.repository.repositories.movies.MoviesRepository
+import com.hrudhaykanth116.instagramclone.data.repository.repositories.tv.PopularTvShowsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch

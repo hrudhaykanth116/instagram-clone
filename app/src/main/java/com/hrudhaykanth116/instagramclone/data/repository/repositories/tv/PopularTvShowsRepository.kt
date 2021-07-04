@@ -1,12 +1,12 @@
-package com.hrudhaykanth116.instagramclone.data.repository.repositories
+package com.hrudhaykanth116.instagramclone.data.repository.repositories.tv
 
 import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.sources.tvshows.PopularTvShowsRemoteDataSource
-import com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.retrofit.RetroApis
 import com.hrudhaykanth116.instagramclone.data.models.TvShowData
+import com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.retrofit.RetroApis
+import com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.sources.tvshows.PopularTvShowsRemoteDataSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

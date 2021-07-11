@@ -27,9 +27,15 @@
         android:label="User profile"
         tools:layout="@layout/fragment_tv_show_details"
         >
+
+        <!--<argument-->
+        <!--    android:name="tvShowData"-->
+        <!--    app:argType="com.hrudhaykanth116.instagramclone.data.models.TvShowData" />-->
+
         <argument
-            android:name="tvShowData"
-            app:argType="com.hrudhaykanth116.instagramclone.data.models.TvShowData" />
+            android:name="tvShowId"
+            app:argType="integer" />
+
     </fragment>
 
     <fragment

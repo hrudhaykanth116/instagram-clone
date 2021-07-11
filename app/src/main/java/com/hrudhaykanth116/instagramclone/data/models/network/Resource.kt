@@ -7,6 +7,9 @@ data class Resource<out T>(
     val error: Error?
 ) {
 
+    val isSuccessful = status == Status.SUCCESS
+    val isFailure = status == Status.ERROR
+
     companion object {
         fun <T> success(data: T): Resource<T> {
             return Resource(Status.SUCCESS, data, null, null)

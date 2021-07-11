@@ -19,6 +19,7 @@ import com.hrudhaykanth116.instagramclone.databinding.FragmentHomeBinding
 import com.hrudhaykanth116.instagramclone.ui.adapters.HomeFragmentAdapter
 import com.hrudhaykanth116.instagramclone.ui.adapters.PagingLoadStateAdapter
 import com.hrudhaykanth116.instagramclone.ui.screens.base.BaseFragment
+import com.hrudhaykanth116.instagramclone.utils.toasts.ToastHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
@@ -82,8 +83,14 @@ class HomeFragment : BaseFragment() {
 
         homeFragmentAdapter = HomeFragmentAdapter(object : HomeFragmentAdapter.IPostClickListener {
             override fun onProfileNameClicked(tvShowData: TvShowData) {
-                val tvShowFragmentAction = HomeFragmentDirections.actionTvShowFragment(tvShowData)
-                findNavController().navigate(tvShowFragmentAction)
+                tvShowData.id?.let {
+                    val tvShowFragmentAction = HomeFragmentDirections.actionTvShowFragment(
+                        it
+                    )
+                    findNavController().navigate(tvShowFragmentAction)
+                } ?: run{
+                    ToastHelper.showErrorToast(requireContext(), "No tv id.")
+                }
             }
         })
 

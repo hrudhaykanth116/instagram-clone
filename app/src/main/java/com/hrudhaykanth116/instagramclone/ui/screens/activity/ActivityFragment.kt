@@ -93,7 +93,7 @@ class ActivityFragment : BaseFragment() {
     }
 
     private fun onDataLoaded(tvShowDataPagedResponseResource: Resource<TvShowDataPagedResponse>) {
-        binding.progressBar.isVisible = true
+        binding.progressBar.isVisible = false
         binding.swipeRefreshLayout.isRefreshing = false
         val tvShowsList: List<TvShowData>? = tvShowDataPagedResponseResource.data?.tvShowsList
         if (tvShowsList != null) {

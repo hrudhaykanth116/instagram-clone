@@ -16,20 +16,24 @@ import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hrudhaykanth116.instagramclone.R
-import com.hrudhaykanth116.instagramclone.data.models.TvShowData
+import com.hrudhaykanth116.instagramclone.data.models.discover.DiscoverResult
+import com.hrudhaykanth116.instagramclone.data.models.genres.Genre
+import com.hrudhaykanth116.instagramclone.data.models.genres.GetTvGenresResponse
+import com.hrudhaykanth116.instagramclone.data.models.network.Resource
 import com.hrudhaykanth116.instagramclone.databinding.FragmentSearchScreenBinding
 import com.hrudhaykanth116.instagramclone.ui.adapters.SearchCategoriesAdapter
 import com.hrudhaykanth116.instagramclone.ui.screens.base.BaseFragment
+import com.hrudhaykanth116.instagramclone.utils.toasts.ToastHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SearchScreenFragment : BaseFragment() {
 
     private lateinit var binding: FragmentSearchScreenBinding
 
-    // Initial state would be loading always followed by loaded or failed
     private lateinit var searchResultsAdapter: SearchResultsAdapter
     private val searchScreenViewModel: SearchScreenViewModel by viewModels()
 
@@ -54,13 +58,13 @@ class SearchScreenFragment : BaseFragment() {
 
         initViews()
         binding.progressBar.isVisible = true
-        getTopRatedTvShows()
-
         super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onDestroyView() {
         Log.d(TAG, "onDestroyView: ")
+        // Need to cancel the job as collect is suspendable on lifecycle scope
+        // fetchTopRatedTvShowsJob?.cancel()
         super.onDestroyView()
     }
 
@@ -92,17 +96,39 @@ class SearchScreenFragment : BaseFragment() {
 
     private fun initCategoriesRecyclerView() {
 
-        val testList = ArrayList<String>()
-        for (i in 1..60) {
-            testList.add("Item: $i")
+
+        // searchScreenViewModel.getTvGenres()
+        //     .observe(viewLifecycleOwner) { tvGenresResponseResource: Resource<GetTvGenresResponse>? ->
+
+        lifecycleScope.launch {
+            binding.progressBar.isVisible = true
+
+            val searchCategories = ArrayList<Genre>()
+            val tvGenresResponseResource: Resource<GetTvGenresResponse> = searchScreenViewModel.getTvGenres()
+            if (tvGenresResponseResource.isSuccessful) {
+                tvGenresResponseResource.data?.genres?.let { searchCategories.addAll(it) }
+
+                val categoriesAdapter = SearchCategoriesAdapter(searchCategories).apply {
+
+                    mSelectedCategories.observe(viewLifecycleOwner) { genresList: ArrayList<Genre>? ->
+                        // TODO: 12/07/21 First time, this observer and regular refresh methods are called. 
+                        refreshDiscoverTvShows(genresList)
+                    }
+                    updateSelectedCategories(searchScreenViewModel.selectedGenres)
+                }
+                binding.categories.adapter = categoriesAdapter
+                binding.categories.layoutManager = LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+                refreshDiscoverTvShows(searchScreenViewModel.selectedGenres)
+            }else{
+                ToastHelper.showErrorToast(requireContext(), "Categories api failed.")
+            }
+            binding.progressBar.isVisible = false
         }
 
-        binding.categories.adapter = SearchCategoriesAdapter(testList)
-        binding.categories.layoutManager = LinearLayoutManager(
-            context,
-            LinearLayoutManager.HORIZONTAL,
-            false
-        )
     }
 
     private fun initSearchResultsRecyclerView() {
@@ -167,14 +193,14 @@ class SearchScreenFragment : BaseFragment() {
 
     }
 
-    private fun getTopRatedTvShows() {
+    private fun refreshDiscoverTvShows(genres: ArrayList<Genre>? = null) {
         Log.d(TAG, "getPopularTvShows: ")
         // Make sure we cancel the previous job before creating a new one
         fetchTopRatedTvShowsJob?.cancel()
         fetchTopRatedTvShowsJob = lifecycleScope.launchWhenStarted {
             Log.d(TAG, "getPopularTvShows: launchWhenStarted")
-            searchScreenViewModel.getTopRatedTvShows()
-                .collectLatest { tvShowPagingData: PagingData<TvShowData> ->
+            searchScreenViewModel.discoverTvShows(genres)
+                .collectLatest { tvShowPagingData: PagingData<DiscoverResult> ->
                     Log.d(TAG, "getPopularTvShows: collectLatest")
                     binding.swipeRefreshLayout.isRefreshing = false
                     binding.progressBar.isVisible = false

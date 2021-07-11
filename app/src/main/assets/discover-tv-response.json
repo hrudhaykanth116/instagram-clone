@@ -1,0 +1,428 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "backdrop_path": "/A9sCKnxgTTapzu307ybdXCJQEqD.jpg",
+      "first_air_date": "2013-12-02",
+      "genre_ids": [
+        16,
+        35,
+        10765,
+        10759
+      ],
+      "id": 60625,
+      "name": "Rick and Morty",
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_name": "Rick and Morty",
+      "overview": "Rick is a mentally-unbalanced but scientifically-gifted old man who has recently reconnected with his family. He spends most of his time involving his young grandson Morty in dangerous, outlandish adventures throughout space and alternate universes. Compounded with Morty's already unstable family life, these events cause Morty much distress at home and school.",
+      "popularity": 978.229,
+      "poster_path": "/8kOWDBK6XlPUzckuHDo3wwVRFwt.jpg",
+      "vote_average": 8.8,
+      "vote_count": 4779
+    },
+    {
+      "backdrop_path": "/iq5L971DFW1SwLJdvl7OpPI1QeZ.jpg",
+      "first_air_date": "2021-06-17",
+      "genre_ids": [
+        16,
+        10759,
+        10765
+      ],
+      "id": 114868,
+      "name": "Record of Ragnarok",
+      "origin_country": [
+        "JP"
+      ],
+      "original_language": "ja",
+      "original_name": "終末のワルキューレ",
+      "overview": "Before eradicating humankind from the world, the gods give them one last chance to prove themselves worthy of survival. Let the Ragnarok battles begin.",
+      "popularity": 552.128,
+      "poster_path": "/kTs2WNZOukpWdNhoRlH94pSJ3xf.jpg",
+      "vote_average": 8.8,
+      "vote_count": 507
+    },
+    {
+      "backdrop_path": "/hpU2cHC9tk90hswCFEpf5AtbqoL.jpg",
+      "first_air_date": "1989-12-17",
+      "genre_ids": [
+        10751,
+        16,
+        35,
+        18
+      ],
+      "id": 456,
+      "name": "The Simpsons",
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_name": "The Simpsons",
+      "overview": "Set in Springfield, the average American town, the show focuses on the antics and everyday adventures of the Simpson family; Homer, Marge, Bart, Lisa and Maggie, as well as a virtual cast of thousands. Since the beginning, the series has been a pop culture icon, attracting hundreds of celebrities to guest star. The show has also made name for itself in its fearless satirical take on politics, media and American life in general.",
+      "popularity": 471.532,
+      "poster_path": "/zLudbPueg8CxGhMS2tyDh3p0TdK.jpg",
+      "vote_average": 7.9,
+      "vote_count": 6765
+    },
+    {
+      "backdrop_path": "/sjxtIUCWR74yPPcZFfTsToepfWm.jpg",
+      "first_air_date": "2021-05-04",
+      "genre_ids": [
+        10765,
+        10759,
+        16
+      ],
+      "id": 105971,
+      "name": "The Bad Batch",
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_name": "The Bad Batch",
+      "overview": "The 'Bad Batch' of elite and experimental clones make their way through an ever-changing galaxy in the immediate aftermath of the Clone Wars.",
+      "popularity": 415.684,
+      "poster_path": "/WjQmEWFrOf98nT5aEfUfVYz9N2.jpg",
+      "vote_average": 8.6,
+      "vote_count": 376
+    },
+    {
+      "backdrop_path": "/9RqliZcoDEjSEISeA0LY9meAiNv.jpg",
+      "first_air_date": "2015-10-19",
+      "genre_ids": [
+        10759,
+        16,
+        10762
+      ],
+      "id": 65334,
+      "name": "Miraculous: Tales of Ladybug & Cat Noir",
+      "origin_country": [
+        "FR"
+      ],
+      "original_language": "fr",
+      "original_name": "Miraculous, les aventures de Ladybug et Chat Noir",
+      "overview": "Normal high school kids by day, protectors of Paris by night! Miraculous follows the heroic adventures of Marinette and Adrien as they transform into Ladybug and Cat Noir and set out to capture akumas, creatures responsible for turning the people of Paris into villains. But neither hero knows the other’s true identity – or that they’re classmates!",
+      "popularity": 331.437,
+      "poster_path": "/qxbW47zmgFyBVmZSIqD9NA1DEjT.jpg",
+      "vote_average": 7.9,
+      "vote_count": 2878
+    },
+    {
+      "backdrop_path": "/8DLpbLeUylcUnE4nTlRC4b6jzNz.jpg",
+      "first_air_date": "2020-10-03",
+      "genre_ids": [
+        16,
+        10759,
+        10765
+      ],
+      "id": 95479,
+      "name": "Jujutsu Kaisen",
+      "origin_country": [
+        "JP"
+      ],
+      "original_language": "ja",
+      "original_name": "呪術廻戦",
+      "overview": "With his days numbered, high schooler Yuji decides to hunt down and consume the remaining 19 fingers of a deadly curse so it can die with him.",
+      "popularity": 322.023,
+      "poster_path": "/g1rK2nRXSidcMwNliWDIroWWGTn.jpg",
+      "vote_average": 8.5,
+      "vote_count": 1245
+    },
+    {
+      "backdrop_path": "/oycArCLGgtWyUz5aho7ojFZkgjN.jpg",
+      "first_air_date": "2002-10-03",
+      "genre_ids": [
+        16,
+        10759,
+        10765
+      ],
+      "id": 46260,
+      "name": "Naruto",
+      "origin_country": [
+        "JP"
+      ],
+      "original_language": "ja",
+      "original_name": "ナルト",
+      "overview": "In another world, ninja are the ultimate power, and in the Village Hidden in the Leaves live the stealthiest ninja in the land. Twelve years earlier, the fearsome Nine-Tailed Fox terrorized the village and claimed many lives before it was subdued and its spirit sealed within the body of a baby boy. That boy, Naruto Uzumaki, has grown up to become a ninja-in-training who's more interested in pranks than in studying ninjutsu.. but Naruto is determined to become the greatest ninja ever!",
+      "popularity": 310.781,
+      "poster_path": "/vauCEnR7CiyBDzRCeElKkCaXIYu.jpg",
+      "vote_average": 8.4,
+      "vote_count": 3747
+    },
+    {
+      "backdrop_path": "/6UH52Fmau8RPsMAbQbjwN3wJSCj.jpg",
+      "first_air_date": "2021-03-26",
+      "genre_ids": [
+        16,
+        10765,
+        10759,
+        18
+      ],
+      "id": 95557,
+      "name": "Invincible",
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_name": "Invincible",
+      "overview": "Mark Grayson is a normal teenager except for the fact that his father is the most powerful superhero on the planet. Shortly after his seventeenth birthday, Mark begins to develop powers of his own and enters into his father’s tutelage.",
+      "popularity": 303.474,
+      "poster_path": "/yDWJYRAwMNKbIYT8ZB33qy84uzO.jpg",
+      "vote_average": 8.8,
+      "vote_count": 2252
+    },
+    {
+      "backdrop_path": "/v7J7q0yMAPbocBgiv39hpAMEcRf.jpg",
+      "first_air_date": "1989-04-26",
+      "genre_ids": [
+        16,
+        10765,
+        10759
+      ],
+      "id": 12971,
+      "name": "Dragon Ball Z",
+      "origin_country": [
+        "JP"
+      ],
+      "original_language": "ja",
+      "original_name": "ドラゴンボールゼット",
+      "overview": "After learning that he is from another planet, a warrior named Goku and his friends are prompted to defend it from an onslaught of extraterrestrial enemies.",
+      "popularity": 259.745,
+      "poster_path": "/dMB9UaXKUx7OnYlAgFfoixnRXgP.jpg",
+      "vote_average": 8.2,
+      "vote_count": 2456
+    },
+    {
+      "backdrop_path": "/wjw3wrmkjjApu83Y4SxmQ5gP2mZ.jpg",
+      "first_air_date": "2021-04-11",
+      "genre_ids": [
+        18,
+        16,
+        10759
+      ],
+      "id": 105009,
+      "name": "Tokyo Revengers",
+      "origin_country": [
+        "JP"
+      ],
+      "original_language": "ja",
+      "original_name": "東京リベンジャーズ",
+      "overview": "Takemichi Hanagaki is a freelancer that’s reached the absolute pits of despair in his life. He finds out that the only girlfriend he ever had, in middle school, Hinata Tachibana, had been killed by the ruthless Tokyo Manji Gang. The day after hearing about her death, he’s standing on the station platform and ends up being pushed over onto the tracks by a herd of people. He closes his eyes thinking he’s about to die, but when he opens his eyes back up, he somehow had gone back in time 12 years. Now that he’s back living the best days of his life, Takemichi decides to get revenge on his life.",
+      "popularity": 252.002,
+      "poster_path": "/qSEKyf0fWhrCEQ3LTwLqe41eSvR.jpg",
+      "vote_average": 8.2,
+      "vote_count": 22
+    },
+    {
+      "backdrop_path": "/z6ES1hCbLozoquj5wilidrtKBPp.jpg",
+      "first_air_date": "2007-02-15",
+      "genre_ids": [
+        16,
+        10759,
+        10765
+      ],
+      "id": 31910,
+      "name": "Naruto Shippūden",
+      "origin_country": [
+        "JP"
+      ],
+      "original_language": "ja",
+      "original_name": "ナルト 疾風伝",
+      "overview": "Naruto Shippuuden is the continuation of the original animated TV series Naruto.The story revolves around an older and slightly more matured Uzumaki Naruto and his quest to save his friend Uchiha Sasuke from the grips of the snake-like Shinobi, Orochimaru. After 2 and a half years Naruto finally returns to his village of Konoha, and sets about putting his ambitions to work, though it will not be easy, as He has amassed a few (more dangerous) enemies, in the likes of the shinobi organization; Akatsuki.",
+      "popularity": 249.286,
+      "poster_path": "/zAYRe2bJxpWTVrwwmBc00VFkAf4.jpg",
+      "vote_average": 8.6,
+      "vote_count": 5640
+    },
+    {
+      "backdrop_path": "/xlKKD1TXJvh0YYlVPqqQ3g3ZUjM.jpg",
+      "first_air_date": "2018-07-01",
+      "genre_ids": [
+        16,
+        10759,
+        10765
+      ],
+      "id": 80020,
+      "name": "Super Dragon Ball Heroes",
+      "origin_country": [
+        "JP"
+      ],
+      "original_language": "ja",
+      "original_name": "スーパードラゴンボールヒーローズ",
+      "overview": "Trunks returns from the future to train with Goku and Vegeta. However, it disappears without warning. Then the mysterious Fu bursts in, telling them that Trunks has been imprisoned in the Prison Planet, a mysterious complex in an unknown place in the universes. The group seeks the dragon balls to free Trunks, but an endless battle awaits them! Will Goku and the others rescue Trunks and escape the Prison Planet?",
+      "popularity": 236.286,
+      "poster_path": "/jYeTfpxS3IzgqKkYCjmdCKwq8PW.jpg",
+      "vote_average": 7.5,
+      "vote_count": 2046
+    },
+    {
+      "backdrop_path": "/7uihCghJiyYFTXSh1BOPdHQN8xK.jpg",
+      "first_air_date": "1997-08-13",
+      "genre_ids": [
+        35,
+        16
+      ],
+      "id": 2190,
+      "name": "South Park",
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_name": "South Park",
+      "overview": "Follows the misadventures of four irreverent grade-schoolers in the quiet, dysfunctional town of South Park, Colorado.",
+      "popularity": 227.7,
+      "poster_path": "/iiCY2QIGSnmtVkIdjkKAfwDs0KF.jpg",
+      "vote_average": 8.2,
+      "vote_count": 2450
+    },
+    {
+      "backdrop_path": "/jqBNii1Qv1W4khVzRtdy7ONOroq.jpg",
+      "first_air_date": "2021-05-27",
+      "genre_ids": [
+        16,
+        35,
+        10762
+      ],
+      "id": 124920,
+      "name": "Rugrats",
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_name": "Rugrats",
+      "overview": "A reinvention of the beloved 90s cartoon, Rugrats follows a group of adventurous babies as they discover the big world around them. Lead by Tommy Pickles, this toddler crew explores the world from their pint-sized and wildly imaginative perspective.",
+      "popularity": 213.548,
+      "poster_path": "/1kMDkkX9LctUUtJPvJPVKW9ylBW.jpg",
+      "vote_average": 7.5,
+      "vote_count": 43
+    },
+    {
+      "backdrop_path": "/jbTqU6BJMufoMnPSlO4ThrcXs3Y.jpg",
+      "first_air_date": "1999-01-31",
+      "genre_ids": [
+        16,
+        35
+      ],
+      "id": 1434,
+      "name": "Family Guy",
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_name": "Family Guy",
+      "overview": "Sick, twisted, politically incorrect and Freakin' Sweet animated series featuring the adventures of the dysfunctional Griffin family. Bumbling Peter and long-suffering Lois have three kids. Stewie (a brilliant but sadistic baby bent on killing his mother and taking over the world), Meg (the oldest, and is the most unpopular girl in town) and Chris (the middle kid, he's not very bright but has a passion for movies). The final member of the family is Brian - a talking dog and much more than a pet, he keeps Stewie in check whilst sipping Martinis and sorting through his own life issues.",
+      "popularity": 209.66,
+      "poster_path": "/eWWCRjBfLyePh2tfZdvNcIvKSJe.jpg",
+      "vote_average": 7,
+      "vote_count": 2845
+    },
+    {
+      "backdrop_path": "/2O3ZRECju00Jod6LrVB3uRgZMXK.jpg",
+      "first_air_date": "2021-07-07",
+      "genre_ids": [
+        10751,
+        35,
+        16
+      ],
+      "id": 90461,
+      "name": "Monsters at Work",
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_name": "Monsters at Work",
+      "overview": "Six months after the events of Monsters, Inc., the city of Monstropolis is now fueled with the sound of laughter. Tylor Tuskmon, a mechanic on the Facilities Team, dreams of working alongside his idols Mike Wazowski and James P. 'Sulley' Sullivan.",
+      "popularity": 195.285,
+      "poster_path": "/s2L0tGpnWJMfaX1y0xUFcfKyX9p.jpg",
+      "vote_average": 7.4,
+      "vote_count": 210
+    },
+    {
+      "backdrop_path": "/gHoE5UByMIjbhBnbYxezrCVGwCL.jpg",
+      "first_air_date": "2005-12-27",
+      "genre_ids": [
+        10762,
+        16,
+        10759,
+        35
+      ],
+      "id": 4686,
+      "name": "Ben 10",
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_name": "Ben 10",
+      "overview": "When 10-year-old Ben Tennyson discovers a mysterious device, he gains the power to change into ten different alien heroes, each with uniquely awesome powers. With such abilities at his disposal, Ben realizes a greater responsibility to help others and stop evildoers, but that doesn't mean he's above a little superpowered mischief now and then.",
+      "popularity": 189.993,
+      "poster_path": "/pT0NlYVIkwM2zAw9oUkePwrOlxW.jpg",
+      "vote_average": 8.1,
+      "vote_count": 1005
+    },
+    {
+      "backdrop_path": "/xNJGvSS5PcJoqNZJahgGPwu8F4z.jpg",
+      "first_air_date": "2010-04-05",
+      "genre_ids": [
+        16,
+        35,
+        10765
+      ],
+      "id": 15260,
+      "name": "Adventure Time",
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_name": "Adventure Time",
+      "overview": "Hook up with Finn and Jake as they travel the Land of Ooo searching for adventure. But remember, adventure isn’t always easy. Sometimes you’ve got to battle fire gnomes that torture old ladies, save a smelly hot dog princess from the Ice King, and thaw out a bunch of frozen businessmen. What the cabbage?!",
+      "popularity": 184.838,
+      "poster_path": "/qk3eQ8jW4opJ48gFWYUXWaMT4l.jpg",
+      "vote_average": 8.3,
+      "vote_count": 1614
+    },
+    {
+      "backdrop_path": "/bhF63Jd90gRYyTHd4y5GCGA2vX6.jpg",
+      "first_air_date": "2010-09-06",
+      "genre_ids": [
+        16,
+        35
+      ],
+      "id": 31132,
+      "name": "Regular Show",
+      "origin_country": [
+        "US"
+      ],
+      "original_language": "en",
+      "original_name": "Regular Show",
+      "overview": "Two bored groundskeepers, Mordecai (a six-foot-tall blue jay) and Rigby (a hyperactive raccoon) are best friends who spend their days trying to entertain themselves by any means necessary, much to the displeasure of their boss. Their everyday pursuits often lead to things spiraling out of control and into the surreal.",
+      "popularity": 184.08,
+      "poster_path": "/88dAGv0ywrLJKCynkH226dBwe0i.jpg",
+      "vote_average": 8.8,
+      "vote_count": 1152
+    },
+    {
+      "backdrop_path": "/yJAOi2n0VYBEXdPI1NXv5FiOcBX.jpg",
+      "first_air_date": "2015-07-05",
+      "genre_ids": [
+        16,
+        10759,
+        10765
+      ],
+      "id": 62715,
+      "name": "Dragon Ball Super",
+      "origin_country": [
+        "JP"
+      ],
+      "original_language": "ja",
+      "original_name": "ドラゴンボール超（スーパー）",
+      "overview": "With Majin Boo defeated half-a-year prior, peace returns to Earth, where Son Goku (now a radish farmer) and his friends now live peaceful lives. However, a new threat appears in the form of Beerus, the God of Destruction. Considered the most terrifying being in the entire universe, Beerus is eager to fight the legendary warrior seen in a prophecy foretold decades ago known as the Super Saiyan God. The series retells the events from the two Dragon Ball Z films, Battle of Gods and Resurrection 'F' before proceeding to an original story about the exploration of alternate universes.",
+      "popularity": 164.577,
+      "poster_path": "/kbhu0tIv5E1PbAw2YPjrhoQ7I1s.jpg",
+      "vote_average": 8.2,
+      "vote_count": 3154
+    }
+  ],
+  "total_pages": 383,
+  "total_results": 7651
+}

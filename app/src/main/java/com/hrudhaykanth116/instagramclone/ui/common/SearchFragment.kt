@@ -14,6 +14,7 @@ import com.hrudhaykanth116.instagramclone.data.models.TvShowData
 import com.hrudhaykanth116.instagramclone.data.models.network.Resource
 import com.hrudhaykanth116.instagramclone.databinding.FragmentSearchBinding
 import com.hrudhaykanth116.instagramclone.ui.screens.base.BaseFragment
+import com.hrudhaykanth116.instagramclone.utils.toasts.ToastHelper
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,11 +26,18 @@ class SearchFragment : BaseFragment() {
     private val viewModel: SearchViewModel by viewModels()
 
     val searchListAdapter: SearchListAdapter by lazy {
-        SearchListAdapter {
+        SearchListAdapter { tvShowData: TvShowData ->
             // Navigate to the item.
-            val action: NavDirections =
-                SearchFragmentDirections.actionSearchFragmentToUserProfileNavScreen(it)
-            findNavController().navigate(action)
+
+            tvShowData.id?.let {
+                val action: NavDirections =
+                    SearchFragmentDirections.actionSearchFragmentToUserProfileNavScreen(
+                        it
+                    )
+                findNavController().navigate(action)
+            } ?: run{
+                ToastHelper.showErrorToast(requireContext(), "No tv id.")
+            }
         }
     }
 

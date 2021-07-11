@@ -3,29 +3,48 @@ package com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.so
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.hrudhaykanth116.instagramclone.data.models.TvShowData
-import com.hrudhaykanth116.instagramclone.data.models.TvShowDataPagedResponse
+import com.hrudhaykanth116.instagramclone.data.models.discover.DiscoverResult
+import com.hrudhaykanth116.instagramclone.data.models.discover.GetDiscoverTvResponse
+import com.hrudhaykanth116.instagramclone.data.models.genres.Genre
 import com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.retrofit.RetroApis
 import retrofit2.HttpException
+import retrofit2.Response
 import java.io.IOException
-import javax.inject.Inject
 import kotlin.random.Random
 
-class TopRatedTvShowsRemoteDataSource @Inject constructor(
-    private val retroApis: RetroApis
-): PagingSource<Int, TvShowData>() {
+class DiscoverTvShowsRemoteDataSource constructor(
+    private val retroApis: RetroApis,
+    genres: List<Genre>?
+) : PagingSource<Int, DiscoverResult>() {
 
-    private var initialPageId = Random.nextInt(1, 20)
+    private val commaSeparatedGenreIds: String = run{
+        if(genres.isNullOrEmpty()){
+            return@run "10759|99|16|10762|10765"
+        }else{
+            return@run genres.joinToString {
+                "${it.id}"
+            }
+        }
+        // genres?.joinToString {
+        //     "${it.id}"
+        // } ?: run{
+        //     // Some default genres --> implicitly showing different genres types.
+        //     "10759|99|16|10762|10765"
+        // }
+    }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, TvShowData> {
+    private var initialPageId = 1
+
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, DiscoverResult> {
         val currentKey = params.key ?: initialPageId
 
         Log.d(TAG, "load: currentKey: $currentKey")
 
         return try {
-            val topRatedTvShowsResponse: TvShowDataPagedResponse =
-                retroApis.getTopRatedTvShows(currentKey)
-            val tvShowsList = topRatedTvShowsResponse.tvShowsList
+            val discoverTvShowsResponse: Response<GetDiscoverTvResponse> =
+                retroApis.discoverTv(currentKey, commaSeparatedGenreIds)
+            val tvShowsList: List<DiscoverResult> =
+                discoverTvShowsResponse.body()?.results ?: arrayListOf()
 
             // TODO: 29/05/21 Check if the response is successful
 
@@ -35,7 +54,7 @@ class TopRatedTvShowsRemoteDataSource @Inject constructor(
                 nextKey = currentKey + 1
             )
 
-        }catch (exception: IOException) {
+        } catch (exception: IOException) {
             Log.e(TAG, "load: ", exception)
             LoadResult.Error(exception)
         } catch (exception: HttpException) {
@@ -45,7 +64,7 @@ class TopRatedTvShowsRemoteDataSource @Inject constructor(
     }
 
     // The refresh key is used for the initial load of the next PagingSource, after invalidation
-    override fun getRefreshKey(state: PagingState<Int, TvShowData>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, DiscoverResult>): Int? {
         // We need to get the previous key (or next key if previous is null) of the page
         // that was closest to the most recently accessed index.
         // Anchor position is the most recently accessed index
@@ -61,8 +80,8 @@ class TopRatedTvShowsRemoteDataSource @Inject constructor(
         return refreshKey
     }
 
-    companion object{
-        private val TAG: String = TopRatedTvShowsRemoteDataSource::class.java.name
+    companion object {
+        private val TAG: String = DiscoverTvShowsRemoteDataSource::class.java.name
     }
 
 }

@@ -2,6 +2,8 @@ package com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.re
 
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
 import com.hrudhaykanth116.instagramclone.data.models.*
+import com.hrudhaykanth116.instagramclone.data.models.discover.GetDiscoverTvResponse
+import com.hrudhaykanth116.instagramclone.data.models.genres.GetTvGenresResponse
 import com.hrudhaykanth116.instagramclone.data.models.search.TvShowSearchResults
 import retrofit2.Call
 import retrofit2.Response
@@ -79,6 +81,21 @@ public interface RetroApis {
         @Query("page") page: String = "1",
         @Query("include_adult") includeAdult: String = "false",
     ): Response<TvShowSearchResults>
+
+    @GET("genre/tv/list")
+    suspend fun getTvGenres(
+        @Query("api_key") apiKey: String = MoviesDbConstants.API_KEY,
+        @Query("language") language: String = "en-US",
+    ): Response<GetTvGenresResponse>
+
+    @GET("discover/tv")
+    suspend fun discoverTv(
+        @Query("page") page: Int,
+        @Query("with_genres") genres: String?,
+        @Query("sort_by") sortBy: String = "popularity.desc",
+        @Query("api_key") apiKey: String = MoviesDbConstants.API_KEY,
+        @Query("language") language: String = "en-US",
+    ): Response<GetDiscoverTvResponse>
 
 
 }

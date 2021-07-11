@@ -16,4 +16,8 @@
     <color name="progressBarTrackColor">#B4B4B4</color>
     <color name="progressBarColor">#1153E2</color>
 
+    <!-- Selector colors -->
+    <color name="selectedColor">#6DDFF3</color>
+    <color name="unSelectedColor">#00FFFFFF</color>
+
 </resources>

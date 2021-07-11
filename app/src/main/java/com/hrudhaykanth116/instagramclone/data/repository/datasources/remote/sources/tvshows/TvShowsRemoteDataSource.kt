@@ -1,6 +1,7 @@
 package com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.sources.tvshows
 
 import com.hrudhaykanth116.instagramclone.data.models.TvShowDetails
+import com.hrudhaykanth116.instagramclone.data.models.genres.GetTvGenresResponse
 import com.hrudhaykanth116.instagramclone.data.models.network.Resource
 import com.hrudhaykanth116.instagramclone.data.models.search.TvShowSearchResults
 import com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.retrofit.RetroApis
@@ -20,6 +21,12 @@ class TvShowsRemoteDataSource @Inject constructor(
     suspend fun searchTvShow(query: String): Resource<TvShowSearchResults> {
         return getResult {
             retroApis.searchTv(query)
+        }
+    }
+
+    suspend fun getTvGenres(): Resource<GetTvGenresResponse> {
+        return getResult {
+            retroApis.getTvGenres()
         }
     }
 

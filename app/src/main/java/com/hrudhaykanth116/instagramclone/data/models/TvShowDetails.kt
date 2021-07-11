@@ -2,6 +2,7 @@ package com.hrudhaykanth116.instagramclone.data.models
 
 
 import com.google.gson.annotations.SerializedName
+import com.hrudhaykanth116.instagramclone.data.models.genres.Genre
 
 data class TvShowDetails(
     @SerializedName("backdrop_path")
@@ -73,13 +74,6 @@ data class TvShowDetails(
         val name: String? = "",
         @SerializedName("profile_path")
         val profilePath: String? = ""
-    )
-
-    data class Genre(
-        @SerializedName("id")
-        val id: Int? = 0,
-        @SerializedName("name")
-        val name: String? = ""
     )
 
     data class LastEpisodeToAir(

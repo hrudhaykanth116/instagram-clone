@@ -11,7 +11,6 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
-import com.hrudhaykanth116.instagramclone.data.models.TvShowData
 import com.hrudhaykanth116.instagramclone.data.models.TvShowDetails
 import com.hrudhaykanth116.instagramclone.data.models.network.Resource
 import com.hrudhaykanth116.instagramclone.databinding.FragmentTvShowDetailsBinding
@@ -32,7 +31,7 @@ class TvShowDetailsFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifecycleScope.launchWhenStarted {
-            loadData(tvShowDetailsFragmentArgs.tvShowData)
+            loadData(tvShowDetailsFragmentArgs.tvShowId)
         }
     }
 
@@ -82,33 +81,23 @@ class TvShowDetailsFragment : BaseFragment() {
             findNavController().popBackStack()
         }
 
-        val tvShowData = arguments?.let {
-            TvShowDetailsFragmentArgs.fromBundle(it).tvShowData
-        }
-
-        tvShowData?.let {
-            binding.topAppBar.title =
-                it.name?.getNonEmptyString() ?: getString(R.string.tv_show_name_unavailable)
-
-            val tvShowImageView = binding.tvShowImage.innerImg
-            ImageLoader.load(MoviesDbConstants.IMAGES_BASE_URL + it.posterPath, tvShowImageView)
-
-        }
-
-
     }
 
-    private fun loadData(tvShowData: TvShowData) {
-        if (tvShowData.id == null) {
-            handleError(message = "No id for the Tv show")
-        } else {
-            viewmodel.getTvShowDetails(tvShowData.id)
-        }
+    private fun loadData(tvShowId: Int) {
+        viewmodel.getTvShowDetails(tvShowId)
     }
 
     private fun fillView(tvShowDetails: TvShowDetails) {
 
         // TODO: 07/06/21 Use data binding.
+
+
+        binding.topAppBar.title =
+            tvShowDetails.name?.getNonEmptyString() ?: getString(R.string.tv_show_name_unavailable)
+
+        val tvShowImageView = binding.tvShowImage.innerImg
+        ImageLoader.load(MoviesDbConstants.IMAGES_BASE_URL + tvShowDetails.posterPath, tvShowImageView)
+
 
         binding.showRatingTV.text = tvShowDetails.voteAverage.toString()
         binding.showSeasonsCountTV.text = tvShowDetails.numberOfSeasons.toString()

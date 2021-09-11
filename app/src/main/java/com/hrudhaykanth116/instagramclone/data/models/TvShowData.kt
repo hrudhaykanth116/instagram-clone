@@ -2,52 +2,55 @@ package com.hrudhaykanth116.instagramclone.data.models
 
 import android.os.Parcelable
 import androidx.recyclerview.widget.DiffUtil
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
 
+@JsonClass(generateAdapter = true)
 @Parcelize
 data class TvShowData(
-    @SerializedName("backdrop_path")
+    @Json(name = "backdrop_path")
     val backdropPath: String? = "",
-    @SerializedName("first_air_date")
+    @Json(name = "first_air_date")
     val firstAirDate: String? = "",
-    @SerializedName("genre_ids")
+    @Json(name = "genre_ids")
     val genreIds: List<Int>? = listOf(),
-    @SerializedName("id")
+    @Json(name = "id")
     val id: Int? = 0,
-    @SerializedName("name")
+    @Json(name = "name")
     val name: String? = "",
-    @SerializedName("origin_country")
+    @Json(name = "origin_country")
     val originCountry: List<String>? = listOf(),
-    @SerializedName("original_language")
+    @Json(name = "original_language")
     val originalLanguage: String? = "",
-    @SerializedName("original_name")
+    @Json(name = "original_name")
     val originalName: String? = "",
-    @SerializedName("overview")
+    @Json(name = "overview")
     val overview: String? = "",
-    @SerializedName("popularity")
+    @Json(name = "popularity")
     val popularity: Double? = 0.0,
-    @SerializedName("poster_path")
+    @Json(name = "poster_path")
     val posterPath: String? = "",
-    @SerializedName("vote_average")
+    @Json(name = "vote_average")
     val voteAverage: Double? = 0.0,
-    @SerializedName("vote_count")
+    @Json(name = "vote_count")
     val voteCount: Int? = 0
 ) : Parcelable {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
 
-        other as TvShowData
-
-        if (id != other.id) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        return id ?: 0
-    }
+    // override fun equals(other: Any?): Boolean {
+    //     if (this === other) return true
+    //     if (javaClass != other?.javaClass) return false
+    //
+    //     other as TvShowData
+    //
+    //     if (id != other.id) return false
+    //
+    //     return true
+    // }
+    //
+    // override fun hashCode(): Int {
+    //     return id ?: 0
+    // }
 
     companion object{
         public val diffUtillCallback = object: DiffUtil.ItemCallback<TvShowData>(){

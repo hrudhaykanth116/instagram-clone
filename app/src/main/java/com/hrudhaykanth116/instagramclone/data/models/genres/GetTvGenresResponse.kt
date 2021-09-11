@@ -1,8 +1,10 @@
 package com.hrudhaykanth116.instagramclone.data.models.genres
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
 
+@JsonClass(generateAdapter = true)
 data class GetTvGenresResponse(
-    @SerializedName("genres")
+    @Json(name = "genres")
     val genres: List<Genre>? = null
 )

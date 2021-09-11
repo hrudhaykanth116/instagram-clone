@@ -1,31 +1,34 @@
 package com.hrudhaykanth116.instagramclone.data.models
 
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class MovieVideosResponse(
-    @SerializedName("id")
+    @Json(name = "id")
     val id: Int? = 0,
-    @SerializedName("results")
+    @Json(name = "results")
     val results: List<MovieVideo?>? = listOf()
 ){
 
+    @JsonClass(generateAdapter = true)
     data class MovieVideo(
-        @SerializedName("id")
+        @Json(name = "id")
         val id: String? = "",
-        @SerializedName("iso_3166_1")
+        @Json(name = "iso_3166_1")
         val iso31661: String? = "",
-        @SerializedName("iso_639_1")
+        @Json(name = "iso_639_1")
         val iso6391: String? = "",
-        @SerializedName("key")
+        @Json(name = "key")
         val key: String? = "",
-        @SerializedName("name")
+        @Json(name = "name")
         val name: String? = "",
-        @SerializedName("site")
+        @Json(name = "site")
         val site: String? = "",
-        @SerializedName("size")
+        @Json(name = "size")
         val size: Int? = 0,
-        @SerializedName("type")
+        @Json(name = "type")
         val type: String? = ""
     )
 

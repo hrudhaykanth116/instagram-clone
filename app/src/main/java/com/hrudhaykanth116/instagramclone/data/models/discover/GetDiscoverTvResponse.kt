@@ -1,15 +1,17 @@
 package com.hrudhaykanth116.instagramclone.data.models.discover
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
 
+@JsonClass(generateAdapter = true)
 data class GetDiscoverTvResponse(
-    @SerializedName("page")
+    @Json(name = "page")
     val page: Int? = null,
-    @SerializedName("results")
+    @Json(name = "results")
     val results: List<DiscoverResult>? = null,
-    @SerializedName("total_pages")
+    @Json(name = "total_pages")
     val totalPages: Int? = null,
-    @SerializedName("total_results")
+    @Json(name = "total_results")
     val totalResults: Int? = null
 ) {
 

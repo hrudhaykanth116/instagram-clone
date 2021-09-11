@@ -1,34 +1,36 @@
 package com.hrudhaykanth116.instagramclone.data.models.discover
 
 import androidx.recyclerview.widget.DiffUtil
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class DiscoverResult(
-    @SerializedName("backdrop_path")
+    @Json(name = "backdrop_path")
     val backdropPath: String? = null,
-    @SerializedName("first_air_date")
+    @Json(name = "first_air_date")
     val firstAirDate: String? = null,
-    @SerializedName("genre_ids")
+    @Json(name = "genre_ids")
     val genreIds: List<Int?>? = null,
-    @SerializedName("id")
+    @Json(name = "id")
     val id: Int? = null,
-    @SerializedName("name")
+    @Json(name = "name")
     val name: String? = null,
-    @SerializedName("origin_country")
+    @Json(name = "origin_country")
     val originCountry: List<String?>? = null,
-    @SerializedName("original_language")
+    @Json(name = "original_language")
     val originalLanguage: String? = null,
-    @SerializedName("original_name")
+    @Json(name = "original_name")
     val originalName: String? = null,
-    @SerializedName("overview")
+    @Json(name = "overview")
     val overview: String? = null,
-    @SerializedName("popularity")
+    @Json(name = "popularity")
     val popularity: Double? = null,
-    @SerializedName("poster_path")
+    @Json(name = "poster_path")
     val posterPath: String? = null,
-    @SerializedName("vote_average")
+    @Json(name = "vote_average")
     val voteAverage: Double? = null,
-    @SerializedName("vote_count")
+    @Json(name = "vote_count")
     val voteCount: Int? = null
 ){
 

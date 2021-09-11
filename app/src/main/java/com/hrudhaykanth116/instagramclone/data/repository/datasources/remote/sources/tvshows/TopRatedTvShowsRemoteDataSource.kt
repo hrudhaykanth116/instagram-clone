@@ -7,6 +7,7 @@ import com.hrudhaykanth116.instagramclone.data.models.TvShowData
 import com.hrudhaykanth116.instagramclone.data.models.TvShowDataPagedResponse
 import com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.retrofit.RetroApis
 import retrofit2.HttpException
+import retrofit2.Response
 import java.io.IOException
 import javax.inject.Inject
 import kotlin.random.Random
@@ -23,9 +24,9 @@ class TopRatedTvShowsRemoteDataSource @Inject constructor(
         Log.d(TAG, "load: currentKey: $currentKey")
 
         return try {
-            val topRatedTvShowsResponse: TvShowDataPagedResponse =
+            val topRatedTvShowsResponse: Response<TvShowDataPagedResponse> =
                 retroApis.getTopRatedTvShows(currentKey)
-            val tvShowsList = topRatedTvShowsResponse.tvShowsList
+            val tvShowsList = topRatedTvShowsResponse.body()?.tvShowsList ?: listOf()
 
             // TODO: 29/05/21 Check if the response is successful
 

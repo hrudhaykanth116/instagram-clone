@@ -8,8 +8,6 @@ Use coroutines.
 Use data binding.
 
 
-
-chips for search categories.
 (https://classroom.udacity.com/courses/ud9012/lessons/d6418953-69fb-41ab-acc4-aafc681ccf41/concepts/54e06c1d-c0de-4fe3-8afa-432d69a4420b)
 Motion layout
 Handle network failures

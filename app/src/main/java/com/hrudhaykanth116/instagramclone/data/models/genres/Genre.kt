@@ -1,10 +1,15 @@
 package com.hrudhaykanth116.instagramclone.data.models.genres
 
-import com.google.gson.annotations.SerializedName
+import android.os.Parcelable
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+import kotlinx.parcelize.Parcelize
 
+@JsonClass(generateAdapter = true)
+@Parcelize
 data class Genre(
-    @SerializedName("id")
+    @Json(name = "id")
     val id: Int? = null,
-    @SerializedName("name")
+    @Json(name = "name")
     val name: String? = null
-)
+): Parcelable

@@ -1,13 +1,15 @@
 package com.hrudhaykanth116.instagramclone.data.models
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class PopularMoviesResponse(
     var page: Int,
-    @SerializedName("total_results")
+    @Json(name = "total_results")
     var totalResults: Int,
-    @SerializedName("total_pages")
+    @Json(name = "total_pages")
     var totalPages: Int,
-    @SerializedName("results")
+    @Json(name = "results")
     var movieData: List<MovieData>
 )

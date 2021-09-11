@@ -1,14 +1,16 @@
 package com.hrudhaykanth116.instagramclone.data.models.search
-import com.google.gson.annotations.SerializedName
 import com.hrudhaykanth116.instagramclone.data.models.TvShowData
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class TvShowSearchResults(
-    @SerializedName("page")
+    @Json(name = "page")
     val page: Int? = null,
-    @SerializedName("results")
+    @Json(name = "results")
     val tvShowDataList: List<TvShowData?>? = null,
-    @SerializedName("total_pages")
+    @Json(name = "total_pages")
     val totalPages: Int? = null,
-    @SerializedName("total_results")
+    @Json(name = "total_results")
     val totalResults: Int? = null
 )

@@ -47,13 +47,13 @@ public interface RetroApis {
     suspend fun getPopularTvShows(
         @Query("page") pageId: Int,
         @Query("api_key") apiKey: String = MoviesDbConstants.API_KEY
-    ): TvShowDataPagedResponse
+    ): Response<TvShowDataPagedResponse>
 
     @GET("tv/top_rated/")
     suspend fun getTopRatedTvShows(
         @Query("page") pageId: Int,
         @Query("api_key") apiKey: String = MoviesDbConstants.API_KEY
-    ): TvShowDataPagedResponse
+    ): Response<TvShowDataPagedResponse>
 
     @GET("tv/airing_today/")
     suspend fun getAiringTodayShows(

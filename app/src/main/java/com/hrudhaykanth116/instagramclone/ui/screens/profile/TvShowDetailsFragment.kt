@@ -4,17 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.tabs.TabLayoutMediator
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.confidential.MoviesDbConstants
 import com.hrudhaykanth116.instagramclone.data.models.TvShowDetails
 import com.hrudhaykanth116.instagramclone.data.models.network.Resource
 import com.hrudhaykanth116.instagramclone.databinding.FragmentTvShowDetailsBinding
-import com.hrudhaykanth116.instagramclone.ui.adapters.TvShowImagesAdapter
+import com.hrudhaykanth116.instagramclone.ui.common.compose.StoriesView
 import com.hrudhaykanth116.instagramclone.ui.screens.base.BaseFragment
 import com.hrudhaykanth116.instagramclone.utils.extensions.getNonEmptyString
 import com.hrudhaykanth116.instagramclone.utils.image.ImageLoader
@@ -77,6 +78,18 @@ class TvShowDetailsFragment : BaseFragment() {
 
     private fun initViews() {
 
+        binding.composeViewStories.apply {
+
+            // Dispose the Composition when the view's LifecycleOwner
+            // is destroyed
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+
+            setContent { 
+                StoriesView(list = listOf())
+            }
+
+        }
+
         binding.topAppBar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
@@ -89,15 +102,14 @@ class TvShowDetailsFragment : BaseFragment() {
 
     private fun fillView(tvShowDetails: TvShowDetails) {
 
-        // TODO: 07/06/21 Use data binding.
-
-
         binding.topAppBar.title =
             tvShowDetails.name?.getNonEmptyString() ?: getString(R.string.tv_show_name_unavailable)
 
         val tvShowImageView = binding.tvShowImage.innerImg
-        ImageLoader.load(MoviesDbConstants.IMAGES_BASE_URL + tvShowDetails.posterPath, tvShowImageView)
-
+        ImageLoader.load(
+            MoviesDbConstants.IMAGES_BASE_URL + tvShowDetails.posterPath,
+            tvShowImageView
+        )
 
         binding.showRatingTV.text = tvShowDetails.voteAverage.toString()
         binding.showSeasonsCountTV.text = tvShowDetails.numberOfSeasons.toString()
@@ -109,17 +121,16 @@ class TvShowDetailsFragment : BaseFragment() {
         }
         binding.tvShowOverview.text = tvShowDetails.overview
 
+        binding.viewPagerContent.adapter =
+            ProfileContentViewPagerAdapter(requireActivity(), tvShowDetails)
 
-        val seasonPosterPathList = ArrayList<String>()
-        tvShowDetails.seasons?.forEach { seasonDetail ->
-            seasonDetail?.posterPath?.let {
-                seasonPosterPathList.add(MoviesDbConstants.IMAGES_BASE_URL + it)
-            }
-        }
+        TabLayoutMediator(binding.viewPagerTab, binding.viewPagerContent) { tab, position ->
+            val orNull: ProfileContentViewPagerAdapter.TabName =
+                ProfileContentViewPagerAdapter.TABS_LIST.getOrNull(position)!!
+            tab.text = orNull.text
+            tab.setIcon(orNull.iconId)
+        }.attach()
 
-        binding.tvShowImages.adapter = TvShowImagesAdapter(seasonPosterPathList)
-        val gridLayoutManager = GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false)
-        binding.tvShowImages.layoutManager = gridLayoutManager
     }
 
 }

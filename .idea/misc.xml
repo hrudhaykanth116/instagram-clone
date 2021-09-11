@@ -4,10 +4,24 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../layout/compose-model-1629749032802.xml" value="0.1" />
+        <entry key="../../../../../layout/compose-model-1630167033467.xml" value="0.165" />
+        <entry key="../../../../../layout/compose-model-1630169225569.xml" value="0.25" />
+        <entry key="../../../../../layout/compose-model-1630217909303.xml" value="0.2777777777777778" />
+        <entry key="../../../../../layout/compose-model-1630304406774.xml" value="0.275" />
+        <entry key="../../../../../layout/compose-model-1630745655755.xml" value="0.45" />
+        <entry key="../../../../../layout/compose-model-1630770038187.xml" value="0.29208754208754206" />
+        <entry key="../../../../../layout/compose-model-1630770125421.xml" value="2.0" />
+        <entry key="../../../../../layout/compose-model-1631257071144.xml" value="0.29208754208754206" />
+        <entry key="../../../../../layout/compose-model-1631306986167.xml" value="0.29208754208754206" />
+        <entry key="../../../../../layout/compose-model-1631351337265.xml" value="0.29124579124579125" />
+        <entry key="../../../../../layout/compose-model-1631351371768.xml" value="1.5" />
+        <entry key="app/src/main/res/layout/fragment_seasons_posters.xml" value="0.28055555555555556" />
+        <entry key="app/src/main/res/layout/fragment_tv_show_details.xml" value="0.30925925925925923" />
+        <entry key="app/src/main/res/layout/my_account_fragment.xml" value="0.31869254341164455" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

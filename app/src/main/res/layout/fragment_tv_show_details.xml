@@ -139,20 +139,34 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvShowWebPage"
                 tools:text="Tv show overview" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/tvShowImages"
+            <androidx.compose.ui.platform.ComposeView
+                android:id="@+id/composeViewStories"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvShowOverview"
-                app:spanCount="3"
-                tools:itemCount="20"
-                tools:listitem="@layout/image_view"
-                tools:visibility="visible" />
+                />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/viewPagerTab"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvShowOverview"
+                />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPagerContent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/viewPagerTab"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

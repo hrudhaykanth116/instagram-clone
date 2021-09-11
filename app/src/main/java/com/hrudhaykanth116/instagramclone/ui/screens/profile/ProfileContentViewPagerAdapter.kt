@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.data.models.TvShowDetails
+import com.hrudhaykanth116.instagramclone.ui.screens.profile.videos.TvVideosFragment
 
 class ProfileContentViewPagerAdapter(
     fragmentActivity: FragmentActivity,

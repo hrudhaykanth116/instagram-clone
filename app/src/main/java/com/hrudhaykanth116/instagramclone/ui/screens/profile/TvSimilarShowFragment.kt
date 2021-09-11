@@ -41,7 +41,7 @@ class TvSimilarShowFragment : BaseFragment() {
         const val KEY_TV_SHOW_DETAILS = "${AppConstants.PACKAGE_NAME}.key_tv_show_details"
 
         public fun getInstance(tvShowDetails: TvShowDetails): Fragment {
-            val movieStoriesFragment = TvImagesFragment()
+            val movieStoriesFragment = TvSimilarShowFragment()
             val bundle = Bundle()
             bundle.putParcelable(KEY_TV_SHOW_DETAILS, tvShowDetails)
             movieStoriesFragment.arguments = bundle

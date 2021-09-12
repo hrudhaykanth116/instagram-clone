@@ -1,6 +1,7 @@
 package com.hrudhaykanth116.instagramclone.ui.screens.profile
 
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -120,15 +121,16 @@ class TvShowDetailsFragment : BaseFragment() {
             binding.tvShowWebPage.text = tvShowDetails.homepage
         }
         binding.tvShowOverview.text = tvShowDetails.overview
+        binding.tvShowOverview.movementMethod = ScrollingMovementMethod()
 
         binding.viewPagerContent.adapter =
             ProfileContentViewPagerAdapter(requireActivity(), tvShowDetails)
 
         TabLayoutMediator(binding.viewPagerTab, binding.viewPagerContent) { tab, position ->
-            val orNull: ProfileContentViewPagerAdapter.TabName =
+            val tabItem: ProfileContentViewPagerAdapter.TabItem =
                 ProfileContentViewPagerAdapter.TABS_LIST.getOrNull(position)!!
-            tab.text = orNull.text
-            tab.setIcon(orNull.iconId)
+            // tab.text = tabItem.text
+            tab.setIcon(tabItem.iconId)
         }.attach()
 
     }

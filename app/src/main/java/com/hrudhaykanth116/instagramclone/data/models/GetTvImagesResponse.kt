@@ -4,13 +4,13 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class GetTvImagesResponse(
-    val backdrops: List<Backdrop?>? = null,
+    val backdrops: List<ImageObj?> = listOf(),
     val id: Int? = null,
-    val posters: List<Poster?>? = null
+    val posters: List<ImageObj?> = listOf()
 ) {
 
     @JsonClass(generateAdapter = true)
-    data class Backdrop(
+    data class ImageObj(
         val aspect_ratio: Double? = null,
         val file_path: String? = null,
         val height: Int? = null,
@@ -20,14 +20,4 @@ data class GetTvImagesResponse(
         val width: Int? = null
     )
 
-    @JsonClass(generateAdapter = true)
-    data class Poster(
-        val aspect_ratio: Double? = null,
-        val file_path: String? = null,
-        val height: Int? = null,
-        val iso_639_1: String? = null,
-        val vote_average: Double? = null,
-        val vote_count: Int? = null,
-        val width: Int? = null
-    )
 }

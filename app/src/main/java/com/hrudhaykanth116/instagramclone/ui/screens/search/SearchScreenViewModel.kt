@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.hrudhaykanth116.instagramclone.data.models.discover.DiscoverResult
+import com.hrudhaykanth116.instagramclone.data.models.TvShowData
 import com.hrudhaykanth116.instagramclone.data.models.genres.Genre
 import com.hrudhaykanth116.instagramclone.data.models.genres.GetTvGenresResponse
 import com.hrudhaykanth116.instagramclone.data.models.network.Resource
@@ -26,7 +26,7 @@ class SearchScreenViewModel @Inject constructor(
     private val tvShowsRepository: TvShowsRepository
 ) : ViewModel() {
 
-    private var discoverTvShowsFlowData: Flow<PagingData<DiscoverResult>>? = null
+    private var discoverTvShowsFlowData: Flow<PagingData<TvShowData>>? = null
 
     val tvGenresResponseResource = MutableLiveData<Resource<GetTvGenresResponse>>()
 
@@ -38,7 +38,7 @@ class SearchScreenViewModel @Inject constructor(
         Log.d(TAG, "init: ")
     }
 
-    fun discoverTvShows(genres: ArrayList<Genre>?): Flow<PagingData<DiscoverResult>> {
+    fun discoverTvShows(genres: ArrayList<Genre>?): Flow<PagingData<TvShowData>> {
         Log.d(TAG, "discoverTvShows: ")
         val selectedGenresChanged = !selectedGenres?.toSet().contentEquals(genres?.toSet())
         if (!selectedGenresChanged && discoverTvShowsFlowData != null) {
@@ -50,7 +50,7 @@ class SearchScreenViewModel @Inject constructor(
         }else{
             selectedGenres = null
         }
-        val newResult: Flow<PagingData<DiscoverResult>> =
+        val newResult: Flow<PagingData<TvShowData>> =
             discoverTvShowsRepository.getTvShowsPagingData(genres).cachedIn(viewModelScope)
         discoverTvShowsFlowData = newResult
         return discoverTvShowsFlowData!!

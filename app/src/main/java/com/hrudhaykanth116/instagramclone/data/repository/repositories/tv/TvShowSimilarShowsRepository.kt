@@ -5,19 +5,18 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.hrudhaykanth116.instagramclone.data.models.TvShowData
-import com.hrudhaykanth116.instagramclone.data.models.genres.Genre
-import com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.retrofit.RetroApis
-import com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.sources.tvshows.DiscoverTvShowsRemoteDataSource
+import com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.retrofit.TvApisService
+import com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.sources.tvshows.TvShowSimilarShowsRemoteDataSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DiscoverTvShowsRepository @Inject constructor(
-    private val retroApis: RetroApis,
+class TvShowSimilarShowsRepository @Inject constructor(
+    private val tvApisService: TvApisService
 ) {
 
-    fun getTvShowsPagingData(genres: List<Genre>?): Flow<PagingData<TvShowData>> {
+    fun getTvShowsPagingData(tvShowId: Int): Flow<PagingData<TvShowData>> {
         Log.d(TAG, "getTvShows: ")
         val pagingConfig = PagingConfig(
             pageSize = PAGE_SIZE,
@@ -28,14 +27,14 @@ class DiscoverTvShowsRepository @Inject constructor(
         return Pager(
             config = pagingConfig,
             pagingSourceFactory = {
-                DiscoverTvShowsRemoteDataSource(retroApis, genres)
+                TvShowSimilarShowsRemoteDataSource(tvShowId, tvApisService)
             }
         ).flow
     }
 
     companion object {
 
-        private const val TAG = "DiscoverTvShowsReposito"
+        private const val TAG = "TvShowSimilarShowsRepos"
 
         private const val PAGE_SIZE = 12
     }

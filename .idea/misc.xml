@@ -15,9 +15,15 @@
         <entry key="../../../../../layout/compose-model-1631306986167.xml" value="0.29208754208754206" />
         <entry key="../../../../../layout/compose-model-1631351337265.xml" value="0.29124579124579125" />
         <entry key="../../../../../layout/compose-model-1631351371768.xml" value="1.5" />
+        <entry key="app/src/main/res/layout/fragment_search_screen.xml" value="0.325" />
         <entry key="app/src/main/res/layout/fragment_seasons_posters.xml" value="0.28055555555555556" />
-        <entry key="app/src/main/res/layout/fragment_tv_show_details.xml" value="0.30925925925925923" />
+        <entry key="app/src/main/res/layout/fragment_show_images.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_tv_reviews.xml" value="0.2916666666666667" />
+        <entry key="app/src/main/res/layout/fragment_tv_show_details.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_tv_similar_shows.xml" value="0.26557711950970375" />
         <entry key="app/src/main/res/layout/fragment_videos.xml" value="0.2935185185185185" />
+        <entry key="app/src/main/res/layout/image_view.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_tv_review.xml" value="0.2916666666666667" />
         <entry key="app/src/main/res/layout/item_tv_video.xml" value="0.26851851851851855" />
         <entry key="app/src/main/res/layout/my_account_fragment.xml" value="0.31869254341164455" />
         <entry key="app/src/main/res/layout/view_my_youtube_player.xml" value="0.26851851851851855" />

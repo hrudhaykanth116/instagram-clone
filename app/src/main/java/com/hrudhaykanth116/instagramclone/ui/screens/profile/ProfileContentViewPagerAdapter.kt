@@ -5,6 +5,10 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.data.models.TvShowDetails
+import com.hrudhaykanth116.instagramclone.ui.screens.profile.castcrew.TvCastFragment
+import com.hrudhaykanth116.instagramclone.ui.screens.profile.images.TvImagesFragment
+import com.hrudhaykanth116.instagramclone.ui.screens.profile.reviews.TvReviewsFragment
+import com.hrudhaykanth116.instagramclone.ui.screens.profile.similar.TvSimilarShowFragment
 import com.hrudhaykanth116.instagramclone.ui.screens.profile.videos.TvVideosFragment
 
 class ProfileContentViewPagerAdapter(
@@ -30,16 +34,16 @@ class ProfileContentViewPagerAdapter(
     companion object {
 
         val TABS_LIST = listOf(
-            TabName(R.drawable.ic_image_24, "images"),
-            TabName(R.drawable.ic_baseline_person_24, "cast"),
-            TabName(R.drawable.ic_baseline_forum_24, "review"),
-            TabName(R.drawable.ic_baseline_videocam_24, "videos"),
-            TabName(R.drawable.ic_baseline_view_comfy_24, "similar"),
+            TabItem(R.drawable.ic_image_24, "images"),
+            TabItem(R.drawable.ic_baseline_person_24, "cast"),
+            TabItem(R.drawable.ic_baseline_forum_24, "review"),
+            TabItem(R.drawable.ic_baseline_videocam_24, "videos"),
+            TabItem(R.drawable.ic_baseline_view_comfy_24, "similar"),
         )
 
     }
 
-    data class TabName(
+    data class TabItem(
         val iconId: Int,
         val text: String
     )

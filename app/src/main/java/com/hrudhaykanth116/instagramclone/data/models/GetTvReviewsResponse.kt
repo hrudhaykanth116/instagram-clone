@@ -1,17 +1,20 @@
 package com.hrudhaykanth116.instagramclone.data.models
 
+import androidx.recyclerview.widget.DiffUtil
+import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class GetTvReviewsResponse(
     val id: Int? = null,
     val page: Int? = null,
-    val results: List<Result?>? = null,
+    @Json(name = "results")
+    val reviewDetails: List<ReviewDetails> = listOf(),
     val total_pages: Int? = null,
     val total_results: Int? = null
 ) {
     @JsonClass(generateAdapter = true)
-    data class Result(
+    data class ReviewDetails(
         val author: String? = null,
         val author_details: AuthorDetails? = null,
         val content: String? = null,
@@ -27,5 +30,19 @@ data class GetTvReviewsResponse(
             val rating: Int? = null,
             val username: String? = null
         )
+
+        companion object{
+            public val diffUtillCallback = object: DiffUtil.ItemCallback<ReviewDetails>(){
+                override fun areItemsTheSame(oldItem: ReviewDetails, newItem: ReviewDetails): Boolean {
+                    return oldItem.id == newItem.id
+                }
+
+                override fun areContentsTheSame(oldItem: ReviewDetails, newItem: ReviewDetails): Boolean {
+                    return oldItem.equals(newItem)
+                }
+
+            }
+        }
+
     }
 }

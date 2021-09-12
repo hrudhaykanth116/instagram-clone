@@ -20,154 +20,144 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <include
+        android:id="@+id/tvShowImage"
+        layout="@layout/rounded_image_container"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appBar" />
+
+    <TextView
+        android:id="@+id/showRatingTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/postsTV"
+        app:layout_constraintEnd_toEndOf="@+id/postsTV"
+        app:layout_constraintStart_toStartOf="@+id/postsTV"
+        app:layout_constraintTop_toTopOf="@+id/tvShowImage"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="7.5" />
+
+    <TextView
+        android:id="@+id/postsTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rating"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvShowImage"
+        app:layout_constraintEnd_toStartOf="@+id/seasonsTV"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toEndOf="@+id/tvShowImage"
+        app:layout_constraintTop_toBottomOf="@+id/showRatingTV" />
+
+    <TextView
+        android:id="@+id/showSeasonsCountTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/seasonsTV"
+        app:layout_constraintEnd_toEndOf="@+id/seasonsTV"
+        app:layout_constraintStart_toStartOf="@+id/seasonsTV"
+        app:layout_constraintTop_toTopOf="@+id/tvShowImage"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="8" />
+
+    <TextView
+        android:id="@+id/seasonsTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/seasons"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/tvShowImage"
+        app:layout_constraintEnd_toStartOf="@+id/episodesTV"
+        app:layout_constraintStart_toEndOf="@+id/postsTV"
+        app:layout_constraintTop_toBottomOf="@+id/showSeasonsCountTV" />
+
+    <TextView
+        android:id="@+id/showEpisodesCountTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/episodesTV"
+        app:layout_constraintEnd_toEndOf="@+id/episodesTV"
+        app:layout_constraintStart_toStartOf="@+id/episodesTV"
+        app:layout_constraintTop_toTopOf="@+id/tvShowImage"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="154" />
+
+    <TextView
+        android:id="@+id/episodesTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/episodes"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvShowImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/seasonsTV"
+        app:layout_constraintTop_toBottomOf="@id/showEpisodesCountTv" />
+
+    <TextView
+        android:id="@+id/tvShowWebPage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin_top"
+        android:autoLink="web"
+        android:textColorLink="#005DAF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvShowImage"
+        app:layout_constraintTop_toBottomOf="@+id/tvShowImage"
+        tools:text="http://www.usanetwork.com/mrrobot" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvShowOverview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_13ssp"
+        android:maxLines="4"
+        android:scrollbars="vertical"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintStart_toStartOf="@id/tvShowImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvShowWebPage"
+        tools:text="Tv show overview \n test \n test \n test\n test \n test\n test\n test\n test\n test\n test\n test\n test\n test\n test\n test\n test\n test\n test\n test\n test\n test\n test\n test\n test\n test" />
+
+
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/composeViewStories"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvShowOverview" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/viewPagerTab"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/composeViewStories"
+        app:tabMode="fixed" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPagerContent"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appBar">
+        app:layout_constraintTop_toBottomOf="@id/viewPagerTab" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <include
-                android:id="@+id/tvShowImage"
-                layout="@layout/rounded_image_container"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/showRatingTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/postsTV"
-                app:layout_constraintEnd_toEndOf="@+id/postsTV"
-                app:layout_constraintStart_toStartOf="@+id/postsTV"
-                app:layout_constraintTop_toTopOf="@+id/tvShowImage"
-                app:layout_constraintVertical_chainStyle="packed"
-                tools:text="7.5" />
-
-            <TextView
-                android:id="@+id/postsTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/rating"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvShowImage"
-                app:layout_constraintEnd_toStartOf="@+id/seasonsTV"
-                app:layout_constraintHorizontal_chainStyle="spread"
-                app:layout_constraintStart_toEndOf="@+id/tvShowImage"
-                app:layout_constraintTop_toBottomOf="@+id/showRatingTV" />
-
-            <TextView
-                android:id="@+id/showSeasonsCountTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/seasonsTV"
-                app:layout_constraintEnd_toEndOf="@+id/seasonsTV"
-                app:layout_constraintStart_toStartOf="@+id/seasonsTV"
-                app:layout_constraintTop_toTopOf="@+id/tvShowImage"
-                app:layout_constraintVertical_chainStyle="packed"
-                tools:text="8" />
-
-            <TextView
-                android:id="@+id/seasonsTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/seasons"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@id/tvShowImage"
-                app:layout_constraintEnd_toStartOf="@+id/episodesTV"
-                app:layout_constraintStart_toEndOf="@+id/postsTV"
-                app:layout_constraintTop_toBottomOf="@+id/showSeasonsCountTV" />
-
-            <TextView
-                android:id="@+id/showEpisodesCountTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/episodesTV"
-                app:layout_constraintEnd_toEndOf="@+id/episodesTV"
-                app:layout_constraintStart_toStartOf="@+id/episodesTV"
-                app:layout_constraintTop_toTopOf="@+id/tvShowImage"
-                app:layout_constraintVertical_chainStyle="packed"
-                tools:text="154" />
-
-            <TextView
-                android:id="@+id/episodesTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/episodes"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvShowImage"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/seasonsTV"
-                app:layout_constraintTop_toBottomOf="@id/showEpisodesCountTv" />
-
-            <TextView
-                android:id="@+id/tvShowWebPage"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_margin_top"
-                android:autoLink="web"
-                android:textColorLink="#005DAF"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tvShowImage"
-                app:layout_constraintTop_toBottomOf="@+id/tvShowImage"
-                tools:text="http://www.usanetwork.com/mrrobot" />
-
-            <TextView
-                android:id="@+id/tvShowOverview"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_margin_top"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tvShowImage"
-                app:layout_constraintTop_toBottomOf="@+id/tvShowWebPage"
-                tools:text="Tv show overview" />
-
-            <androidx.compose.ui.platform.ComposeView
-                android:id="@+id/composeViewStories"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvShowOverview"
-                />
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/viewPagerTab"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvShowOverview"
-                />
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPagerContent"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/viewPagerTab"
-                />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,44 +1,47 @@
 package com.hrudhaykanth116.instagramclone.ui.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.hrudhaykanth116.instagramclone.R
+import com.hrudhaykanth116.instagramclone.databinding.ImageViewBinding
 import com.hrudhaykanth116.instagramclone.utils.image.ImageLoader
 
-class TvShowImagesAdapter(private val imagesList: List<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TvShowImagesAdapter(
+    private val mImagesList: ArrayList<String?> = ArrayList()
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+
+    fun updateList(imagesList: List<String?>){
+        mImagesList.clear()
+        mImagesList.addAll(imagesList)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.image_view, parent, false)
+        val binding = ImageViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-        return TvShowImageViewHolder(itemView)
+        return TvShowImageViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
-        return imagesList.size
+        return mImagesList.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        val imgUrl = imagesList[position]
+        val imgUrl = mImagesList[position]
         (holder as TvShowImageViewHolder).bind(imgUrl)
 
     }
 
 
 
-    class TvShowImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    class TvShowImageViewHolder(private val binding: ImageViewBinding) : RecyclerView.ViewHolder(binding.root){
 
-        val searchResultImg = itemView as ImageView
 
-        public fun bind(imgUrl: String) {
-            // dummy data for testing.
-            // val imgUrl = "https://picsum.photos/id/${holder.adapterPosition * 8}/300"
-
-            ImageLoader.load(imgUrl, searchResultImg)
+        public fun bind(imgUrl: String?) {
+            ImageLoader.load(imgUrl, binding.mainImageView)
         }
 
     }

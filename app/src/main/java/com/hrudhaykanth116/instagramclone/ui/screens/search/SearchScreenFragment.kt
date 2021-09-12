@@ -16,7 +16,7 @@ import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hrudhaykanth116.instagramclone.R
-import com.hrudhaykanth116.instagramclone.data.models.discover.DiscoverResult
+import com.hrudhaykanth116.instagramclone.data.models.TvShowData
 import com.hrudhaykanth116.instagramclone.data.models.genres.Genre
 import com.hrudhaykanth116.instagramclone.data.models.genres.GetTvGenresResponse
 import com.hrudhaykanth116.instagramclone.data.models.network.Resource
@@ -140,7 +140,14 @@ class SearchScreenFragment : BaseFragment() {
             GridLayoutManager.VERTICAL,
             false
         )
-        searchResultsAdapter = SearchResultsAdapter()
+        searchResultsAdapter = SearchResultsAdapter(){ tvShowData ->
+            tvShowData.id?.let {
+                val tvShowFragmentAction = SearchScreenFragmentDirections.actionTvShowFragment(it)
+                findNavController().navigate(tvShowFragmentAction)
+            } ?: run{
+                ToastHelper.showErrorToast(requireContext(), "No tv show id")
+            }
+        }
         binding.searchResultsContainer.adapter = searchResultsAdapter
         binding.searchResultsContainer.layoutManager = staggeredGridLayoutManager
 
@@ -200,7 +207,7 @@ class SearchScreenFragment : BaseFragment() {
         fetchTopRatedTvShowsJob = lifecycleScope.launchWhenStarted {
             Log.d(TAG, "getPopularTvShows: launchWhenStarted")
             searchScreenViewModel.discoverTvShows(genres)
-                .collectLatest { tvShowPagingData: PagingData<DiscoverResult> ->
+                .collectLatest { tvShowPagingData: PagingData<TvShowData> ->
                     Log.d(TAG, "getPopularTvShows: collectLatest")
                     binding.swipeRefreshLayout.isRefreshing = false
                     binding.progressBar.isVisible = false

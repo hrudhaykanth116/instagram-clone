@@ -8,7 +8,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 object ImageLoader {
 
     fun load(
-        imgUrl: String,
+        imgUrl: String?,
         targetImageView: ImageView,
         context: Context? = null,
         errorDrawable: Int? = null

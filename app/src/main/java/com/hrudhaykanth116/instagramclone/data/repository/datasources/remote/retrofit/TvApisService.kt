@@ -35,7 +35,7 @@ interface TvApisService {
         @Query("api_key") apiKey: String = MoviesDbConstants.API_KEY
     ): Response<GetTvReviewsResponse>
 
-    @GET("tv/{tv_id}/credits")
+    @GET("tv/{tv_id}/aggregate_credits")
     suspend fun getTvCredits(
         @Path("tv_id") tvShowId: Int,
         @Query("api_key") apiKey: String = MoviesDbConstants.API_KEY

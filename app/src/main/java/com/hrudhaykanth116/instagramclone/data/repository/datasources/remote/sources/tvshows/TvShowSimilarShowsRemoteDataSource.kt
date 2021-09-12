@@ -4,34 +4,17 @@ import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.hrudhaykanth116.instagramclone.data.models.TvShowData
-import com.hrudhaykanth116.instagramclone.data.models.discover.GetDiscoverTvResponse
-import com.hrudhaykanth116.instagramclone.data.models.genres.Genre
-import com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.retrofit.RetroApis
+import com.hrudhaykanth116.instagramclone.data.models.TvShowDataPagedResponse
+import com.hrudhaykanth116.instagramclone.data.repository.datasources.remote.retrofit.TvApisService
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
 import kotlin.random.Random
 
-class DiscoverTvShowsRemoteDataSource constructor(
-    private val retroApis: RetroApis,
-    genres: List<Genre>?
+class TvShowSimilarShowsRemoteDataSource constructor(
+    private val tvShowId: Int,
+    private val tvApisService: TvApisService
 ) : PagingSource<Int, TvShowData>() {
-
-    private val commaSeparatedGenreIds: String = run{
-        if(genres.isNullOrEmpty()){
-            return@run "10759|99|16|10762|10765"
-        }else{
-            return@run genres.joinToString {
-                "${it.id}"
-            }
-        }
-        // genres?.joinToString {
-        //     "${it.id}"
-        // } ?: run{
-        //     // Some default genres --> implicitly showing different genres types.
-        //     "10759|99|16|10762|10765"
-        // }
-    }
 
     private var initialPageId = 1
 
@@ -41,10 +24,10 @@ class DiscoverTvShowsRemoteDataSource constructor(
         Log.d(TAG, "load: currentKey: $currentKey")
 
         return try {
-            val discoverTvShowsResponse: Response<GetDiscoverTvResponse> =
-                retroApis.discoverTv(currentKey, commaSeparatedGenreIds)
+            val discoverTvShowsResponse: Response<TvShowDataPagedResponse> =
+                tvApisService.getTvShowsSimilar(tvShowId, currentKey)
             val tvShowsList: List<TvShowData> =
-                discoverTvShowsResponse.body()?.results ?: arrayListOf()
+                discoverTvShowsResponse.body()?.tvShowsList ?: arrayListOf()
 
             // TODO: 29/05/21 Check if the response is successful
 
@@ -81,7 +64,7 @@ class DiscoverTvShowsRemoteDataSource constructor(
     }
 
     companion object {
-        private val TAG: String = DiscoverTvShowsRemoteDataSource::class.java.name
+        private val TAG: String = TvShowSimilarShowsRemoteDataSource::class.java.name
     }
 
 }

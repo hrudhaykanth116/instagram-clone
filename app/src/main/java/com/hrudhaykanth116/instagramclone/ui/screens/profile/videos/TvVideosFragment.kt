@@ -84,17 +84,21 @@ class TvVideosFragment : BaseFragment() {
     }
 
     private fun onVideoLinksAvailable(results: List<GetTvVideosResponse.Result?>) {
-        val key: String? = results.getOrNull(0)?.key // video id
+
 
         val youTubeKeys: List<GetTvVideosResponse.Result?> = results.filter {
             it?.site == "YouTube"
         }
 
         if (!youTubeKeys.isNullOrEmpty()) {
-            binding.noDataView.isVisible = false
+            binding.progressBar.isVisible = false
+            binding.dataLoadErrorView.isVisible = false
+            binding.noDataTextView.isVisible = false
             videosAdapter.updateVideoIds(youTubeKeys)
         }else{
-            binding.noDataView.isVisible = true
+            binding.progressBar.isVisible = false
+            binding.dataLoadErrorView.isVisible = false
+            binding.noDataTextView.isVisible = true
         }
     }
 

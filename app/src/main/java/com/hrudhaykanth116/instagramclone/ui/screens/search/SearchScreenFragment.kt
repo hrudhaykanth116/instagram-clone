@@ -1,11 +1,15 @@
 package com.hrudhaykanth116.instagramclone.ui.screens.search
 
+import android.content.Context
+import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -13,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.paging.PagingData
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hrudhaykanth116.instagramclone.R
@@ -24,6 +29,7 @@ import com.hrudhaykanth116.instagramclone.databinding.FragmentSearchScreenBindin
 import com.hrudhaykanth116.instagramclone.ui.adapters.SearchCategoriesAdapter
 import com.hrudhaykanth116.instagramclone.ui.screens.base.BaseFragment
 import com.hrudhaykanth116.instagramclone.utils.toasts.ToastHelper
+import com.hrudhaykanth116.instagramclone.utils.ui.list.addSpacing
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
@@ -56,7 +62,7 @@ class SearchScreenFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        initViews()
+        initViews(view.context)
         binding.progressBar.isVisible = true
         super.onViewCreated(view, savedInstanceState)
     }
@@ -73,9 +79,9 @@ class SearchScreenFragment : BaseFragment() {
         super.onDestroy()
     }
 
-    private fun initViews() {
+    private fun initViews(context: Context) {
         initClickListeners()
-        initSearchResultsRecyclerView()
+        initSearchResultsRecyclerView(context)
         initCategoriesRecyclerView()
     }
 
@@ -131,7 +137,7 @@ class SearchScreenFragment : BaseFragment() {
 
     }
 
-    private fun initSearchResultsRecyclerView() {
+    private fun initSearchResultsRecyclerView(context: Context) {
         Log.d(TAG, "initSearchResultsRecyclerView: ")
 
         val staggeredGridLayoutManager = GridLayoutManager(
@@ -150,6 +156,7 @@ class SearchScreenFragment : BaseFragment() {
         }
         binding.searchResultsContainer.adapter = searchResultsAdapter
         binding.searchResultsContainer.layoutManager = staggeredGridLayoutManager
+        binding.searchResultsContainer.addSpacing()
 
         searchResultsAdapter.addLoadStateListener { combinedLoadStates ->
             onLoadStateChanged(combinedLoadStates)

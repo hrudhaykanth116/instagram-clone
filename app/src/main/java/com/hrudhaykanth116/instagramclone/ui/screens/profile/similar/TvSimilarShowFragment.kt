@@ -18,6 +18,7 @@ import com.hrudhaykanth116.instagramclone.data.constants.AppConstants
 import com.hrudhaykanth116.instagramclone.data.models.TvShowData
 import com.hrudhaykanth116.instagramclone.data.models.TvShowDetails
 import com.hrudhaykanth116.instagramclone.databinding.FragmentTvSimilarShowsBinding
+import com.hrudhaykanth116.instagramclone.ui.common.list.setGridLayout
 import com.hrudhaykanth116.instagramclone.ui.screens.base.BaseFragment
 import com.hrudhaykanth116.instagramclone.ui.screens.search.SearchResultsAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,18 +65,10 @@ class TvSimilarShowFragment : BaseFragment() {
     private fun initSearchResultsRecyclerView() {
         Log.d(TAG, "initSearchResultsRecyclerView: ")
 
-        val staggeredGridLayoutManager = GridLayoutManager(
-            context,
-            3,
-            GridLayoutManager.VERTICAL,
-            false
-        )
-        binding.searchResultsContainer.adapter = searchResultsAdapter
-        binding.searchResultsContainer.layoutManager = staggeredGridLayoutManager
-
         searchResultsAdapter.addLoadStateListener { combinedLoadStates ->
             onLoadStateChanged(combinedLoadStates)
         }
+        binding.searchResultsContainer.setGridLayout(searchResultsAdapter)
     }
 
     private fun onLoadStateChanged(combinedLoadStates: CombinedLoadStates) {

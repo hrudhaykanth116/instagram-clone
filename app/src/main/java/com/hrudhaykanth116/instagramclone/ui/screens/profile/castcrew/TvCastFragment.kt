@@ -16,7 +16,9 @@ import com.hrudhaykanth116.instagramclone.data.models.TvShowDetails
 import com.hrudhaykanth116.instagramclone.data.models.network.Resource
 import com.hrudhaykanth116.instagramclone.databinding.FragmentShowImagesBinding
 import com.hrudhaykanth116.instagramclone.ui.adapters.TvShowImagesAdapter
+import com.hrudhaykanth116.instagramclone.ui.common.list.setGridLayout
 import com.hrudhaykanth116.instagramclone.ui.screens.base.BaseFragment
+import com.hrudhaykanth116.instagramclone.utils.ui.list.addSpacing
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -92,16 +94,7 @@ class TvCastFragment : BaseFragment() {
 
     private fun initSearchResultsRecyclerView() {
         Log.d(TAG, "initSearchResultsRecyclerView: ")
-
-        val staggeredGridLayoutManager = GridLayoutManager(
-            context,
-            3,
-            GridLayoutManager.VERTICAL,
-            false
-        )
-        binding.searchResultsContainer.adapter = imagesAdapter
-        binding.searchResultsContainer.layoutManager = staggeredGridLayoutManager
-
+        binding.searchResultsContainer.setGridLayout(imagesAdapter)
     }
 
     companion object{

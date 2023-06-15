@@ -13,6 +13,7 @@
         android:background="@color/images_bg_color"
         android:src="@drawable/scorpion_poster"
         android:scaleType="fitXY"
+        android:layout_marginEnd="@dimen/_1sdp"
         app:layout_constraintDimensionRatio="1:1.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

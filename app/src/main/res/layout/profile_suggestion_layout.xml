@@ -5,23 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="10dp">
+    android:padding="@dimen/default_padding">
 
     <include
         android:id="@+id/showImage"
         layout="@layout/rounded_image_container"
-        android:layout_width="70dp"
-        android:layout_height="70dp" />
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp" />
 
     <TextView
         android:id="@+id/showName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/_16sdp"
         tools:text="Show name ksjdhfskjdhfkjsdfhksjdfhkdsjfhskdjfh"
         android:textColor="#000000"
-        android:textSize="16sp"
-        android:layout_marginEnd="8dp"
+        android:textSize="@dimen/_14ssp"
+        android:layout_marginEnd="@dimen/default_margin_end"
         android:ellipsize="end"
         android:singleLine="true"
         app:layout_constraintStart_toEndOf="@+id/showImage"
@@ -34,9 +34,9 @@
         android:id="@+id/showRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/_16sdp"
         tools:text="8.6"
-        android:textSize="14sp"
+        android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toEndOf="@id/showImage"
         app:layout_constraintTop_toBottomOf="@id/showName"
         app:layout_constraintBottom_toBottomOf="@id/showImage"
@@ -46,12 +46,12 @@
         android:id="@+id/followBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="@dimen/_16sdp"
         android:background="@drawable/main_buttons_bg"
-        android:paddingStart="10dp"
-        android:paddingTop="5dp"
-        android:paddingEnd="10dp"
-        android:paddingBottom="5dp"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_5sdp"
         android:text="Follow"
         android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="@+id/showImage"
@@ -60,9 +60,9 @@
 
     <Button
         android:id="@+id/closeBtn"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_marginEnd="@dimen/default_margin_end"
         android:background="@android:drawable/ic_menu_close_clear_cancel"
         android:backgroundTint="#000000"
         app:layout_constraintBottom_toBottomOf="@+id/showImage"

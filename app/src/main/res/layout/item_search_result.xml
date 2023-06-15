@@ -9,8 +9,8 @@
     <include
         android:id="@+id/image"
         layout="@layout/rounded_image_container"
-        android:layout_width="70dp"
-        android:layout_height="70dp" />
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp" />
 
     <TextView
         android:id="@+id/title"
@@ -19,8 +19,8 @@
         android:layout_marginStart="@dimen/default_margin_start"
         tools:text="Scorpion"
         android:textColor="#000000"
-        android:textSize="16sp"
-        android:layout_marginEnd="8dp"
+        android:textSize="@dimen/_16ssp"
+        android:layout_marginEnd="@dimen/_8sdp"
         android:ellipsize="end"
         android:singleLine="true"
         app:layout_constraintStart_toEndOf="@+id/image"
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_margin_start"
         tools:text="The show is about a genius and his team who solves national and international cases that can only be solved by super intelligent people."
-        android:textSize="14sp"
+        android:textSize="@dimen/_14ssp"
         android:lines="2"
         android:ellipsize="end"
         app:layout_constraintStart_toEndOf="@id/image"

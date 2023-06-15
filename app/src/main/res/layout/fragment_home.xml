@@ -17,39 +17,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/cameraIcon"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_margin="10dp"
-        android:elevation="2dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_camera_white_24dp"
-        app:layout_constraintBottom_toBottomOf="@id/appBar"
-        app:layout_constraintStart_toStartOf="@id/appBar"
-        app:layout_constraintTop_toTopOf="@id/appBar"
-        app:tint="#000000" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:elevation="2dp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:elevation="@dimen/_2sdp"
         android:fontFamily="@font/leckerli_one"
         android:text="Instagram"
         android:textColor="#000000"
-        android:textSize="22sp"
+        android:textSize="@dimen/_22ssp"
         app:layout_constraintBottom_toBottomOf="@id/appBar"
-        app:layout_constraintStart_toEndOf="@id/cameraIcon"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/appBar" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="10dp"
-        android:elevation="2dp"
-        android:src="@drawable/ic_send_white_24dp"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:elevation="@dimen/_2sdp"
+        android:src="@drawable/ic_message"
         app:layout_constraintBottom_toBottomOf="@id/appBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/appBar"
@@ -60,7 +47,7 @@
         android:id="@+id/mainPostsSwipeRefreshLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="@dimen/_5sdp"
         tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

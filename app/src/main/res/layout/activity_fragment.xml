@@ -9,9 +9,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/appBar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/_50sdp"
         android:orientation="horizontal"
-        android:elevation="1dp"
+        android:elevation="@dimen/_1sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,10 +21,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:elevation="2dp"
+        android:elevation="@dimen/_2sdp"
         android:text="Top rated Tv shows"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="@dimen/_20ssp"
         app:layout_constraintBottom_toBottomOf="@id/appBar"
         app:layout_constraintStart_toStartOf="@id/appBar"
         app:layout_constraintTop_toTopOf="@id/appBar" />

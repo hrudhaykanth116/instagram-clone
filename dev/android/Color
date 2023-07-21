@@ -1,0 +1,14 @@
+Google theme and styles: https://youtu.be/Owkf8DhAOSo
+
+
+* Selector colors in colors directory are used for state based colors.
+    * Order matters while comparing for any state.
+    * Api 23, ref attributes is added.
+    * Api 21 alpha modulation is added. Useful to set variations of theme refs like (0.25 alpha, colorPrimary)
+    * Color state list wont work on api < 10 for image view background because ColorStateDrawables are created on Api 10.(Use backgroundTint)
+
+* Naming
+    * Do not name with semantic meaning(colorPrimary, colorSecondary).
+    * Name with literals. (Brand_blue, brand_red, blue_200)
+
+

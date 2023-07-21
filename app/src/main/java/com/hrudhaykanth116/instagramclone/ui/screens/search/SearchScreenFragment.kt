@@ -122,6 +122,7 @@ class SearchScreenFragment : BaseFragment() {
                     }
                     updateSelectedCategories(searchScreenViewModel.selectedGenres)
                 }
+                binding.categories.addSpacing(LinearLayoutManager.HORIZONTAL)
                 binding.categories.adapter = categoriesAdapter
                 binding.categories.layoutManager = LinearLayoutManager(
                     context,

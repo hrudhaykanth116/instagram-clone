@@ -1,0 +1,6 @@
+Google guide: https://youtu.be/Owkf8DhAOSo?t=2085
+Google Material Dark theme get started: https://youtu.be/4OO_Evk0jHI
+
+* Extend Material.DayNight.
+    * values/theme.xml vs value-night/theme.xml --> Extract base theme and use
+    * values/color.xml vs values-night/color.xml --> No because color semantics wil be there.

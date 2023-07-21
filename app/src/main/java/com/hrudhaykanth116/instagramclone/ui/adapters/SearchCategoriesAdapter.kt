@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hrudhaykanth116.instagramclone.R
 import com.hrudhaykanth116.instagramclone.data.models.genres.Genre
 import com.hrudhaykanth116.instagramclone.databinding.SearchCategoryItemBinding
+import com.hrudhaykanth116.instagramclone.utils.android.resources.color.getThemedColor
 import com.hrudhaykanth116.instagramclone.utils.extensions.livedata.addAll
 import com.hrudhaykanth116.instagramclone.utils.extensions.livedata.clear
 import com.hrudhaykanth116.instagramclone.utils.extensions.livedata.notifyObserver
@@ -51,24 +52,23 @@ class SearchCategoriesAdapter(
     inner class SearchCategoriesViewHolder(val binding: SearchCategoryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        val context = binding.root.context
+
         fun bind(genre: Genre) {
             binding.categoryNameTV.text = genre.name
 
-            if (mSelectedCategories.value?.contains(genre) == true) {
-                binding.contentLayout.setBackgroundColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        R.color.selectedColor
-                    )
-                )
+            val isSelected = mSelectedCategories.value?.contains(genre) == true
+
+            val bgColorRef = if (isSelected) {
+                R.attr.colorPrimary
             } else {
-                binding.contentLayout.setBackgroundColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        R.color.transparentColor
-                    )
-                )
+                R.attr.transparent
             }
+
+            // TODO: Use selector colorStateList
+            binding.contentLayout.setBackgroundColor(
+                context.getThemedColor(bgColorRef)
+            )
 
             binding.root.setOnClickListener {
                 // Using simple straight path to update selected categories list and update the view.

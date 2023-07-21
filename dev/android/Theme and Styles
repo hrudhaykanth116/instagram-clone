@@ -1,0 +1,38 @@
+Google theme and styles: https://youtu.be/Owkf8DhAOSo
+Google Underlying color/theme application to views: https://youtu.be/sNSlDfaNq-0?t=753
+
+
+
+
+* Style is for view specific. Theme is for view/view-group and underlying/enclosing views.
+* Closest view context should be used to apply relevant theme.
+* Theme contain style reference(toolbarStyle) and style contain theme reference(?attr/).
+
+* Style/Theme attribute replaces the actual attributes in the views. Simple
+    - colorPrimary is theme attribute. So, if used as style attribute view isn't effected.
+
+* Theme/Style follows inheritance flow. Child is given preference with overridden values.
+* ThemeOverlay.AppTheme.Red styles with parent as empty overrides only given attributes.
+* ContextThemeWrapper(context, theme) for overlay effect programmatically while inflating layout.
+
+* Themes should be Interfaces. Implementation is done by resources.
+
+* Attrs Ref
+    * Can Use attrs for colors, alpha, size etc..
+    * ?android:attr/ vs ?attr/
+        -- Platform vs Material/AppCompat.
+        -- Use Material/Appcompat if attr is define there, for backward compatibility.
+    *
+
+* Naming:
+    * <Style_Type>.<group/module_name>.<subgroup/widget>.<Variance>
+    * Theme.MyApp
+    * Widget.MyApp.ToolBar
+    * Widget.MyApp.ToolBar.Blue(Implicit extension of above due to dot notation)
+
+* Organization:
+    * themes.xml -> Only themes/Overlay
+    * type.xml -> Text appearances, text size dimens
+    * styles.xml -> Only view styles
+    * shapes.xml, sys_ui.xml more and more
+

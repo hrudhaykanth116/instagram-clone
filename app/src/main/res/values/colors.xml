@@ -4,7 +4,7 @@
     <!-- Material theme colors start -->
 
     <color name="seed">#9a006e</color>
-    <color name="md_theme_light_primary">#AD1D7D</color>
+    <color name="md_theme_light_primary">#FFA0DF</color>
     <color name="md_theme_light_onPrimary">#FFFFFF</color>
     <color name="md_theme_light_primaryContainer">#FFD8E9</color>
     <color name="md_theme_light_onPrimaryContainer">#3C0029</color>

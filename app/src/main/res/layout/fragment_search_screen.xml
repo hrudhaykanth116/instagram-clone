@@ -52,6 +52,7 @@
         android:orientation="horizontal"
         android:layout_marginTop="@dimen/default_margin_top"
         android:visibility="visible"
+        android:layout_marginHorizontal="@dimen/default_padding"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

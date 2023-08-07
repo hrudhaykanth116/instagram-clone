@@ -9,6 +9,10 @@ fun RecyclerView.addSpacing(
     orientation: Int = DividerItemDecoration.VERTICAL // Most common orientation. Can override
 ){
     addItemDecoration(DividerItemDecoration(context, orientation).apply {
-        setDrawable(ContextCompat.getDrawable(context, R.drawable.divider_space_grid)!!)
+        val drawable = when (orientation) {
+            DividerItemDecoration.HORIZONTAL -> R.drawable.divider_item_horizontal
+            else -> R.drawable.divider_item_vertical
+        }
+        setDrawable(ContextCompat.getDrawable(context, drawable)!!)
     })
 }

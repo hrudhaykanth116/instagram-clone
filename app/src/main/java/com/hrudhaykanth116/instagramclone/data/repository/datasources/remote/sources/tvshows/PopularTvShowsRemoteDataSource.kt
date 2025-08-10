@@ -28,13 +28,23 @@ class PopularTvShowsRemoteDataSource constructor(
         return try {
             val tvShowDataPagedResponse: Response<TvShowDataPagedResponse> =
                 retroApis.getPopularTvShows(currentKey)
-            // TODO: 12/06/21 Check if response is successful
+
+            if (!tvShowDataPagedResponse.isSuccessful) {
+                return LoadResult.Error(HttpException(tvShowDataPagedResponse))
+            }
+
             val tvShowsList = tvShowDataPagedResponse.body()?.tvShowsList ?: listOf()
+
+            val nextKey = if (tvShowDataPagedResponse.code() != 200) {
+                null
+            } else {
+                currentKey + 1
+            }
 
             LoadResult.Page(
                 data = tvShowsList,
                 prevKey = if (currentKey == initialPageId) null else currentKey - 1,
-                nextKey = currentKey + 1
+                nextKey = nextKey
             )
 
         }catch (exception: IOException) {
